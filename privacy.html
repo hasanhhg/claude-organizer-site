@@ -3,65 +3,176 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy — Claude Organizer</title>
+  <title>Privacy Policy - Claude Organizer</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --accent: #6c47ff;
-      --border: #e5e5e7;
-      --muted:  #6b6b6b;
-      --bg2:    #f7f7f8;
+      --bg:            #F9F7F4;
+      --surface:       #FFFFFF;
+      --border:        #E8E2DA;
+      --text:          #1C1917;
+      --muted:         #79716B;
+      --faint:         #A8A29E;
+      --primary:       #D97756;
+      --primary-h:     #C2633D;
+      --primary-bg:    #FDF3EE;
+      --primary-border:#F0C0A8;
+      --radius:        10px;
     }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      color: #1a1a1a;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.7;
-      background: #fff;
+      -webkit-font-smoothing: antialiased;
     }
+
+    a { color: var(--primary); }
+    a:hover { text-decoration: underline; }
+
     nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,0.9);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(249,247,244,0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
-      padding: 0 24px; height: 56px;
-      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    .nav-logo { font-weight: 700; font-size: 1rem; color: #1a1a1a; text-decoration: none; }
-    .nav-back  { font-size: 0.875rem; color: var(--accent); text-decoration: none; }
-    .nav-back:hover { text-decoration: underline; }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-logo-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .nav-back {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-back:hover { color: var(--text); text-decoration: none; }
+
     main {
-      max-width: 720px;
+      max-width: 680px;
       margin: 0 auto;
-      padding: 60px 24px 80px;
+      padding: 56px 24px 80px;
     }
-    h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
-    .meta { font-size: 0.875rem; color: var(--muted); margin-bottom: 48px; }
-    h2 { font-size: 1.15rem; font-weight: 700; margin: 40px 0 12px; }
-    p  { font-size: 0.95rem; color: #333; margin-bottom: 16px; }
-    ul { padding-left: 20px; margin-bottom: 16px; }
-    li { font-size: 0.95rem; color: #333; margin-bottom: 6px; }
+
+    h1 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .meta {
+      font-size: 0.85rem;
+      color: var(--faint);
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 36px 0 10px;
+      color: var(--text);
+    }
+
+    p {
+      font-size: 0.925rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+      line-height: 1.7;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-bottom: 14px;
+    }
+
+    li {
+      font-size: 0.925rem;
+      color: var(--muted);
+      margin-bottom: 5px;
+      line-height: 1.6;
+    }
+
+    strong { color: var(--text); }
+
     .highlight {
-      background: #f0ecff;
-      border: 1px solid #d4caff;
-      border-radius: 10px;
-      padding: 20px 24px;
-      margin: 32px 0;
+      background: var(--primary-bg);
+      border: 1px solid var(--primary-border);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      margin: 28px 0 8px;
     }
-    .highlight p { margin: 0; font-weight: 600; color: var(--accent); }
+
+    .highlight p {
+      margin: 0;
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.9rem;
+    }
+
+    code {
+      font-family: 'Menlo', 'Consolas', monospace;
+      font-size: 0.85rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1px 5px;
+      border-radius: 4px;
+      color: var(--text);
+    }
+
     footer {
       border-top: 1px solid var(--border);
       padding: 24px;
       text-align: center;
-      font-size: 0.82rem;
-      color: var(--muted);
+      font-size: 0.8rem;
+      color: var(--faint);
+      background: var(--bg);
     }
-    a { color: var(--accent); }
+
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">Claude Organizer</a>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">CO</div>
+    Claude Organizer
+  </a>
   <a href="index.html" class="nav-back">Back to home</a>
 </nav>
 
@@ -70,7 +181,7 @@
   <p class="meta">Last updated: May 2026</p>
 
   <div class="highlight">
-    <p>Short version: your chat content never leaves your browser. Only chat titles are ever sent anywhere, and only when the AI fallback is needed.</p>
+    <p>Short version: your chat content never leaves your browser. Only chat titles are sent anywhere, and only when the AI fallback is needed.</p>
   </div>
 
   <h2>What this extension does</h2>
@@ -88,17 +199,17 @@
 
   <h2>What data leaves your browser</h2>
   <p>For most chats, matching happens entirely offline using a built-in keyword wordlist. No data is sent anywhere.</p>
-  <p>When keyword matching fails, the chat title (and summary if available) is sent to a shared AI backend to suggest a project category. This request contains:</p>
+  <p>When keyword matching fails, the chat title and summary are sent to a shared AI backend to suggest a project category. This request contains:</p>
   <ul>
     <li>The chat title</li>
     <li>The chat summary (a short auto-generated description, not your messages)</li>
     <li>Your existing project names</li>
   </ul>
-  <p>No personal information, no message content, no account details are included.</p>
+  <p>No personal information, no message content, and no account details are included.</p>
   <p>The AI backend is a Cloudflare Worker that forwards the request to Groq to run a language model. Neither service stores this data after the request completes.</p>
 
   <h2>Wordlist updates</h2>
-  <p>The extension fetches a keyword wordlist from GitHub when a new version is available. This request contains no personal data — it is a plain file download.</p>
+  <p>The extension fetches a keyword wordlist from GitHub when a new version is available. This request contains no personal data. It is a plain file download.</p>
 
   <h2>Local storage</h2>
   <p>The extension stores the following data locally in your browser using <code>chrome.storage</code>:</p>
@@ -116,24 +227,24 @@
   <h2>Third-party services</h2>
   <p>The extension communicates with the following services:</p>
   <ul>
-    <li><strong>Claude.ai</strong> — to read and organize your chats. This uses your active browser session.</li>
-    <li><strong>Cloudflare Workers</strong> — AI categorization backend. Receives chat titles only, no personal data.</li>
-    <li><strong>Groq</strong> — runs the AI model that suggests project categories. Receives chat titles only.</li>
-    <li><strong>GitHub</strong> — serves the keyword wordlist file. No personal data sent.</li>
+    <li><strong>Claude.ai</strong> - to read and organize your chats using your active browser session</li>
+    <li><strong>Cloudflare Workers</strong> - AI categorization backend, receives chat titles only</li>
+    <li><strong>Groq</strong> - runs the AI model that suggests project categories, receives chat titles only</li>
+    <li><strong>GitHub</strong> - serves the keyword wordlist file, no personal data sent</li>
   </ul>
 
   <h2>Children</h2>
   <p>This extension is not directed at children under 13 and does not knowingly collect data from children.</p>
 
   <h2>Changes to this policy</h2>
-  <p>If this policy changes, the updated version will be posted here with a new "Last updated" date.</p>
+  <p>If this policy changes, the updated version will be posted here with a new last updated date.</p>
 
   <h2>Contact</h2>
-  <p>Questions about this privacy policy can be sent to the GitHub repository at <a href="https://github.com/hasanhhg/claude-organizer-site" target="_blank">github.com/hasanhhg/claude-organizer-site</a>.</p>
+  <p>Questions about this privacy policy can be submitted via the GitHub repository at <a href="https://github.com/hasanhhg/claude-organizer-site" target="_blank">github.com/hasanhhg/claude-organizer-site</a>.</p>
 </main>
 
 <footer>
-  <p>Claude Organizer &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; Not affiliated with Anthropic</p>
+  <p>Claude Organizer · <a href="index.html">Home</a> · Not affiliated with Anthropic</p>
 </footer>
 
 </body>
