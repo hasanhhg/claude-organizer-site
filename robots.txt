@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hasanhhg.github.io/claude-organizer-site/sitemap.xml

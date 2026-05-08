@@ -3,26 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Claude Organizer - Auto-organize your Claude chats</title>
+  <title>Claude Organizer – Auto-organize your Claude chats</title>
   <meta name="description" content="Claude Organizer automatically sorts your Claude.ai chats into projects in one click. No API key needed. Free Chrome extension.">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:         #F9F7F4;
-      --surface:    #FFFFFF;
-      --border:     #E8E2DA;
-      --border-soft:#F0EBE4;
-      --text:       #1C1917;
-      --muted:      #79716B;
-      --faint:      #A8A29E;
-      --primary:    #D97756;
-      --primary-h:  #C2633D;
-      --primary-bg: #FDF3EE;
+      --bg:             #F9F7F4;
+      --surface:        #FFFFFF;
+      --border:         #E8E2DA;
+      --border-soft:    #F0EBE4;
+      --text:           #1C1917;
+      --muted:          #79716B;
+      --faint:          #A8A29E;
+      --primary:        #D97756;
+      --primary-h:      #C2633D;
+      --primary-bg:     #FDF3EE;
       --primary-border: #F0C0A8;
-      --green:      #16A34A;
-      --green-bg:   #DCFCE7;
-      --radius:     10px;
+      --green:          #16A34A;
+      --radius:         10px;
+      --radius-lg:      16px;
+
+      /* Spacing scale */
+      --space-1:  4px;
+      --space-2:  8px;
+      --space-3:  12px;
+      --space-4:  16px;
+      --space-5:  24px;
+      --space-6:  32px;
+      --space-7:  48px;
+      --space-8:  64px;
+      --space-9:  96px;
+
+      /* Page layout */
+      --max-w:    860px;
+      --px:       clamp(20px, 5vw, 40px);
+
+      /* Shadows */
+      --shadow-sm: 0 1px 3px rgba(28,25,23,0.07), 0 1px 2px rgba(28,25,23,0.05);
+      --shadow-md: 0 4px 12px rgba(28,25,23,0.08), 0 1px 3px rgba(28,25,23,0.06);
+      --shadow-lg: 0 16px 48px rgba(28,25,23,0.12), 0 4px 12px rgba(28,25,23,0.07);
     }
 
     html { scroll-behavior: smooth; }
@@ -31,217 +51,464 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     a { color: var(--primary); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* Nav */
+    /* ─── NAV ─────────────────────────────────────────── */
     nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(249,247,244,0.92);
-      backdrop-filter: blur(12px);
+      background: rgba(249,247,244,0.90);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-      height: 56px;
+      padding: 0 var(--px);
+      height: 58px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: var(--space-4);
     }
 
     .nav-logo {
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--text);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: var(--space-2);
+      white-space: nowrap;
     }
 
     .nav-logo-icon {
-      width: 26px;
-      height: 26px;
-      border-radius: 7px;
-      background: var(--primary);
-      color: #fff;
-      font-size: 13px;
-      font-weight: 700;
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
+    }
+
+    .nav-logo-icon img {
+      width: 100%; height: 100%;
+      display: block;
     }
 
     .nav-cta {
       background: var(--primary);
-      color: #fff;
+      color: #fff !important;
       padding: 8px 18px;
       border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      transition: background 0.15s;
-    }
-    .nav-cta:hover { background: var(--primary-h); text-decoration: none; }
-
-    /* Hero */
-    .hero {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 80px 24px 56px;
-      text-align: center;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      background: var(--primary-bg);
-      color: var(--primary);
-      border: 1px solid var(--primary-border);
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 4px 14px;
-      border-radius: 100px;
-      margin-bottom: 24px;
-      letter-spacing: 0.03em;
-    }
-
-    .hero h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.025em;
-      margin-bottom: 20px;
-      color: var(--text);
-    }
-
-    .hero h1 span { color: var(--primary); }
-
-    .hero p {
-      font-size: 1.1rem;
-      color: var(--muted);
-      max-width: 520px;
-      margin: 0 auto 36px;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: #fff;
-      padding: 13px 28px;
-      border-radius: var(--radius);
-      font-size: 0.975rem;
+      font-size: 0.82rem;
       font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
       transition: background 0.15s, transform 0.1s;
-      border: none;
-      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
-    .btn-primary:hover { background: var(--primary-h); text-decoration: none; transform: translateY(-1px); }
+    .nav-cta:hover { background: var(--primary-h); text-decoration: none; transform: translateY(-1px); }
 
-    .hero-note {
-      margin-top: 14px;
-      font-size: 0.8rem;
-      color: var(--faint);
+    /* ─── PAGE WRAPPER ────────────────────────────────── */
+    .page-section {
+      padding: var(--space-9) var(--px);
     }
-
-    /* Preview */
-    .preview-wrap {
-      max-width: 720px;
-      margin: 48px auto 0;
-      padding: 0 24px;
-    }
-
-    .preview-wrap img {
-      width: 100%;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      box-shadow: 0 8px 32px rgba(28,25,23,0.10);
-      display: block;
-    }
-
-    .preview-placeholder {
-      width: 100%;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      background: var(--surface);
-      height: 400px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--faint);
-      font-size: 0.875rem;
-    }
-
-    /* Sections */
-    section { padding: 80px 24px; }
+    .page-section.tight { padding-top: var(--space-7); padding-bottom: var(--space-7); }
 
     .inner {
-      max-width: 820px;
+      max-width: var(--max-w);
       margin: 0 auto;
     }
 
-    .section-label {
-      font-size: 0.75rem;
+    /* ─── SECTION LABELS ──────────────────────────────── */
+    .eyebrow {
+      font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--primary);
-      margin-bottom: 10px;
+      margin-bottom: var(--space-2);
     }
 
     .section-title {
-      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      font-size: clamp(1.55rem, 3.5vw, 2.15rem);
       font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 14px;
+      letter-spacing: -0.022em;
+      line-height: 1.2;
+      margin-bottom: var(--space-3);
       color: var(--text);
     }
 
     .section-sub {
       font-size: 1rem;
       color: var(--muted);
-      max-width: 520px;
-      margin-bottom: 44px;
-      line-height: 1.6;
+      max-width: 500px;
+      line-height: 1.65;
     }
 
-    /* How it works */
+    .section-head { margin-bottom: var(--space-7); }
+
+    /* ─── HERO ────────────────────────────────────────── */
+    .hero {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: clamp(56px, 10vw, 96px) var(--px) clamp(40px, 6vw, 64px);
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--primary-bg);
+      color: var(--primary);
+      border: 1px solid var(--primary-border);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: var(--space-5);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.1rem, 6vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space-5);
+      color: var(--text);
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--primary);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.1rem);
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto var(--space-6);
+      line-height: 1.65;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--primary);
+      color: #fff !important;
+      padding: 13px 28px;
+      border-radius: var(--radius);
+      font-size: 0.96rem;
+      font-weight: 700;
+      transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+      box-shadow: 0 2px 8px rgba(217,119,86,0.35);
+    }
+    .btn-primary:hover {
+      background: var(--primary-h);
+      text-decoration: none;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(217,119,86,0.40);
+    }
+
+    .btn-primary svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    .hero-note {
+      margin-top: var(--space-3);
+      font-size: 0.78rem;
+      color: var(--faint);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-3);
+    }
+
+    .hero-note span { display: flex; align-items: center; gap: 5px; }
+    .hero-note span::before { content: '✓'; color: var(--green); font-weight: 700; font-size: 0.82rem; }
+
+    /* ─── MOCKUP ──────────────────────────────────────── */
+    .mockup-section {
+      padding: 0 var(--px) var(--space-9);
+    }
+
+    .mockup-outer {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .browser-chrome {
+      background: #272320;
+      border-radius: var(--radius-lg);
+      box-shadow:
+        0 32px 80px rgba(28,25,23,0.26),
+        0 8px 24px rgba(28,25,23,0.14),
+        0 0 0 1px rgba(255,255,255,0.04);
+      overflow: hidden;
+    }
+
+    .browser-bar {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 12px 16px;
+      background: #333028;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .b-dots { display: flex; gap: 6px; flex-shrink: 0; }
+    .b-dot { width: 11px; height: 11px; border-radius: 50%; }
+    .b-dot.r { background: #FF5F57; }
+    .b-dot.y { background: #FEBC2E; }
+    .b-dot.g { background: #28C840; }
+
+    .browser-url {
+      flex: 1;
+      background: rgba(255,255,255,0.07);
+      border-radius: 6px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      gap: 6px;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.38);
+      font-family: monospace;
+    }
+
+    .url-lock { font-size: 0.65rem; }
+
+    .popup-frame { background: var(--bg); }
+
+    .popup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .popup-brand {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .popup-icon {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .popup-icon img { width: 100%; height: 100%; display: block; }
+
+    .popup-ver { font-size: 0.65rem; color: var(--faint); font-weight: 400; }
+
+    .popup-connected {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.68rem;
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    .popup-connected::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .popup-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .popup-tab {
+      flex: 1;
+      padding: 9px 0;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--faint);
+      text-align: center;
+      border-bottom: 2px solid transparent;
+    }
+
+    .popup-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+    .popup-body { padding: 12px; }
+
+    .popup-row-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .popup-row-label span:first-child {
+      font-size: 0.71rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .popup-cancel {
+      font-size: 0.68rem;
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .popup-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 6px;
+      overflow: hidden;
+    }
+
+    .popup-group-hd {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 10px;
+      background: #FAFAF9;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .popup-group-name {
+      font-size: 0.73rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .new-pill {
+      background: var(--primary-bg);
+      border: 1px solid var(--primary-border);
+      color: var(--primary);
+      font-size: 0.58rem;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 100px;
+    }
+
+    .popup-group-count {
+      font-size: 0.65rem;
+      color: var(--faint);
+    }
+
+    .popup-chat {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 10px;
+      font-size: 0.69rem;
+      color: var(--muted);
+      border-bottom: 1px solid #FAFAF9;
+    }
+
+    .popup-chat:last-child { border-bottom: none; }
+
+    .arrow { color: var(--primary); font-size: 0.6rem; flex-shrink: 0; }
+
+    .popup-apply {
+      margin-top: 10px;
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 9px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-align: center;
+      cursor: default;
+      letter-spacing: 0.01em;
+    }
+
+    /* ─── DIVIDER ─────────────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0;
+    }
+
+    /* ─── HOW IT WORKS ────────────────────────────────── */
     .steps {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 23px;
+      left: calc(33.333% - 8px);
+      right: calc(33.333% - 8px);
+      height: 2px;
+      background: var(--border);
+      z-index: 0;
     }
 
     .step {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 26px 22px;
+      padding: 24px 20px;
+      position: relative;
+      z-index: 1;
     }
 
     .step-num {
-      width: 34px;
-      height: 34px;
+      width: 36px; height: 36px;
       border-radius: 50%;
       background: var(--primary);
       color: #fff;
       font-weight: 800;
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 14px;
+      box-shadow: 0 0 0 4px var(--bg);
     }
 
-    .step h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; color: var(--text); }
-    .step p  { font-size: 0.875rem; color: var(--muted); line-height: 1.55; }
+    .step h3 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
 
-    /* Features */
-    .section-tinted {
+    .step p { font-size: 0.845rem; color: var(--muted); line-height: 1.6; }
+
+    /* ─── FEATURES ────────────────────────────────────── */
+    .tinted {
       background: var(--surface);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
@@ -249,8 +516,8 @@
 
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-3);
     }
 
     .feature {
@@ -258,135 +525,378 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 22px 20px;
+      transition: border-color 0.15s, box-shadow 0.15s;
     }
 
-    .feature-icon { font-size: 1.4rem; margin-bottom: 10px; }
-    .feature h3   { font-size: 0.9rem; font-weight: 700; margin-bottom: 6px; color: var(--text); }
-    .feature p    { font-size: 0.84rem; color: var(--muted); line-height: 1.55; }
+    .feature:hover {
+      border-color: var(--primary-border);
+      box-shadow: var(--shadow-sm);
+    }
 
-    /* Topics */
-    .topics-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+    .feature-icon { font-size: 1.3rem; margin-bottom: 10px; display: block; }
+    .feature h3   { font-size: 0.875rem; font-weight: 700; margin-bottom: 5px; color: var(--text); }
+    .feature p    { font-size: 0.825rem; color: var(--muted); line-height: 1.6; }
+
+    /* ─── TOPICS ──────────────────────────────────────── */
+    .topics-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
 
     .topic-pill {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 100px;
       padding: 5px 14px;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--muted);
       font-weight: 500;
+      transition: border-color 0.15s, color 0.15s;
+      cursor: default;
     }
 
-    /* Privacy */
-    .privacy-box {
+    .topic-pill:hover { border-color: var(--primary-border); color: var(--primary); }
+
+    /* ─── PRIVACY ─────────────────────────────────────── */
+    .privacy-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+      margin-top: var(--space-6);
+    }
+
+    .privacy-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+    }
+
+    .privacy-card-icon {
+      font-size: 1.4rem;
+      margin-bottom: var(--space-3);
+      display: block;
+    }
+
+    .privacy-card h3 { font-size: 0.875rem; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+    .privacy-card p  { font-size: 0.825rem; color: var(--muted); line-height: 1.6; }
+
+    .privacy-note {
+      margin-top: var(--space-5);
       background: var(--primary-bg);
       border: 1px solid var(--primary-border);
       border-radius: var(--radius);
-      padding: 28px;
+      padding: 16px 20px;
+      font-size: 0.845rem;
+      color: var(--muted);
+      line-height: 1.6;
       display: flex;
-      gap: 18px;
       align-items: flex-start;
+      gap: 10px;
     }
 
-    .privacy-icon { font-size: 1.8rem; flex-shrink: 0; margin-top: 2px; }
-    .privacy-box h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; color: var(--text); }
-    .privacy-box p  { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
+    .privacy-note::before { content: '🔒'; flex-shrink: 0; font-size: 1rem; margin-top: 1px; }
 
-    /* FAQ */
-    .faq { display: flex; flex-direction: column; gap: 12px; }
+    /* ─── FAQ ─────────────────────────────────────────── */
+    .faq {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
 
     .faq-item {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 18px 22px;
+      padding: 20px 22px;
+      cursor: pointer;
+      transition: border-color 0.15s;
     }
 
-    .faq-item h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 6px; color: var(--text); }
-    .faq-item p  { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+    .faq-item:hover { border-color: var(--primary-border); }
 
-    /* CTA */
+    .faq-q {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .faq-q::after {
+      content: '+';
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--faint);
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .faq-item.open .faq-q::after { content: '−'; }
+
+    .faq-a {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-top: var(--space-3);
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--border-soft);
+      display: none;
+    }
+
+    .faq-item.open .faq-a { display: block; }
+
+    /* ─── CTA ─────────────────────────────────────────── */
     .cta-section {
-      text-align: center;
       background: var(--primary);
+      text-align: center;
     }
 
-    .cta-section .section-label { color: rgba(255,255,255,0.65); }
-    .cta-section .section-title { color: #fff; }
-    .cta-section .section-sub   { color: rgba(255,255,255,0.75); margin: 0 auto 36px; }
+    .cta-section .eyebrow { color: rgba(255,255,255,0.6); }
+    .cta-section .section-title { color: #fff; margin-bottom: var(--space-3); }
+
+    .cta-sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.72);
+      margin: 0 auto var(--space-6);
+      max-width: 400px;
+      line-height: 1.6;
+    }
 
     .btn-white {
-      background: #fff;
-      color: var(--primary);
-      padding: 13px 28px;
-      border-radius: var(--radius);
-      font-size: 0.975rem;
-      font-weight: 700;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: var(--space-2);
+      background: #fff;
+      color: var(--primary) !important;
+      padding: 13px 28px;
+      border-radius: var(--radius);
+      font-size: 0.96rem;
+      font-weight: 700;
       transition: opacity 0.15s, transform 0.1s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
     }
-    .btn-white:hover { opacity: 0.92; text-decoration: none; transform: translateY(-1px); }
+    .btn-white:hover { opacity: 0.94; text-decoration: none; transform: translateY(-2px); }
 
-    /* Footer */
+    .cta-note {
+      margin-top: var(--space-3);
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────── */
     footer {
       border-top: 1px solid var(--border);
-      padding: 24px;
-      text-align: center;
-      font-size: 0.8rem;
-      color: var(--faint);
+      padding: var(--space-6) var(--px);
       background: var(--bg);
     }
-    footer a { color: var(--muted); }
-    footer a:hover { color: var(--text); }
 
-    @media (max-width: 560px) {
-      .privacy-box { flex-direction: column; }
-      section { padding: 56px 20px; }
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-5);
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .footer-logo {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .footer-logo img { width: 100%; height: 100%; display: block; }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-5);
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--faint);
+    }
+
+    .footer-links a:hover { color: var(--text); text-decoration: none; }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--faint);
+      margin-top: var(--space-4);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--border-soft);
+      text-align: center;
+      max-width: var(--max-w);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────── */
+
+    /* Tablet */
+    @media (max-width: 720px) {
+      .steps { grid-template-columns: 1fr; }
+      .steps::before { display: none; }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .privacy-cards { grid-template-columns: 1fr; }
+    }
+
+    /* Mobile */
+    @media (max-width: 520px) {
+      :root { --space-9: 64px; }
+      .features-grid { grid-template-columns: 1fr; }
+      nav { height: 52px; }
+      .nav-logo span { display: none; }
+      .nav-cta { padding: 7px 14px; font-size: 0.8rem; }
+      .hero h1 { letter-spacing: -0.02em; }
+      .hero-note { flex-direction: column; gap: var(--space-2); }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: var(--space-4); }
+      .footer-links { justify-content: flex-start; }
+    }
+
+    /* Very small */
+    @media (max-width: 380px) {
+      .browser-chrome { font-size: 92%; }
     }
   </style>
 </head>
 <body>
 
-<!-- Nav -->
+<!-- ── NAV ──────────────────────────────────────────────── -->
 <nav>
   <div class="nav-logo">
-    <div class="nav-logo-icon">CO</div>
-    Claude Organizer
+    <div class="nav-logo-icon"><img src="icon128.png" alt="Claude Organizer icon"></div>
+    <span>Claude Organizer</span>
   </div>
-  <a href="https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm" class="nav-cta">Add to Chrome</a>
+  <a href="https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm" class="nav-cta">
+    Add to Chrome — Free
+  </a>
 </nav>
 
-<!-- Hero -->
+<!-- ── HERO ─────────────────────────────────────────────── -->
 <div class="hero">
   <div class="hero-badge">Free Chrome Extension</div>
-  <h1>Organize your Claude chats<br><span>in one click</span></h1>
-  <p>Hundreds of chats, zero organization. Claude Organizer automatically sorts them into projects using smart keyword matching and AI. No setup required.</p>
+  <h1>Your Claude chats,<br><em>finally organized</em></h1>
+  <p class="hero-sub">Hundreds of chats and zero order? Claude Organizer scans them all, builds a plan, and moves everything into projects in one click.</p>
   <a href="https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm" class="btn-primary">
-    Add to Chrome - Free
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 2C4.686 2 2 4.686 2 8s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6z"/>
+      <circle cx="8" cy="8" r="2.5" fill="currentColor" stroke="none"/>
+    </svg>
+    Add to Chrome — Free
   </a>
-  <p class="hero-note">No account needed. No API key required.</p>
+  <p class="hero-note">
+    <span>No API key required</span>
+    <span>No account needed</span>
+    <span>Works in seconds</span>
+  </p>
 </div>
 
-<!-- Preview -->
-<div class="preview-wrap">
-  <div class="preview-placeholder">
-    Screenshot coming here
+<!-- ── MOCKUP ────────────────────────────────────────────── -->
+<div class="mockup-section">
+  <div class="inner">
+    <div class="mockup-outer">
+      <div class="browser-chrome">
+        <div class="browser-bar">
+          <div class="b-dots">
+            <div class="b-dot r"></div>
+            <div class="b-dot y"></div>
+            <div class="b-dot g"></div>
+          </div>
+          <div class="browser-url">
+            <span class="url-lock">🔒</span> claude.ai
+          </div>
+        </div>
+        <div class="popup-frame">
+          <div class="popup-header">
+            <div class="popup-brand">
+              <div class="popup-icon"><img src="icon128.png" alt=""></div>
+              Claude Organizer
+              <span class="popup-ver">v1.3</span>
+            </div>
+            <div class="popup-connected">Connected</div>
+          </div>
+          <div class="popup-tabs">
+            <div class="popup-tab active">Auto-Organize</div>
+            <div class="popup-tab">Manual</div>
+            <div class="popup-tab">Debug</div>
+          </div>
+          <div class="popup-body">
+            <div class="popup-row-label">
+              <span>14 chats ready to move</span>
+              <span class="popup-cancel">Cancel</span>
+            </div>
+
+            <div class="popup-group">
+              <div class="popup-group-hd">
+                <div class="popup-group-name">💻 Coding <span class="new-pill">new</span></div>
+                <span class="popup-group-count">4 chats</span>
+              </div>
+              <div class="popup-chat"><span class="arrow">→</span> Fix React hydration bug</div>
+              <div class="popup-chat"><span class="arrow">→</span> Chrome extension MV3 migration</div>
+              <div class="popup-chat"><span class="arrow">→</span> Python async best practices</div>
+              <div class="popup-chat"><span class="arrow">→</span> Docker compose setup</div>
+            </div>
+
+            <div class="popup-group">
+              <div class="popup-group-hd">
+                <div class="popup-group-name">💰 Finance</div>
+                <span class="popup-group-count">3 chats</span>
+              </div>
+              <div class="popup-chat"><span class="arrow">→</span> ETF investing strategy</div>
+              <div class="popup-chat"><span class="arrow">→</span> Tax deductions for freelancers</div>
+              <div class="popup-chat"><span class="arrow">→</span> Monthly budget template</div>
+            </div>
+
+            <div class="popup-group">
+              <div class="popup-group-hd">
+                <div class="popup-group-name">✈️ Travel <span class="new-pill">new</span></div>
+                <span class="popup-group-count">2 chats</span>
+              </div>
+              <div class="popup-chat"><span class="arrow">→</span> Japan itinerary 2 weeks</div>
+              <div class="popup-chat"><span class="arrow">→</span> Packing list for backpacking</div>
+            </div>
+
+            <button class="popup-apply">Apply Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- How it works -->
-<section>
+<div class="divider"></div>
+
+<!-- ── HOW IT WORKS ──────────────────────────────────────── -->
+<section class="page-section">
   <div class="inner">
-    <div class="section-label">How it works</div>
-    <h2 class="section-title">Three steps, one click</h2>
-    <p class="section-sub">You see the full plan before anything moves. Nothing happens without your approval.</p>
+    <div class="section-head">
+      <div class="eyebrow">How it works</div>
+      <h2 class="section-title">Three steps, one click</h2>
+      <p class="section-sub">You see the full plan before anything moves. Nothing happens without your approval.</p>
+    </div>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <h3>Click Organize</h3>
-        <p>The extension scans your unorganized chats and builds a plan using keyword matching and AI. Takes a few seconds.</p>
+        <p>The extension scans all your unorganized chats and builds a move plan using keyword matching and AI. Takes a few seconds.</p>
       </div>
       <div class="step">
         <div class="step-num">2</div>
@@ -402,150 +912,199 @@
   </div>
 </section>
 
-<!-- Features -->
-<section class="section-tinted">
+<!-- ── FEATURES ──────────────────────────────────────────── -->
+<section class="page-section tinted">
   <div class="inner">
-    <div class="section-label">Features</div>
-    <h2 class="section-title">Everything you need, nothing you don't</h2>
-    <p class="section-sub">Simple and fast. No settings to configure, no API key to paste.</p>
+    <div class="section-head">
+      <div class="eyebrow">Features</div>
+      <h2 class="section-title">Everything you need,<br>nothing you don't</h2>
+      <p class="section-sub">Simple and fast. No settings to configure, no API key to paste.</p>
+    </div>
     <div class="features-grid">
       <div class="feature">
-        <div class="feature-icon">⚡</div>
+        <span class="feature-icon">⚡</span>
         <h3>Instant keyword matching</h3>
-        <p>A built-in multilingual wordlist matches most chats instantly with no network call needed.</p>
+        <p>A built-in multilingual wordlist matches most chats in milliseconds — no network call, no delay.</p>
       </div>
       <div class="feature">
-        <div class="feature-icon">🤖</div>
+        <span class="feature-icon">🤖</span>
         <h3>AI for the hard ones</h3>
-        <p>Ambiguous titles get categorized by AI automatically. No API key needed, it just works.</p>
+        <p>Ambiguous titles get categorized by a shared AI backend. No API key needed — it just works.</p>
       </div>
       <div class="feature">
-        <div class="feature-icon">👁</div>
+        <span class="feature-icon">👁️</span>
         <h3>Preview before applying</h3>
         <p>See the full plan before a single chat moves. Cancel at any time with one click.</p>
       </div>
       <div class="feature">
-        <div class="feature-icon">✋</div>
-        <h3>Manual Mode</h3>
-        <p>Assign specific chats by hand when auto-organize is not quite right.</p>
+        <span class="feature-icon">✋</span>
+        <h3>Manual mode</h3>
+        <p>Assign specific chats by hand when auto-organize isn't quite right for your workflow.</p>
       </div>
       <div class="feature">
-        <div class="feature-icon">🌍</div>
+        <span class="feature-icon">🌍</span>
         <h3>Multilingual</h3>
-        <p>Keywords in English, Dutch, French, German, Spanish, Italian, Polish and more.</p>
+        <p>Keyword matching covers English, Dutch, French, German, Spanish, Polish, Russian and more.</p>
       </div>
       <div class="feature">
-        <div class="feature-icon">🧹</div>
+        <span class="feature-icon">🧹</span>
         <h3>Auto-cleanup</h3>
-        <p>Empty projects are removed automatically after each organize run.</p>
+        <p>Empty projects are removed automatically after each organize run. Your sidebar stays tidy.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Topics -->
-<section>
+<!-- ── TOPICS ────────────────────────────────────────────── -->
+<section class="page-section">
   <div class="inner">
-    <div class="section-label">Wordlist</div>
-    <h2 class="section-title">Recognizes 24 topic categories</h2>
-    <p class="section-sub">The built-in wordlist covers the most common chat topics across multiple languages and updates automatically.</p>
+    <div class="section-head">
+      <div class="eyebrow">Wordlist</div>
+      <h2 class="section-title">Recognizes 24 topic categories</h2>
+      <p class="section-sub">The built-in wordlist covers the most common chat topics across multiple languages and updates automatically from GitHub.</p>
+    </div>
     <div class="topics-wrap">
-      <span class="topic-pill">Gaming</span>
-      <span class="topic-pill">Coding</span>
-      <span class="topic-pill">Finance</span>
-      <span class="topic-pill">Work</span>
-      <span class="topic-pill">Health</span>
-      <span class="topic-pill">Travel</span>
-      <span class="topic-pill">Food</span>
-      <span class="topic-pill">Music</span>
-      <span class="topic-pill">Movies</span>
-      <span class="topic-pill">Sports</span>
-      <span class="topic-pill">Education</span>
-      <span class="topic-pill">Technology</span>
-      <span class="topic-pill">Design</span>
-      <span class="topic-pill">Home</span>
-      <span class="topic-pill">Cars</span>
-      <span class="topic-pill">Writing</span>
-      <span class="topic-pill">Science</span>
-      <span class="topic-pill">Legal</span>
-      <span class="topic-pill">Social Media</span>
-      <span class="topic-pill">AI</span>
-      <span class="topic-pill">Media Server</span>
-      <span class="topic-pill">Security</span>
-      <span class="topic-pill">Personal Development</span>
-      <span class="topic-pill">General Knowledge</span>
+      <span class="topic-pill">🎮 Gaming</span>
+      <span class="topic-pill">💻 Coding</span>
+      <span class="topic-pill">💰 Finance</span>
+      <span class="topic-pill">💼 Work</span>
+      <span class="topic-pill">🏥 Health</span>
+      <span class="topic-pill">✈️ Travel</span>
+      <span class="topic-pill">🍕 Food</span>
+      <span class="topic-pill">🎵 Music</span>
+      <span class="topic-pill">🎬 Movies</span>
+      <span class="topic-pill">⚽ Sports</span>
+      <span class="topic-pill">📚 Education</span>
+      <span class="topic-pill">💡 Technology</span>
+      <span class="topic-pill">🎨 Design</span>
+      <span class="topic-pill">🏠 Home</span>
+      <span class="topic-pill">🚗 Cars</span>
+      <span class="topic-pill">✍️ Writing</span>
+      <span class="topic-pill">🔬 Science</span>
+      <span class="topic-pill">⚖️ Legal</span>
+      <span class="topic-pill">📱 Social Media</span>
+      <span class="topic-pill">🤖 AI</span>
+      <span class="topic-pill">🖥️ Media Server</span>
+      <span class="topic-pill">🔒 Security</span>
+      <span class="topic-pill">🌱 Personal Dev</span>
+      <span class="topic-pill">🌐 General Knowledge</span>
     </div>
   </div>
 </section>
 
-<!-- Privacy -->
-<section class="section-tinted">
+<!-- ── PRIVACY ────────────────────────────────────────────── -->
+<section class="page-section tinted">
   <div class="inner">
-    <div class="section-label">Privacy</div>
-    <h2 class="section-title">Your data stays yours</h2>
-    <p class="section-sub">No accounts, no tracking, no data collection.</p>
-    <div class="privacy-box">
-      <div class="privacy-icon">🔒</div>
-      <div>
-        <h3>What leaves your browser</h3>
-        <p>
-          Your chats are read directly from Claude.ai using your active browser session.
-          For ambiguous chat titles, only the <strong>title text</strong> is sent to a shared AI backend for categorization.
-          No chat content, no personal data, no stored history.
-          The extension has no servers of its own and collects no analytics.
-        </p>
+    <div class="section-head">
+      <div class="eyebrow">Privacy</div>
+      <h2 class="section-title">Your data stays yours</h2>
+      <p class="section-sub">No accounts, no tracking, no data collection beyond what's needed to organize your chats.</p>
+    </div>
+    <div class="privacy-cards">
+      <div class="privacy-card">
+        <span class="privacy-card-icon">🏠</span>
+        <h3>Stays in your browser</h3>
+        <p>Your chats are read directly from Claude.ai using your active login session. No data is stored on any server.</p>
+      </div>
+      <div class="privacy-card">
+        <span class="privacy-card-icon">📤</span>
+        <h3>Only titles leave</h3>
+        <p>When AI categorization is needed, only the <strong>chat title</strong> is sent — never the conversation content.</p>
+      </div>
+      <div class="privacy-card">
+        <span class="privacy-card-icon">📊</span>
+        <h3>Zero analytics</h3>
+        <p>No usage tracking, no telemetry, no crash reports. The extension has no backend of its own.</p>
       </div>
     </div>
+    <div class="privacy-note">
+      Chat content never leaves your browser. For ambiguous titles, only the title text is sent to a shared AI service for categorization. No personal data, no history, no accounts.
+      <a href="privacy.html" style="margin-left:6px;white-space:nowrap">Full privacy policy →</a>
+    </div>
   </div>
 </section>
 
-<!-- FAQ -->
-<section>
+<!-- ── FAQ ───────────────────────────────────────────────── -->
+<section class="page-section">
   <div class="inner">
-    <div class="section-label">FAQ</div>
-    <h2 class="section-title">Common questions</h2>
-    <p class="section-sub"></p>
+    <div class="section-head">
+      <div class="eyebrow">FAQ</div>
+      <h2 class="section-title">Common questions</h2>
+    </div>
     <div class="faq">
-      <div class="faq-item">
-        <h3>Is it free?</h3>
-        <p>Yes, completely free. No subscription, no premium tier, no hidden costs.</p>
+      <div class="faq-item open">
+        <div class="faq-q">Is it free?</div>
+        <div class="faq-a">Yes, completely free. No subscription, no premium tier, no hidden costs — ever.</div>
       </div>
       <div class="faq-item">
-        <h3>Do I need an API key?</h3>
-        <p>No. The AI categorization runs on a shared backend. You just install and click Organize.</p>
+        <div class="faq-q">Do I need an API key?</div>
+        <div class="faq-a">No. The AI categorization runs on a shared backend at no cost to you. Just install the extension and click Organize.</div>
       </div>
       <div class="faq-item">
-        <h3>Will it delete my chats or projects?</h3>
-        <p>No chats are ever deleted. Projects that are left empty after organizing are removed, but all your conversations stay intact and can be found in your chat history.</p>
+        <div class="faq-q">Will it delete my chats or projects?</div>
+        <div class="faq-a">No chats are ever deleted. Projects that are left completely empty after organizing are removed to keep your sidebar clean, but every conversation stays intact in your chat history.</div>
       </div>
       <div class="faq-item">
-        <h3>Does it work in languages other than English?</h3>
-        <p>Yes. The keyword wordlist covers Dutch, French, German, Spanish, Italian, Polish and more. The AI fallback works in any language.</p>
+        <div class="faq-q">Does it work in languages other than English?</div>
+        <div class="faq-a">Yes. The keyword wordlist covers Dutch, French, German, Spanish, Italian, Polish, Russian, Arabic, Hindi and more. The AI fallback works in any language.</div>
       </div>
       <div class="faq-item">
-        <h3>Do I need to be logged in to Claude.ai?</h3>
-        <p>Yes. The extension reads your chats using your active Claude.ai browser session. Open Claude.ai, log in, then click the extension.</p>
+        <div class="faq-q">Do I need to be logged in to Claude.ai?</div>
+        <div class="faq-a">Yes. The extension uses your active Claude.ai browser session to read and move chats. Open claude.ai, log in, then click the extension icon.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I undo an organize run?</div>
+        <div class="faq-a">Not automatically, but you can move chats back manually in Claude.ai. That's why the preview step exists — review the plan carefully before clicking Apply.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
+<!-- ── CTA ───────────────────────────────────────────────── -->
+<section class="page-section cta-section">
   <div class="inner">
-    <div class="section-label">Get started</div>
+    <div class="eyebrow">Get started</div>
     <h2 class="section-title">Clean up your chats today</h2>
-    <p class="section-sub">Free, no setup, works in seconds.</p>
+    <p class="cta-sub">Free, no setup, works in seconds. Install and organize everything in under a minute.</p>
     <a href="https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm" class="btn-white">
-      Add to Chrome - Free
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 2C4.686 2 2 4.686 2 8s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6z"/>
+        <circle cx="8" cy="8" r="2.5" fill="currentColor" stroke="none"/>
+      </svg>
+      Add to Chrome — Free
     </a>
+    <p class="cta-note">No account · No API key · No data collection</p>
   </div>
 </section>
 
-<!-- Footer -->
+<!-- ── FOOTER ────────────────────────────────────────────── -->
 <footer>
-  <p>Claude Organizer · <a href="privacy.html">Privacy Policy</a> · Not affiliated with Anthropic</p>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo"><img src="icon128.png" alt=""></div>
+      Claude Organizer
+    </div>
+    <div class="footer-links">
+      <a href="https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm">Chrome Web Store</a>
+      <a href="https://github.com/hasanhhg/claude-chat-organizer" target="_blank" rel="noopener">GitHub</a>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+  </div>
+  <div class="footer-copy">
+    Not affiliated with Anthropic. Claude is a trademark of Anthropic, PBC.
+  </div>
 </footer>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
 
 </body>
 </html>
