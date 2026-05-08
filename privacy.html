@@ -208,14 +208,10 @@
   <p>No personal information, no message content, and no account details are included.</p>
   <p>The AI backend is a Cloudflare Worker that forwards the request to Groq to run a language model. Neither service stores this data after the request completes.</p>
 
-  <h2>Wordlist updates</h2>
-  <p>The extension fetches a keyword wordlist from GitHub when a new version is available. This request contains no personal data. It is a plain file download.</p>
-
   <h2>Local storage</h2>
   <p>The extension stores the following data locally in your browser using <code>chrome.storage</code>:</p>
   <ul>
     <li>Your organization ID and name (to avoid re-fetching on every run)</li>
-    <li>The keyword wordlist (cached to avoid repeated downloads)</li>
     <li>A pending organize plan (temporary, cleared after applying)</li>
     <li>A flag indicating whether you have seen the welcome screen</li>
   </ul>
@@ -230,7 +226,6 @@
     <li><strong>Claude.ai</strong> - to read and organize your chats using your active browser session</li>
     <li><strong>Cloudflare Workers</strong> - AI categorization backend, receives chat titles only</li>
     <li><strong>Groq</strong> - runs the AI model that suggests project categories, receives chat titles only</li>
-    <li><strong>GitHub</strong> - serves the keyword wordlist file, no personal data sent</li>
   </ul>
 
   <h2>Children</h2>
