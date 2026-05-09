@@ -7,6 +7,14 @@
   <meta name="description" content="Claude Organizer automatically sorts your Claude.ai chats into projects in one click. No API key needed. Free Chrome extension.">
   <link rel="canonical" href="https://chat-organizer.com/">
 
+  <!-- Hreflang -->
+  <link rel="alternate" hreflang="en" href="https://chat-organizer.com/?lang=en">
+  <link rel="alternate" hreflang="nl" href="https://chat-organizer.com/?lang=nl">
+  <link rel="alternate" hreflang="fr" href="https://chat-organizer.com/?lang=fr">
+  <link rel="alternate" hreflang="de" href="https://chat-organizer.com/?lang=de">
+  <link rel="alternate" hreflang="es" href="https://chat-organizer.com/?lang=es">
+  <link rel="alternate" hreflang="x-default" href="https://chat-organizer.com/">
+
   <!-- Open Graph -->
   <meta property="og:title" content="Claude Organizer – Auto-organize your Claude chats">
   <meta property="og:description" content="Hundreds of chats, zero order? Claude Organizer scans them all and moves everything into projects in one click. Free Chrome extension.">
@@ -25,11 +33,7 @@
     "description": "Automatically sort your Claude.ai chats into projects in one click. No API key needed.",
     "operatingSystem": "Chrome",
     "applicationCategory": "BrowserApplication",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
     "url": "https://chat-organizer.com",
     "image": "https://chat-organizer.com/icon128.png"
   }
@@ -42,7 +46,6 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* Type scale — 1.333 ratio, base 18px */
       --t-xs:   14px;
       --t-sm:   16px;
       --t-body: 18px;
@@ -51,28 +54,15 @@
       --t-2xl:  42px;
       --t-3xl:  56px;
       --t-4xl:  75px;
-
-      /* Spacing — 8pt grid */
-      --s1:  8px;
-      --s2:  16px;
-      --s3:  24px;
-      --s4:  32px;
-      --s5:  40px;
-      --s6:  48px;
-      --s7:  56px;
-      --s8:  64px;
-      --s10: 80px;
-      --s12: 96px;
-      --s16: 128px;
-
-      /* Colors */
+      --s1:  8px;  --s2: 16px; --s3: 24px; --s4: 32px; --s5: 40px;
+      --s6: 48px; --s7: 56px; --s8: 64px; --s10: 80px; --s12: 96px; --s16: 128px;
       --bg:             #F9F7F4;
       --bg-alt:         #F2EDE6;
       --surface:        #FFFFFF;
       --border:         #E8E2DA;
       --border-soft:    #F0EBE4;
       --text:           #1C1917;
-      --muted:          #6B6360;   /* was #79716B — darkened for WCAG AA */
+      --muted:          #6B6360;
       --faint:          #A8A29E;
       --primary:        #D97756;
       --primary-h:      #C2633D;
@@ -89,7 +79,6 @@
     }
 
     html { scroll-behavior: smooth; }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
       font-size: var(--t-body);
@@ -99,926 +88,280 @@
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
-
     a { color: var(--primary); text-decoration: none; }
     a:hover { text-decoration: underline; }
+    :focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: 4px; }
 
-    /* Focus-visible — keyboard navigation ring */
-    :focus-visible {
-      outline: 2px solid var(--primary);
-      outline-offset: 2px;
-      border-radius: 4px;
-    }
-
-    /* Skip link */
     .skip-link {
-      position: absolute;
-      top: -100%;
-      left: var(--s1);
-      background: var(--text);
-      color: #fff;
-      padding: var(--s1) var(--s2);
-      border-radius: 4px;
-      z-index: 999;
-      font-size: var(--t-sm);
-      font-weight: 600;
-      text-decoration: none;
+      position: absolute; top: -100%; left: var(--s1);
+      background: var(--text); color: #fff;
+      padding: var(--s1) var(--s2); border-radius: 4px;
+      z-index: 999; font-size: var(--t-sm); font-weight: 600; text-decoration: none;
     }
     .skip-link:focus-visible { top: var(--s1); }
 
     /* ─── NAV ─────────────────────────────────────────────── */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      position: sticky; top: 0; z-index: 100;
       background: rgba(249,247,244,0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
-      padding: 0 var(--px);
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      padding: 0 var(--px); height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
     }
-
     .nav-logo {
-      font-weight: 700;
-      font-size: 0.9rem;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: var(--s1);
-      white-space: nowrap;
-      text-decoration: none;
+      font-weight: 700; font-size: 0.9rem; color: var(--text);
+      display: flex; align-items: center; gap: var(--s1); white-space: nowrap; text-decoration: none;
     }
     .nav-logo:hover { text-decoration: none; }
-
-    .nav-logo-icon {
-      width: 28px; height: 28px;
-      border-radius: 8px;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
+    .nav-logo-icon { width: 28px; height: 28px; border-radius: 8px; overflow: hidden; flex-shrink: 0; }
     .nav-logo-icon img { width: 100%; height: 100%; display: block; }
-
+    .nav-right { display: flex; align-items: center; gap: var(--s2); }
     .nav-cta {
-      background: var(--primary);
-      color: #fff !important;
-      padding: var(--s1) 18px;
-      border-radius: 8px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      transition: background 0.15s, transform 0.1s;
-      white-space: nowrap;
+      background: var(--primary); color: #fff !important;
+      padding: var(--s1) 18px; border-radius: 8px;
+      font-size: 0.82rem; font-weight: 700;
+      transition: background 0.15s, transform 0.1s; white-space: nowrap;
     }
     .nav-cta:hover { background: var(--primary-h); text-decoration: none; transform: translateY(-1px); }
 
+    /* ─── LANGUAGE SWITCHER ───────────────────────────────── */
+    .lang-switcher { position: relative; }
+    .lang-btn {
+      display: flex; align-items: center; gap: 5px;
+      background: none; border: 1px solid var(--border);
+      border-radius: 8px; padding: 6px 10px;
+      font-size: var(--t-xs); font-weight: 600; color: var(--muted);
+      cursor: pointer; transition: border-color 0.15s, color 0.15s;
+      font-family: inherit;
+    }
+    .lang-btn:hover { border-color: var(--primary-border); color: var(--text); }
+    .lang-btn svg { width: 14px; height: 14px; }
+    .lang-current { font-weight: 700; }
+    .lang-menu {
+      display: none; position: absolute; top: calc(100% + 6px); right: 0;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow-md);
+      min-width: 140px; overflow: hidden; z-index: 200;
+    }
+    .lang-menu.open { display: block; }
+    .lang-option {
+      display: flex; align-items: center; gap: var(--s1);
+      width: 100%; padding: 9px 14px;
+      font-size: var(--t-sm); color: var(--muted);
+      background: none; border: none; cursor: pointer;
+      text-align: left; font-family: inherit;
+      transition: background 0.1s, color 0.1s;
+    }
+    .lang-option:hover { background: var(--bg-alt); color: var(--text); }
+    .lang-option.active { color: var(--primary); font-weight: 700; }
+    .lang-option .lang-flag { font-size: 1rem; }
+
     /* ─── SECTION SYSTEM ──────────────────────────────────── */
-    .section {
-      padding: var(--s12) var(--px);
-    }
-    .section.alt {
-      background: var(--bg-alt);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .section.white {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-    }
-
+    .section { padding: var(--s12) var(--px); }
+    .section.alt { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .section.white { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .inner { max-width: var(--max-w); margin: 0 auto; }
     .eyebrow {
-      font-size: var(--t-xs);
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #B35C35;   /* was var(--primary) — darkened to ~5.2:1 for WCAG AA */
-      margin-bottom: var(--s1);
+      font-size: var(--t-xs); font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #B35C35; margin-bottom: var(--s1);
     }
-
     .section-title {
-      font-size: clamp(2rem, 3.5vw, 2.75rem);
-      font-weight: 800;
-      letter-spacing: -0.025em;
-      line-height: 1.1;
-      margin-bottom: var(--s2);
-      color: var(--text);
+      font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 800;
+      letter-spacing: -0.025em; line-height: 1.1; margin-bottom: var(--s2); color: var(--text);
     }
-
-    .section-sub {
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 52ch;
-      line-height: 1.65;
-    }
-
+    .section-sub { font-size: 1.05rem; color: var(--muted); max-width: 52ch; line-height: 1.65; }
     .section-head { margin-bottom: var(--s7); }
 
     /* ─── HERO ────────────────────────────────────────────── */
     .hero-wrap {
       background: linear-gradient(150deg, #EDE6DC 0%, #F3EEE8 35%, var(--bg) 70%);
-      border-bottom: 1px solid var(--border);
-      padding: 0 var(--px);
-      overflow: hidden;
+      border-bottom: 1px solid var(--border); padding: 0 var(--px); overflow: hidden;
     }
-
     .hero-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--s8);
-      align-items: center;
-      padding-top: var(--s12);
-      padding-bottom: var(--s12);
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--s8); align-items: center;
+      padding-top: var(--s12); padding-bottom: var(--s12);
     }
-
     .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: var(--primary-bg);
-      color: var(--primary);
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--primary-bg); color: var(--primary);
       border: 1px solid var(--primary-border);
-      font-size: var(--t-xs);
-      font-weight: 700;
-      padding: 5px 13px;
-      border-radius: 100px;
-      margin-bottom: var(--s3);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      font-size: var(--t-xs); font-weight: 700;
+      padding: 5px 13px; border-radius: 100px;
+      margin-bottom: var(--s3); letter-spacing: 0.06em; text-transform: uppercase;
     }
-    .hero-badge::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--primary);
-      flex-shrink: 0;
-    }
-
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--primary); flex-shrink: 0; }
     .hero-content h1 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -0.035em;
-      margin-bottom: var(--s3);
-      color: var(--text);
+      font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900;
+      line-height: 1.05; letter-spacing: -0.035em;
+      margin-bottom: var(--s3); color: var(--text);
     }
-
-    .hero-content h1 em {
-      font-style: normal;
-      color: var(--primary);
-    }
-
-    .hero-sub {
-      font-size: 1.1rem;
-      color: var(--muted);
-      max-width: 44ch;
-      margin-bottom: var(--s3);
-      line-height: 1.65;
-    }
-
-    /* Hero social proof */
-    .hero-stars {
-      display: flex;
-      align-items: center;
-      gap: var(--s1);
-      font-size: var(--t-sm);
-      color: var(--muted);
-      margin-bottom: var(--s3);
-    }
-    .hero-stars .stars {
-      color: #F59E0B;
-      font-size: 1rem;
-      letter-spacing: 1px;
-    }
-
+    .hero-content h1 em { font-style: normal; color: var(--primary); }
+    .hero-sub { font-size: 1.1rem; color: var(--muted); max-width: 44ch; margin-bottom: var(--s3); line-height: 1.65; }
+    .hero-stars { display: flex; align-items: center; gap: var(--s1); font-size: var(--t-sm); color: var(--muted); margin-bottom: var(--s3); }
+    .hero-stars .stars { color: #F59E0B; font-size: 1rem; letter-spacing: 1px; }
     .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--s1);
-      background: var(--primary);
-      color: #fff !important;
-      padding: 14px 28px;
-      border-radius: var(--radius);
-      font-size: 1rem;
-      font-weight: 700;
+      display: inline-flex; align-items: center; gap: var(--s1);
+      background: var(--primary); color: #fff !important;
+      padding: 14px 28px; border-radius: var(--radius);
+      font-size: 1rem; font-weight: 700;
       transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
       box-shadow: 0 2px 10px rgba(217,119,86,0.38);
     }
-    .btn-primary:hover {
-      background: var(--primary-h);
-      text-decoration: none;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(217,119,86,0.45);
-    }
+    .btn-primary:hover { background: var(--primary-h); text-decoration: none; transform: translateY(-2px); box-shadow: 0 6px 24px rgba(217,119,86,0.45); }
     .btn-primary svg { width: 16px; height: 16px; flex-shrink: 0; }
-
     .hero-note {
-      margin-top: 14px;
-      font-size: var(--t-xs);
-      color: var(--faint);
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
+      margin-top: 14px; font-size: var(--t-xs); color: var(--faint);
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
     }
     .hero-note span { display: flex; align-items: center; gap: 5px; }
     .hero-note span::before { content: '✓'; color: var(--green); font-weight: 700; font-size: 0.8rem; }
 
     /* ─── MOCKUP ──────────────────────────────────────────── */
     .mockup-outer { max-width: 100%; }
-
-    .browser-chrome {
-      background: #272320;
-      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-      box-shadow: var(--shadow-lg);
-      overflow: hidden;
-    }
-
-    .browser-bar {
-      display: flex;
-      align-items: center;
-      gap: var(--s1);
-      padding: 11px 14px;
-      background: #333028;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-
+    .browser-chrome { background: #272320; border-radius: var(--radius-lg) var(--radius-lg) 0 0; box-shadow: var(--shadow-lg); overflow: hidden; }
+    .browser-bar { display: flex; align-items: center; gap: var(--s1); padding: 11px 14px; background: #333028; border-bottom: 1px solid rgba(255,255,255,0.05); }
     .b-dots { display: flex; gap: 6px; flex-shrink: 0; }
     .b-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .b-dot.r { background: #FF5F57; }
-    .b-dot.y { background: #FEBC2E; }
-    .b-dot.g { background: #28C840; }
-
-    .browser-url {
-      flex: 1;
-      background: rgba(255,255,255,0.07);
-      border-radius: 6px;
-      height: 22px;
-      display: flex;
-      align-items: center;
-      padding: 0 10px;
-      gap: 5px;
-      font-size: 0.68rem;
-      color: rgba(255,255,255,0.38);
-      font-family: monospace;
-    }
-
+    .b-dot.r { background: #FF5F57; } .b-dot.y { background: #FEBC2E; } .b-dot.g { background: #28C840; }
+    .browser-url { flex: 1; background: rgba(255,255,255,0.07); border-radius: 6px; height: 22px; display: flex; align-items: center; padding: 0 10px; gap: 5px; font-size: 0.68rem; color: rgba(255,255,255,0.38); font-family: monospace; }
     .popup-frame { background: var(--bg); }
-
-    .popup-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 14px;
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .popup-brand {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-
+    .popup-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: var(--surface); border-bottom: 1px solid var(--border); }
+    .popup-brand { display: flex; align-items: center; gap: 7px; font-size: 0.78rem; font-weight: 700; color: var(--text); }
     .popup-icon { width: 22px; height: 22px; border-radius: 6px; overflow: hidden; flex-shrink: 0; }
     .popup-icon img { width: 100%; height: 100%; display: block; }
     .popup-ver { font-size: 0.65rem; color: var(--faint); font-weight: 400; }
-
-    .popup-connected {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.68rem;
-      color: var(--green);
-      font-weight: 600;
-    }
-    .popup-connected::before {
-      content: '';
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--green);
-    }
-
-    .popup-tabs {
-      display: flex;
-      border-bottom: 1px solid var(--border);
-      background: var(--surface);
-    }
-
-    .popup-tab {
-      flex: 1;
-      padding: 9px 0;
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: var(--faint);
-      text-align: center;
-      border-bottom: 2px solid transparent;
-    }
+    .popup-connected { display: flex; align-items: center; gap: 5px; font-size: 0.68rem; color: var(--green); font-weight: 600; }
+    .popup-connected::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+    .popup-tabs { display: flex; border-bottom: 1px solid var(--border); background: var(--surface); }
+    .popup-tab { flex: 1; padding: 9px 0; font-size: 0.7rem; font-weight: 600; color: var(--faint); text-align: center; border-bottom: 2px solid transparent; }
     .popup-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
-
     .popup-body { padding: 12px; }
-
-    .popup-row-label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: var(--s1);
-    }
+    .popup-row-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--s1); }
     .popup-row-label span:first-child { font-size: 0.71rem; font-weight: 700; color: var(--text); }
     .popup-cancel { font-size: 0.68rem; color: var(--primary); font-weight: 500; }
-
-    .popup-group {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      margin-bottom: 6px;
-      overflow: hidden;
-    }
-
-    .popup-group-hd {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 7px 10px;
-      background: #FAFAF9;
-      border-bottom: 1px solid var(--border-soft);
-    }
-
-    .popup-group-name {
-      font-size: 0.73rem;
-      font-weight: 700;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .new-pill {
-      background: var(--primary-bg);
-      border: 1px solid var(--primary-border);
-      color: var(--primary);
-      font-size: 0.58rem;
-      font-weight: 700;
-      padding: 1px 5px;
-      border-radius: 100px;
-    }
-
+    .popup-group { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 6px; overflow: hidden; }
+    .popup-group-hd { display: flex; align-items: center; justify-content: space-between; padding: 7px 10px; background: #FAFAF9; border-bottom: 1px solid var(--border-soft); }
+    .popup-group-name { font-size: 0.73rem; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 5px; }
+    .new-pill { background: var(--primary-bg); border: 1px solid var(--primary-border); color: var(--primary); font-size: 0.58rem; font-weight: 700; padding: 1px 5px; border-radius: 100px; }
     .popup-group-count { font-size: 0.65rem; color: var(--faint); }
-
-    .popup-chat {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      padding: 5px 10px;
-      font-size: 0.69rem;
-      color: var(--muted);
-      border-bottom: 1px solid #FAFAF9;
-    }
+    .popup-chat { display: flex; align-items: center; gap: 7px; padding: 5px 10px; font-size: 0.69rem; color: var(--muted); border-bottom: 1px solid #FAFAF9; }
     .popup-chat:last-child { border-bottom: none; }
-
     .arrow { color: var(--primary); font-size: 0.6rem; flex-shrink: 0; }
+    .popup-apply { margin-top: 10px; width: 100%; background: var(--primary); color: #fff; border: none; border-radius: 8px; padding: 9px; font-size: 0.76rem; font-weight: 700; text-align: center; cursor: default; letter-spacing: 0.01em; }
 
-    .popup-apply {
-      margin-top: 10px;
-      width: 100%;
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 9px;
-      font-size: 0.76rem;
-      font-weight: 700;
-      text-align: center;
-      cursor: default;
-      letter-spacing: 0.01em;
-    }
-
-    /* ─── STATS STRIP ─────────────────────────────────────── */
-    .stats-strip {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 0 var(--px);
-    }
-
-    .stats-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      display: flex;
-      align-items: stretch;
-    }
-
-    .stat-item {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: var(--s1);
-      padding: var(--s6) var(--s2);
-      border-right: 1px solid var(--border);
-    }
+    /* ─── STATS ───────────────────────────────────────────── */
+    .stats-strip { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 var(--px); }
+    .stats-inner { max-width: var(--max-w); margin: 0 auto; display: flex; align-items: stretch; }
+    .stat-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--s1); padding: var(--s6) var(--s2); border-right: 1px solid var(--border); }
     .stat-item:last-child { border-right: none; }
-
-    .stat-value {
-      font-size: var(--t-2xl);
-      font-weight: 800;
-      color: var(--text);
-      letter-spacing: -0.03em;
-      line-height: 1;
-    }
-
-    .stat-label {
-      font-size: var(--t-xs);
-      color: var(--faint);
-      text-align: center;
-      line-height: 1.4;
-    }
+    .stat-value { font-size: var(--t-2xl); font-weight: 800; color: var(--text); letter-spacing: -0.03em; line-height: 1; }
+    .stat-label { font-size: var(--t-xs); color: var(--faint); text-align: center; line-height: 1.4; }
 
     /* ─── HOW IT WORKS ────────────────────────────────────── */
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--s3);
-      position: relative;
-    }
-
-    .steps::before {
-      content: '';
-      position: absolute;
-      top: 20px;
-      left: calc(33.333% + 12px);
-      right: calc(33.333% + 12px);
-      height: 2px;
-      background: var(--primary-border);
-      z-index: 0;
-    }
-
-    .step {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: var(--s4) var(--s3);
-      position: relative;
-      z-index: 1;
-      transition: border-color 0.15s, box-shadow 0.15s;
-    }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s3); position: relative; }
+    .steps::before { content: ''; position: absolute; top: 20px; left: calc(33.333% + 12px); right: calc(33.333% + 12px); height: 2px; background: var(--primary-border); z-index: 0; }
+    .step { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--s4) var(--s3); position: relative; z-index: 1; transition: border-color 0.15s, box-shadow 0.15s; }
     .step:hover { border-color: var(--primary-border); box-shadow: var(--shadow-sm); }
-
-    .step-num {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: var(--primary);
-      color: #fff;
-      font-weight: 800;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: var(--s2);
-      box-shadow: 0 0 0 4px var(--bg-alt);
-    }
-
+    .step-num { width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: #fff; font-weight: 800; font-size: 1rem; display: flex; align-items: center; justify-content: center; margin-bottom: var(--s2); box-shadow: 0 0 0 4px var(--bg-alt); }
     .step h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: var(--s1); color: var(--text); }
-    .step p   { font-size: 0.95rem; color: var(--muted); line-height: 1.65; }
+    .step p { font-size: 0.95rem; color: var(--muted); line-height: 1.65; }
 
-    /* ─── FEATURES / BENTO ────────────────────────────────── */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--s3);
-    }
-
-    .feature {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: var(--s4);
-      transition: border-color 0.15s, box-shadow 0.15s;
-    }
+    /* ─── FEATURES ────────────────────────────────────────── */
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s3); }
+    .feature { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--s4); transition: border-color 0.15s, box-shadow 0.15s; }
     .feature:hover { border-color: var(--primary-border); box-shadow: var(--shadow-sm); }
-
-    .feature-icon {
-      width: 40px; height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: var(--s2);
-      color: var(--primary);
-    }
+    .feature-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; margin-bottom: var(--s2); color: var(--primary); }
     .feature-icon svg { width: 24px; height: 24px; }
-    .feature h3   { font-size: 1rem; font-weight: 700; margin-bottom: var(--s1); color: var(--text); }
-    .feature p    { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+    .feature h3 { font-size: 1rem; font-weight: 700; margin-bottom: var(--s1); color: var(--text); }
+    .feature p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
 
-    /* ─── MID-PAGE CTA BAND ───────────────────────────────── */
-    .cta-band {
-      background: #1C1917;
-      padding: var(--s8) var(--px);
-    }
-
-    .cta-band-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--s4);
-      flex-wrap: wrap;
-    }
-
-    .cta-band-text h3 {
-      font-size: var(--t-xl);
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: -0.02em;
-      margin-bottom: var(--s1);
-    }
-
-    .cta-band-text p {
-      font-size: 1rem;
-      color: rgba(255,255,255,0.55);
-    }
-
-    .btn-band {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--s1);
-      background: var(--primary);
-      color: #fff !important;
-      padding: 13px 26px;
-      border-radius: var(--radius);
-      font-size: 0.95rem;
-      font-weight: 700;
-      white-space: nowrap;
-      transition: background 0.15s, transform 0.1s;
-      flex-shrink: 0;
-    }
+    /* ─── MID CTA BAND ────────────────────────────────────── */
+    .cta-band { background: #1C1917; padding: var(--s8) var(--px); }
+    .cta-band-inner { max-width: var(--max-w); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: var(--s4); flex-wrap: wrap; }
+    .cta-band-text h3 { font-size: var(--t-xl); font-weight: 800; color: #fff; letter-spacing: -0.02em; margin-bottom: var(--s1); }
+    .cta-band-text p { font-size: 1rem; color: rgba(255,255,255,0.55); }
+    .btn-band { display: inline-flex; align-items: center; gap: var(--s1); background: var(--primary); color: #fff !important; padding: 13px 26px; border-radius: var(--radius); font-size: 0.95rem; font-weight: 700; white-space: nowrap; transition: background 0.15s, transform 0.1s; flex-shrink: 0; }
     .btn-band:hover { background: var(--primary-h); text-decoration: none; transform: translateY(-1px); }
     .btn-band svg { width: 15px; height: 15px; }
 
     /* ─── TOPICS ──────────────────────────────────────────── */
-    .topics-layout {
-      display: grid;
-      grid-template-columns: 240px 1fr;
-      gap: var(--s8);
-      align-items: start;
-    }
-
-    .topics-sidebar {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: var(--s4);
-      position: sticky;
-      top: 72px;
-    }
-
-    .topics-stat {
-      font-size: 3.5rem;
-      font-weight: 900;
-      color: var(--primary);
-      letter-spacing: -0.04em;
-      line-height: 1;
-      margin-bottom: var(--s1);
-    }
-
-    .topics-stat-label {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.55;
-      margin-bottom: var(--s3);
-      padding-bottom: var(--s3);
-      border-bottom: 1px solid var(--border-soft);
-    }
-
-    .topics-meta {
-      font-size: 0.85rem;
-      color: var(--faint);
-      line-height: 1.6;
-    }
+    .topics-layout { display: grid; grid-template-columns: 240px 1fr; gap: var(--s8); align-items: start; }
+    .topics-sidebar { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--s4); position: sticky; top: 72px; }
+    .topics-stat { font-size: 3.5rem; font-weight: 900; color: var(--primary); letter-spacing: -0.04em; line-height: 1; margin-bottom: var(--s1); }
+    .topics-stat-label { font-size: 0.9rem; color: var(--muted); line-height: 1.55; margin-bottom: var(--s3); padding-bottom: var(--s3); border-bottom: 1px solid var(--border-soft); }
+    .topics-meta { font-size: 0.85rem; color: var(--faint); line-height: 1.6; }
     .topics-meta strong { color: var(--muted); }
-
-    .topics-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--s1);
-      align-content: flex-start;
-    }
-
-    .topic-pill {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: var(--s1) var(--s2);
-      font-size: 0.85rem;
-      color: var(--muted);
-      font-weight: 500;
-      transition: border-color 0.15s, color 0.15s, background 0.15s;
-      cursor: default;
-    }
+    .topics-wrap { display: flex; flex-wrap: wrap; gap: var(--s1); align-content: flex-start; }
+    .topic-pill { background: var(--surface); border: 1px solid var(--border); border-radius: 100px; padding: var(--s1) var(--s2); font-size: 0.85rem; color: var(--muted); font-weight: 500; transition: border-color 0.15s, color 0.15s, background 0.15s; cursor: default; }
     .topic-pill:hover { border-color: var(--primary-border); color: var(--primary); background: var(--primary-bg); }
 
     /* ─── PRIVACY ─────────────────────────────────────────── */
-    .privacy-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--s3);
-      margin-bottom: var(--s3);
-    }
-
-    .privacy-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: var(--s4) 28px;
-      border-top: 3px solid var(--primary);
-    }
-
-    .privacy-card-icon {
-      width: 40px; height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: var(--s2);
-      color: var(--primary);
-    }
+    .privacy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s3); margin-bottom: var(--s3); }
+    .privacy-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--s4) 28px; border-top: 3px solid var(--primary); }
+    .privacy-card-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; margin-bottom: var(--s2); color: var(--primary); }
     .privacy-card-icon svg { width: 24px; height: 24px; }
-    .privacy-card h3   { font-size: 1rem; font-weight: 700; margin-bottom: var(--s1); color: var(--text); }
-    .privacy-card p    { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
-
-    .privacy-note {
-      background: var(--primary-bg);
-      border: 1px solid var(--primary-border);
-      border-radius: var(--radius);
-      padding: var(--s3);
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.65;
-      display: flex;
-      align-items: flex-start;
-      gap: var(--s2);
-      margin-bottom: var(--s3);
-    }
+    .privacy-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: var(--s1); color: var(--text); }
+    .privacy-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+    .privacy-note { background: var(--primary-bg); border: 1px solid var(--primary-border); border-radius: var(--radius); padding: var(--s3); font-size: 0.9rem; color: var(--muted); line-height: 1.65; display: flex; align-items: flex-start; gap: var(--s2); margin-bottom: var(--s3); }
     .privacy-note-icon { flex-shrink: 0; color: var(--primary); margin-top: 2px; }
     .privacy-note-icon svg { width: 18px; height: 18px; }
-
-    /* Permissions transparency */
-    .permissions-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--s2);
-    }
-
-    .permission-item {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: var(--s2) var(--s3);
-    }
-
-    .permission-name {
-      font-size: var(--t-xs);
-      font-weight: 700;
-      color: var(--text);
-      font-family: monospace;
-      background: var(--bg-alt);
-      padding: 2px 6px;
-      border-radius: 4px;
-      display: inline-block;
-      margin-bottom: var(--s1);
-    }
-
-    .permission-desc {
-      font-size: var(--t-xs);
-      color: var(--muted);
-      line-height: 1.55;
-    }
+    .permissions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s2); }
+    .permission-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--s2) var(--s3); }
+    .permission-name { font-size: var(--t-xs); font-weight: 700; color: var(--text); font-family: monospace; background: var(--bg-alt); padding: 2px 6px; border-radius: 4px; display: inline-block; margin-bottom: var(--s1); }
+    .permission-desc { font-size: var(--t-xs); color: var(--muted); line-height: 1.55; }
 
     /* ─── TESTIMONIALS ────────────────────────────────────── */
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--s3);
-    }
-
-    .testimonial {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: var(--s4);
-    }
-
-    .testimonial-stars {
-      color: #F59E0B;
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-      margin-bottom: var(--s2);
-    }
-
-    .testimonial-quote {
-      font-size: 0.95rem;
-      color: var(--text);
-      line-height: 1.65;
-      margin-bottom: var(--s3);
-    }
-
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: var(--s2);
-    }
-
-    .testimonial-avatar {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: var(--bg-alt);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-
-    .testimonial-name {
-      font-size: var(--t-xs);
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.3;
-    }
-
-    .testimonial-role {
-      font-size: var(--t-xs);
-      color: var(--faint);
-    }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s3); }
+    .testimonial { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--s4); }
+    .testimonial-stars { color: #F59E0B; font-size: 0.9rem; letter-spacing: 1px; margin-bottom: var(--s2); }
+    .testimonial-quote { font-size: 0.95rem; color: var(--text); line-height: 1.65; margin-bottom: var(--s3); }
+    .testimonial-author { display: flex; align-items: center; gap: var(--s2); }
+    .testimonial-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--bg-alt); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .testimonial-name { font-size: var(--t-xs); font-weight: 700; color: var(--text); line-height: 1.3; }
+    .testimonial-role { font-size: var(--t-xs); color: var(--faint); }
 
     /* ─── FAQ ─────────────────────────────────────────────── */
-    .faq {
-      display: flex;
-      flex-direction: column;
-      gap: var(--s2);
-    }
-
-    .faq details {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      transition: border-color 0.15s;
-    }
+    .faq { display: flex; flex-direction: column; gap: var(--s2); }
+    .faq details { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); transition: border-color 0.15s; }
     .faq details:hover { border-color: var(--primary-border); }
     .faq details[open] { border-color: var(--primary-border); }
-
-    .faq summary {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text);
-      padding: var(--s3);
-      cursor: pointer;
-      list-style: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: var(--s2);
-      user-select: none;
-    }
+    .faq summary { font-size: 1rem; font-weight: 700; color: var(--text); padding: var(--s3); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: var(--s2); user-select: none; }
     .faq summary::-webkit-details-marker { display: none; }
-    .faq summary::after {
-      content: '+';
-      font-size: 1.2rem;
-      font-weight: 400;
-      color: var(--faint);
-      flex-shrink: 0;
-      transition: transform 0.15s;
-    }
-    .faq details[open] summary::after {
-      content: '\2212';
-    }
-
-    .faq-a {
-      font-size: 0.95rem;
-      color: var(--muted);
-      line-height: 1.65;
-      padding: 0 var(--s3) var(--s3);
-      border-top: 1px solid var(--border-soft);
-      padding-top: var(--s2);
-      margin-top: 0;
-    }
+    .faq summary::after { content: '+'; font-size: 1.2rem; font-weight: 400; color: var(--faint); flex-shrink: 0; }
+    .faq details[open] summary::after { content: '\2212'; }
+    .faq-a { font-size: 0.95rem; color: var(--muted); line-height: 1.65; padding: 0 var(--s3) var(--s3); border-top: 1px solid var(--border-soft); padding-top: var(--s2); }
 
     /* ─── CTA ─────────────────────────────────────────────── */
-    .cta-section {
-      background: #1C1917;
-      padding: var(--s12) var(--px);
-      text-align: center;
-    }
+    .cta-section { background: #1C1917; padding: var(--s12) var(--px); text-align: center; }
     .cta-section .section-title { color: #fff; margin-bottom: var(--s2); }
-
-    .cta-sub {
-      font-size: 1.05rem;
-      color: rgba(255,255,255,0.5);
-      margin: 0 auto var(--s4);
-      max-width: 44ch;
-      line-height: 1.65;
-    }
-
-    .btn-white {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--s1);
-      background: var(--primary);
-      color: #fff !important;
-      padding: 16px 32px;
-      border-radius: var(--radius);
-      font-size: 1rem;
-      font-weight: 700;
-      transition: background 0.15s, transform 0.1s;
-      box-shadow: 0 4px 24px rgba(217,119,86,0.4);
-    }
+    .cta-sub { font-size: 1.05rem; color: rgba(255,255,255,0.5); margin: 0 auto var(--s4); max-width: 44ch; line-height: 1.65; }
+    .btn-white { display: inline-flex; align-items: center; gap: var(--s1); background: var(--primary); color: #fff !important; padding: 16px 32px; border-radius: var(--radius); font-size: 1rem; font-weight: 700; transition: background 0.15s, transform 0.1s; box-shadow: 0 4px 24px rgba(217,119,86,0.4); }
     .btn-white:hover { background: var(--primary-h); text-decoration: none; transform: translateY(-2px); }
-
-    .cta-note {
-      margin-top: var(--s2);
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.35);
-    }
+    .cta-note { margin-top: var(--s2); font-size: 0.8rem; color: rgba(255,255,255,0.35); }
 
     /* ─── FOOTER ──────────────────────────────────────────── */
-    footer {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      padding: 40px var(--px);
-    }
-
-    .footer-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--s3);
-    }
-
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: var(--s1);
-      font-size: 0.84rem;
-      font-weight: 700;
-      color: var(--muted);
-    }
-
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 40px var(--px); }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: var(--s3); }
+    .footer-brand { display: flex; align-items: center; gap: var(--s1); font-size: 0.84rem; font-weight: 700; color: var(--muted); }
     .footer-logo { width: 22px; height: 22px; border-radius: 6px; overflow: hidden; flex-shrink: 0; }
     .footer-logo img { width: 100%; height: 100%; display: block; }
-
-    .footer-links {
-      display: flex;
-      align-items: center;
-      gap: var(--s3);
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
+    .footer-links { display: flex; align-items: center; gap: var(--s3); flex-wrap: wrap; justify-content: flex-end; }
     .footer-links a { font-size: 0.8rem; color: var(--faint); }
     .footer-links a:hover { color: var(--text); text-decoration: none; }
-
-    .footer-copy {
-      font-size: 0.73rem;
-      color: var(--faint);
-      margin-top: var(--s2);
-      padding-top: var(--s2);
-      border-top: 1px solid var(--border-soft);
-      text-align: center;
-      max-width: var(--max-w);
-      margin-left: auto;
-      margin-right: auto;
-    }
+    .footer-copy { font-size: 0.73rem; color: var(--faint); margin-top: var(--s2); padding-top: var(--s2); border-top: 1px solid var(--border-soft); text-align: center; max-width: var(--max-w); margin-left: auto; margin-right: auto; }
 
     /* ─── REDUCED MOTION ──────────────────────────────────── */
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
     }
 
     /* ─── RESPONSIVE ──────────────────────────────────────── */
     @media (max-width: 900px) {
-      .hero-inner {
-        grid-template-columns: 1fr;
-        gap: var(--s6);
-        padding-top: var(--s8);
-        padding-bottom: var(--s8);
-      }
+      .hero-inner { grid-template-columns: 1fr; gap: var(--s6); padding-top: var(--s8); padding-bottom: var(--s8); }
       .hero-content { text-align: center; }
       .hero-sub { margin-left: auto; margin-right: auto; }
       .hero-note { justify-content: center; }
@@ -1032,7 +375,6 @@
       .cta-band-inner { flex-direction: column; text-align: center; }
       .testimonials-grid { grid-template-columns: 1fr; }
     }
-
     @media (max-width: 720px) {
       .steps { grid-template-columns: 1fr; }
       .steps::before { display: none; }
@@ -1042,10 +384,8 @@
       .stats-inner { flex-wrap: wrap; }
       .stat-item { min-width: 50%; padding: var(--s4) var(--s2); }
       .stat-item:nth-child(2) { border-right: none; }
-      .stat-item:nth-child(1),
-      .stat-item:nth-child(2) { border-bottom: 1px solid var(--border); }
+      .stat-item:nth-child(1), .stat-item:nth-child(2) { border-bottom: 1px solid var(--border); }
     }
-
     @media (max-width: 520px) {
       .section { padding: var(--s8) var(--px); }
       nav { height: 52px; }
@@ -1056,16 +396,13 @@
       .hero-note { flex-direction: column; gap: var(--s1); }
       .topics-sidebar { grid-template-columns: 1fr; }
       .topics-stat { grid-row: auto; }
+      .lang-btn .lang-current { display: none; }
     }
-
-    @media (max-width: 380px) {
-      .browser-chrome { font-size: 90%; }
-    }
+    @media (max-width: 380px) { .browser-chrome { font-size: 90%; } }
   </style>
 </head>
 <body>
 
-<!-- Skip link -->
 <a href="#main" class="skip-link">Skip to content</a>
 
 <!-- ── NAV ──────────────────────────────────────────────── -->
@@ -1074,7 +411,27 @@
     <div class="nav-logo-icon"><img src="icon128.png" alt="Claude Organizer icon"></div>
     <span>Claude Organizer</span>
   </a>
-  <a href="https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm" class="nav-cta">Add to Chrome</a>
+  <div class="nav-right">
+    <!-- Language switcher -->
+    <div class="lang-switcher">
+      <button class="lang-btn" aria-label="Change language" aria-haspopup="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+        </svg>
+        <span class="lang-current">EN</span>
+      </button>
+      <div class="lang-menu" role="menu">
+        <button class="lang-option active" data-lang="en" role="menuitem"><span class="lang-flag">&#127468;&#127463;</span> English</button>
+        <button class="lang-option" data-lang="nl" role="menuitem"><span class="lang-flag">&#127475;&#127473;</span> Nederlands</button>
+        <button class="lang-option" data-lang="fr" role="menuitem"><span class="lang-flag">&#127467;&#127479;</span> Fran&#231;ais</button>
+        <button class="lang-option" data-lang="de" role="menuitem"><span class="lang-flag">&#127465;&#127466;</span> Deutsch</button>
+        <button class="lang-option" data-lang="es" role="menuitem"><span class="lang-flag">&#127466;&#127480;</span> Espa&#241;ol</button>
+      </div>
+    </div>
+    <a href="https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm" class="nav-cta" data-i18n="nav.cta">Add to Chrome</a>
+  </div>
 </nav>
 
 <main id="main">
@@ -1082,46 +439,36 @@
 <!-- ── HERO ─────────────────────────────────────────────── -->
 <div class="hero-wrap">
   <div class="hero-inner">
-
     <div class="hero-content">
-      <div class="hero-badge">Free Chrome Extension</div>
-      <h1>Your Claude chats,<br><em>finally organized</em></h1>
-      <p class="hero-sub">Hundreds of chats and zero order? Claude Organizer scans them all, builds a plan, and moves everything into projects in one click.</p>
+      <div class="hero-badge" data-i18n="hero.badge">Free Chrome Extension</div>
+      <h1 data-i18n-html="hero.h1">Your Claude chats,<br><em>finally organized</em></h1>
+      <p class="hero-sub" data-i18n="hero.sub">Hundreds of chats and zero order? Claude Organizer scans them all, builds a plan, and moves everything into projects in one click.</p>
       <div class="hero-stars">
         <span class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-        <span>Loved by Claude power users</span>
+        <span data-i18n="hero.stars">Loved by Claude power users</span>
       </div>
       <a href="https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm" class="btn-primary">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M8 2C4.686 2 2 4.686 2 8s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6z"/>
-          <circle cx="8" cy="8" r="2.5" fill="currentColor" stroke="none"/>
-        </svg>
-        Add to Chrome — it's free
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2C4.686 2 2 4.686 2 8s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6z"/><circle cx="8" cy="8" r="2.5" fill="currentColor" stroke="none"/></svg>
+        <span data-i18n="hero.cta">Add to Chrome &mdash; it's free</span>
       </a>
       <p class="hero-note">
-        <span>No API key required</span>
-        <span>No account needed</span>
-        <span>Works in seconds</span>
+        <span data-i18n="hero.note1">No API key required</span>
+        <span data-i18n="hero.note2">No account needed</span>
+        <span data-i18n="hero.note3">Works in seconds</span>
       </p>
     </div>
-
     <div class="hero-mockup">
       <div class="mockup-outer">
         <div class="browser-chrome">
           <div class="browser-bar">
-            <div class="b-dots">
-              <div class="b-dot r"></div>
-              <div class="b-dot y"></div>
-              <div class="b-dot g"></div>
-            </div>
+            <div class="b-dots"><div class="b-dot r"></div><div class="b-dot y"></div><div class="b-dot g"></div></div>
             <div class="browser-url"><span>&#128274;</span> claude.ai</div>
           </div>
           <div class="popup-frame">
             <div class="popup-header">
               <div class="popup-brand">
                 <div class="popup-icon"><img src="icon128.png" alt=""></div>
-                Claude Organizer
-                <span class="popup-ver">v1.3</span>
+                Claude Organizer <span class="popup-ver">v1.3</span>
               </div>
               <div class="popup-connected">Connected</div>
             </div>
@@ -1131,34 +478,22 @@
               <div class="popup-tab">Debug</div>
             </div>
             <div class="popup-body">
-              <div class="popup-row-label">
-                <span>14 chats ready to move</span>
-                <span class="popup-cancel">Cancel</span>
-              </div>
+              <div class="popup-row-label"><span>14 chats ready to move</span><span class="popup-cancel">Cancel</span></div>
               <div class="popup-group">
-                <div class="popup-group-hd">
-                  <div class="popup-group-name">&#128187; Coding <span class="new-pill">new</span></div>
-                  <span class="popup-group-count">4 chats</span>
-                </div>
+                <div class="popup-group-hd"><div class="popup-group-name">&#128187; Coding <span class="new-pill">new</span></div><span class="popup-group-count">4 chats</span></div>
                 <div class="popup-chat"><span class="arrow">&#8594;</span> Fix React hydration bug</div>
                 <div class="popup-chat"><span class="arrow">&#8594;</span> Chrome extension MV3 migration</div>
                 <div class="popup-chat"><span class="arrow">&#8594;</span> Python async best practices</div>
                 <div class="popup-chat"><span class="arrow">&#8594;</span> Docker compose setup</div>
               </div>
               <div class="popup-group">
-                <div class="popup-group-hd">
-                  <div class="popup-group-name">&#128176; Finance</div>
-                  <span class="popup-group-count">3 chats</span>
-                </div>
+                <div class="popup-group-hd"><div class="popup-group-name">&#128176; Finance</div><span class="popup-group-count">3 chats</span></div>
                 <div class="popup-chat"><span class="arrow">&#8594;</span> ETF investing strategy</div>
                 <div class="popup-chat"><span class="arrow">&#8594;</span> Tax deductions for freelancers</div>
                 <div class="popup-chat"><span class="arrow">&#8594;</span> Monthly budget template</div>
               </div>
               <div class="popup-group">
-                <div class="popup-group-hd">
-                  <div class="popup-group-name">&#9992;&#65039; Travel <span class="new-pill">new</span></div>
-                  <span class="popup-group-count">2 chats</span>
-                </div>
+                <div class="popup-group-hd"><div class="popup-group-name">&#9992;&#65039; Travel <span class="new-pill">new</span></div><span class="popup-group-count">2 chats</span></div>
                 <div class="popup-chat"><span class="arrow">&#8594;</span> Japan itinerary 2 weeks</div>
                 <div class="popup-chat"><span class="arrow">&#8594;</span> Packing list for backpacking</div>
               </div>
@@ -1168,29 +503,16 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- ── STATS STRIP ────────────────────────────────────────── -->
+<!-- ── STATS ──────────────────────────────────────────────── -->
 <div class="stats-strip" aria-label="Key statistics">
   <div class="stats-inner">
-    <div class="stat-item">
-      <span class="stat-value">Free</span>
-      <span class="stat-label">No subscription ever</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-value">40+</span>
-      <span class="stat-label">Chat topics recognized</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-value">24+</span>
-      <span class="stat-label">Built-in categories</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-value">1-click</span>
-      <span class="stat-label">Full organize run</span>
-    </div>
+    <div class="stat-item"><span class="stat-value" data-i18n="stats.v1">Free</span><span class="stat-label" data-i18n="stats.l1">No subscription ever</span></div>
+    <div class="stat-item"><span class="stat-value">40+</span><span class="stat-label" data-i18n="stats.l2">Chat topics recognized</span></div>
+    <div class="stat-item"><span class="stat-value">24+</span><span class="stat-label" data-i18n="stats.l3">Built-in categories</span></div>
+    <div class="stat-item"><span class="stat-value">1-click</span><span class="stat-label" data-i18n="stats.l4">Full organize run</span></div>
   </div>
 </div>
 
@@ -1198,26 +520,14 @@
 <section class="section alt">
   <div class="inner">
     <div class="section-head">
-      <div class="eyebrow">How it works</div>
-      <h2 class="section-title">Three steps, one click</h2>
-      <p class="section-sub">You see the full plan before anything moves. Nothing happens without your approval.</p>
+      <div class="eyebrow" data-i18n="hiw.eyebrow">How it works</div>
+      <h2 class="section-title" data-i18n="hiw.title">Three steps, one click</h2>
+      <p class="section-sub" data-i18n="hiw.sub">You see the full plan before anything moves. Nothing happens without your approval.</p>
     </div>
     <div class="steps">
-      <div class="step">
-        <div class="step-num" aria-hidden="true">1</div>
-        <h3>Click Organize</h3>
-        <p>The extension scans all your unorganized chats and builds a move plan using keyword matching and AI. Takes a few seconds.</p>
-      </div>
-      <div class="step">
-        <div class="step-num" aria-hidden="true">2</div>
-        <h3>Review the plan</h3>
-        <p>See exactly which chat goes where before anything moves. New projects are clearly marked. Unmatched chats are flagged separately.</p>
-      </div>
-      <div class="step">
-        <div class="step-num" aria-hidden="true">3</div>
-        <h3>Click Apply</h3>
-        <p>Everything moves in one batch. Empty projects are cleaned up automatically. Done.</p>
-      </div>
+      <div class="step"><div class="step-num" aria-hidden="true">1</div><h3 data-i18n="step1.title">Click Organize</h3><p data-i18n="step1.desc">The extension scans all your unorganized chats and builds a move plan using keyword matching and AI. Takes a few seconds.</p></div>
+      <div class="step"><div class="step-num" aria-hidden="true">2</div><h3 data-i18n="step2.title">Review the plan</h3><p data-i18n="step2.desc">See exactly which chat goes where before anything moves. New projects are clearly marked. Unmatched chats are flagged separately.</p></div>
+      <div class="step"><div class="step-num" aria-hidden="true">3</div><h3 data-i18n="step3.title">Click Apply</h3><p data-i18n="step3.desc">Everything moves in one batch. Empty projects are cleaned up automatically. Done.</p></div>
     </div>
   </div>
 </section>
@@ -1226,94 +536,55 @@
 <section class="section white">
   <div class="inner">
     <div class="section-head">
-      <div class="eyebrow">Features</div>
-      <h2 class="section-title">Everything you need,<br>nothing you don't</h2>
-      <p class="section-sub">Simple and fast. No settings to configure, no API key to paste.</p>
+      <div class="eyebrow" data-i18n="feat.eyebrow">Features</div>
+      <h2 class="section-title" data-i18n-html="feat.title">Everything you need,<br>nothing you don't</h2>
+      <p class="section-sub" data-i18n="feat.sub">Simple and fast. No settings to configure, no API key to paste.</p>
     </div>
     <div class="features-grid">
-
       <div class="feature">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
-          </svg>
-        </div>
-        <h3>Instant keyword matching</h3>
-        <p>A built-in multilingual wordlist matches most chats in milliseconds, with no network call and no delay.</p>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+        <h3 data-i18n="feat1.title">Instant keyword matching</h3>
+        <p data-i18n="feat1.desc">A built-in multilingual wordlist matches most chats in milliseconds, with no network call and no delay.</p>
       </div>
-
       <div class="feature">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
-            <path d="M18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"/>
-          </svg>
-        </div>
-        <h3>AI for the hard ones</h3>
-        <p>Ambiguous titles get categorized by a shared AI backend. No API key needed. It just works.</p>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/><path d="M18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"/></svg></div>
+        <h3 data-i18n="feat2.title">AI for the hard ones</h3>
+        <p data-i18n="feat2.desc">Ambiguous titles get categorized by a shared AI backend. No API key needed. It just works.</p>
       </div>
-
       <div class="feature">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
-            <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-          </svg>
-        </div>
-        <h3>Preview before applying</h3>
-        <p>See the full plan before a single chat moves. Cancel at any time with one click.</p>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+        <h3 data-i18n="feat3.title">Preview before applying</h3>
+        <p data-i18n="feat3.desc">See the full plan before a single chat moves. Cancel at any time with one click.</p>
       </div>
-
       <div class="feature">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M10.05 4.575a1.575 1.575 0 10-3.15 0v3m3.15-3v-1.5a1.575 1.575 0 013.15 0v1.5m-3.15 0l.075 5.925m3.075.75V4.575m0 0a1.575 1.575 0 013.15 0V15M6.9 7.575a1.575 1.575 0 10-3.15 0v8.175a6.75 6.75 0 006.75 6.75h2.018a5.25 5.25 0 003.712-1.538l1.732-1.732a5.25 5.25 0 001.538-3.712l.003-2.024a.668.668 0 01.198-.471 1.575 1.575 0 10-2.228-2.228 3.818 3.818 0 00-1.12 2.687M6.9 7.575V12m6.27 4.318A4.49 4.49 0 0116.35 15"/>
-          </svg>
-        </div>
-        <h3>Manual mode</h3>
-        <p>Assign specific chats by hand when auto-organize isn't quite right for your workflow.</p>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.05 4.575a1.575 1.575 0 10-3.15 0v3m3.15-3v-1.5a1.575 1.575 0 013.15 0v1.5m-3.15 0l.075 5.925m3.075.75V4.575m0 0a1.575 1.575 0 013.15 0V15M6.9 7.575a1.575 1.575 0 10-3.15 0v8.175a6.75 6.75 0 006.75 6.75h2.018a5.25 5.25 0 003.712-1.538l1.732-1.732a5.25 5.25 0 001.538-3.712l.003-2.024a.668.668 0 01.198-.471 1.575 1.575 0 10-2.228-2.228 3.818 3.818 0 00-1.12 2.687M6.9 7.575V12m6.27 4.318A4.49 4.49 0 0116.35 15"/></svg></div>
+        <h3 data-i18n="feat4.title">Manual mode</h3>
+        <p data-i18n="feat4.desc">Assign specific chats by hand when auto-organize isn't quite right for your workflow.</p>
       </div>
-
       <div class="feature">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="2" y1="12" x2="22" y2="12"/>
-            <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
-          </svg>
-        </div>
-        <h3>Multilingual</h3>
-        <p>Keyword matching covers English, Dutch, French, German, Spanish, Polish, Russian and more.</p>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+        <h3 data-i18n="feat5.title">Multilingual</h3>
+        <p data-i18n="feat5.desc">Keyword matching covers English, Dutch, French, German, Spanish, Polish, Russian and more.</p>
       </div>
-
       <div class="feature">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
-            <polyline points="22 4 12 14.01 9 11.01"/>
-          </svg>
-        </div>
-        <h3>Auto-cleanup</h3>
-        <p>Empty projects are removed automatically after each organize run. Your sidebar stays tidy.</p>
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <h3 data-i18n="feat6.title">Auto-cleanup</h3>
+        <p data-i18n="feat6.desc">Empty projects are removed automatically after each organize run. Your sidebar stays tidy.</p>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ── MID-PAGE CTA BAND ──────────────────────────────────── -->
+<!-- ── MID CTA BAND ───────────────────────────────────────── -->
 <div class="cta-band">
   <div class="cta-band-inner">
     <div class="cta-band-text">
-      <h3>Ready to clean up?</h3>
-      <p>Free, no setup, takes about 10 seconds to install.</p>
+      <h3 data-i18n="band.title">Ready to clean up?</h3>
+      <p data-i18n="band.sub">Free, no setup, takes about 10 seconds to install.</p>
     </div>
     <a href="https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm" class="btn-band">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M8 2C4.686 2 2 4.686 2 8s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6z"/>
-        <circle cx="8" cy="8" r="2.5" fill="currentColor" stroke="none"/>
-      </svg>
-      Add to Chrome
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2C4.686 2 2 4.686 2 8s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6z"/><circle cx="8" cy="8" r="2.5" fill="currentColor" stroke="none"/></svg>
+      <span data-i18n="band.cta">Add to Chrome</span>
     </a>
   </div>
 </div>
@@ -1324,42 +595,28 @@
     <div class="topics-layout">
       <div class="topics-sidebar">
         <div class="topics-stat">24+</div>
-        <div class="topics-stat-label">built-in categories, plus AI covering everything else</div>
-        <div class="topics-meta">
-          Works across <strong>10+ languages</strong> and handles any topic your chats throw at it.
-        </div>
+        <div class="topics-stat-label" data-i18n="topics.sidebar">built-in categories, plus AI covering everything else</div>
+        <div class="topics-meta" data-i18n-html="topics.meta">Works across <strong>10+ languages</strong> and handles any topic your chats throw at it.</div>
       </div>
       <div>
         <div class="section-head">
-          <div class="eyebrow">Wordlist</div>
-          <h2 class="section-title">Recognizes what you're talking about</h2>
-          <p class="section-sub">The built-in wordlist covers the most common chat topics across multiple languages.</p>
+          <div class="eyebrow" data-i18n="topics.eyebrow">Wordlist</div>
+          <h2 class="section-title" data-i18n="topics.title">Recognizes what you're talking about</h2>
+          <p class="section-sub" data-i18n="topics.sub">The built-in wordlist covers the most common chat topics across multiple languages.</p>
         </div>
         <div class="topics-wrap" aria-label="Supported categories">
-          <span class="topic-pill">&#127918; Gaming</span>
-          <span class="topic-pill">&#128187; Coding</span>
-          <span class="topic-pill">&#128176; Finance</span>
-          <span class="topic-pill">&#128188; Work</span>
-          <span class="topic-pill">&#127973; Health</span>
-          <span class="topic-pill">&#9992;&#65039; Travel</span>
-          <span class="topic-pill">&#127829; Food</span>
-          <span class="topic-pill">&#127925; Music</span>
-          <span class="topic-pill">&#127916; Movies</span>
-          <span class="topic-pill">&#9917; Sports</span>
-          <span class="topic-pill">&#128218; Education</span>
-          <span class="topic-pill">&#128161; Technology</span>
-          <span class="topic-pill">&#127912; Design</span>
-          <span class="topic-pill">&#127968; Home</span>
-          <span class="topic-pill">&#128663; Cars</span>
-          <span class="topic-pill">&#9999;&#65039; Writing</span>
-          <span class="topic-pill">&#128300; Science</span>
-          <span class="topic-pill">&#9878;&#65039; Legal</span>
-          <span class="topic-pill">&#128241; Social Media</span>
-          <span class="topic-pill">&#129302; AI</span>
-          <span class="topic-pill">&#128421;&#65039; Media Server</span>
-          <span class="topic-pill">&#128274; Security</span>
-          <span class="topic-pill">&#127807; Personal Dev</span>
-          <span class="topic-pill">&#127760; General Knowledge</span>
+          <span class="topic-pill">&#127918; Gaming</span><span class="topic-pill">&#128187; Coding</span>
+          <span class="topic-pill">&#128176; Finance</span><span class="topic-pill">&#128188; Work</span>
+          <span class="topic-pill">&#127973; Health</span><span class="topic-pill">&#9992;&#65039; Travel</span>
+          <span class="topic-pill">&#127829; Food</span><span class="topic-pill">&#127925; Music</span>
+          <span class="topic-pill">&#127916; Movies</span><span class="topic-pill">&#9917; Sports</span>
+          <span class="topic-pill">&#128218; Education</span><span class="topic-pill">&#128161; Technology</span>
+          <span class="topic-pill">&#127912; Design</span><span class="topic-pill">&#127968; Home</span>
+          <span class="topic-pill">&#128663; Cars</span><span class="topic-pill">&#9999;&#65039; Writing</span>
+          <span class="topic-pill">&#128300; Science</span><span class="topic-pill">&#9878;&#65039; Legal</span>
+          <span class="topic-pill">&#128241; Social Media</span><span class="topic-pill">&#129302; AI</span>
+          <span class="topic-pill">&#128421;&#65039; Media Server</span><span class="topic-pill">&#128274; Security</span>
+          <span class="topic-pill">&#127807; Personal Dev</span><span class="topic-pill">&#127760; General Knowledge</span>
         </div>
       </div>
     </div>
@@ -1370,75 +627,40 @@
 <section class="section alt">
   <div class="inner">
     <div class="section-head">
-      <div class="eyebrow">Privacy</div>
-      <h2 class="section-title">Your data stays yours</h2>
-      <p class="section-sub">No accounts, no tracking, no data collection beyond what's needed to organize your chats.</p>
+      <div class="eyebrow" data-i18n="priv.eyebrow">Privacy</div>
+      <h2 class="section-title" data-i18n="priv.title">Your data stays yours</h2>
+      <p class="section-sub" data-i18n="priv.sub">No accounts, no tracking, no data collection beyond what's needed to organize your chats.</p>
     </div>
     <div class="privacy-grid">
       <div class="privacy-card">
-        <div class="privacy-card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          </svg>
-        </div>
-        <h3>Stays in your browser</h3>
-        <p>Your chats are read directly from Claude.ai using your active login session. No data is stored on any server.</p>
+        <div class="privacy-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3 data-i18n="pc1.title">Stays in your browser</h3>
+        <p data-i18n="pc1.desc">Your chats are read directly from Claude.ai using your active login session. No data is stored on any server.</p>
       </div>
       <div class="privacy-card">
-        <div class="privacy-card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="12" y1="19" x2="12" y2="5"/>
-            <polyline points="5 12 12 5 19 12"/>
-          </svg>
-        </div>
-        <h3>Only titles leave</h3>
-        <p>When AI categorization is needed, only the <strong>chat title</strong> is sent. Never the conversation content.</p>
+        <div class="privacy-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></div>
+        <h3 data-i18n="pc2.title">Only titles leave</h3>
+        <p data-i18n-html="pc2.desc">When AI categorization is needed, only the <strong>chat title</strong> is sent. Never the conversation content.</p>
       </div>
       <div class="privacy-card">
-        <div class="privacy-card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="18" y1="20" x2="18" y2="10"/>
-            <line x1="12" y1="20" x2="12" y2="4"/>
-            <line x1="6" y1="20" x2="6" y2="14"/>
-            <line x1="3" y1="3" x2="21" y2="21" stroke-width="1.75"/>
-          </svg>
-        </div>
-        <h3>Zero analytics</h3>
-        <p>No usage tracking, no telemetry, no crash reports. The extension has no backend of its own.</p>
+        <div class="privacy-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="3" y1="3" x2="21" y2="21" stroke-width="1.75"/></svg></div>
+        <h3 data-i18n="pc3.title">Zero analytics</h3>
+        <p data-i18n="pc3.desc">No usage tracking, no telemetry, no crash reports. The extension has no backend of its own.</p>
       </div>
     </div>
-
     <div class="privacy-note">
-      <span class="privacy-note-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-          <path d="M7 11V7a5 5 0 0110 0v4"/>
-        </svg>
-      </span>
-      <span>
-        Chat content never leaves your browser. For ambiguous titles, only the title text is sent to a shared AI service for categorization. No personal data, no history, no accounts.
-        <a href="privacy.html" style="margin-left:6px;white-space:nowrap">Full privacy policy &#8594;</a>
-      </span>
+      <span class="privacy-note-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></span>
+      <span><span data-i18n="priv.note">Chat content never leaves your browser. For ambiguous titles, only the title text is sent to a shared AI service for categorization. No personal data, no history, no accounts.</span>
+      <a href="privacy.html" style="margin-left:6px;white-space:nowrap" data-i18n="priv.link">Full privacy policy</a> &#8594;</span>
     </div>
-
     <div style="margin-top: var(--s2);">
-      <p style="font-size: var(--t-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #B35C35; margin-bottom: var(--s2);">Chrome permissions explained</p>
+      <p style="font-size: var(--t-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #B35C35; margin-bottom: var(--s2);" data-i18n="perms.title">Chrome permissions explained</p>
       <div class="permissions-grid">
-        <div class="permission-item">
-          <div class="permission-name">activeTab</div>
-          <p class="permission-desc">Reads your open Claude.ai tab to detect chat titles. Only active while you use the extension.</p>
-        </div>
-        <div class="permission-item">
-          <div class="permission-name">storage</div>
-          <p class="permission-desc">Saves your project names locally in your browser. Nothing is sent to any server.</p>
-        </div>
-        <div class="permission-item">
-          <div class="permission-name">scripting</div>
-          <p class="permission-desc">Runs the organizer logic on claude.ai to read the sidebar and move chats into projects.</p>
-        </div>
+        <div class="permission-item"><div class="permission-name">activeTab</div><p class="permission-desc" data-i18n="perm1.desc">Reads your open Claude.ai tab to detect chat titles. Only active while you use the extension.</p></div>
+        <div class="permission-item"><div class="permission-name">storage</div><p class="permission-desc" data-i18n="perm2.desc">Saves your project names locally in your browser. Nothing is sent to any server.</p></div>
+        <div class="permission-item"><div class="permission-name">scripting</div><p class="permission-desc" data-i18n="perm3.desc">Runs the organizer logic on claude.ai to read the sidebar and move chats into projects.</p></div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -1446,42 +668,24 @@
 <section class="section white">
   <div class="inner">
     <div class="section-head">
-      <div class="eyebrow">What users say</div>
-      <h2 class="section-title">Cleaning up chat chaos</h2>
+      <div class="eyebrow" data-i18n="test.eyebrow">What users say</div>
+      <h2 class="section-title" data-i18n="test.title">Cleaning up chat chaos</h2>
     </div>
     <div class="testimonials-grid">
       <div class="testimonial">
         <div class="testimonial-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="testimonial-quote">"Finally, my Claude sidebar is not a complete disaster. Organized 67 chats in about 10 seconds. The preview step is key."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar" aria-hidden="true">&#129489;&#8205;&#128187;</div>
-          <div>
-            <div class="testimonial-name">Marcus T.</div>
-            <div class="testimonial-role">Software developer</div>
-          </div>
-        </div>
+        <p class="testimonial-quote" data-i18n="test.q1">"Finally, my Claude sidebar is not a complete disaster. Organized 67 chats in about 10 seconds. The preview step is key."</p>
+        <div class="testimonial-author"><div class="testimonial-avatar" aria-hidden="true">&#129489;&#8205;&#128187;</div><div><div class="testimonial-name">Marcus T.</div><div class="testimonial-role" data-i18n="test.r1">Software developer</div></div></div>
       </div>
       <div class="testimonial">
         <div class="testimonial-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="testimonial-quote">"Works perfectly in French too. Was not expecting that. The keyword matching gets my chats right almost every time."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar" aria-hidden="true">&#128104;&#8205;&#128188;</div>
-          <div>
-            <div class="testimonial-name">Julien D.</div>
-            <div class="testimonial-role">Product manager</div>
-          </div>
-        </div>
+        <p class="testimonial-quote" data-i18n="test.q2">"Works perfectly in French too. Was not expecting that. The keyword matching gets my chats right almost every time."</p>
+        <div class="testimonial-author"><div class="testimonial-avatar" aria-hidden="true">&#128104;&#8205;&#128188;</div><div><div class="testimonial-name">Julien D.</div><div class="testimonial-role" data-i18n="test.r2">Product manager</div></div></div>
       </div>
       <div class="testimonial">
         <div class="testimonial-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="testimonial-quote">"I was skeptical about no API key but the AI fallback genuinely works. Sorted 40 research chats into the right projects instantly."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar" aria-hidden="true">&#128105;&#8205;&#128300;</div>
-          <div>
-            <div class="testimonial-name">Sarah K.</div>
-            <div class="testimonial-role">Researcher</div>
-          </div>
-        </div>
+        <p class="testimonial-quote" data-i18n="test.q3">"I was skeptical about no API key but the AI fallback genuinely works. Sorted 40 research chats into the right projects instantly."</p>
+        <div class="testimonial-author"><div class="testimonial-avatar" aria-hidden="true">&#128105;&#8205;&#128300;</div><div><div class="testimonial-name">Sarah K.</div><div class="testimonial-role" data-i18n="test.r3">Researcher</div></div></div>
       </div>
     </div>
   </div>
@@ -1491,34 +695,16 @@
 <section class="section">
   <div class="inner">
     <div class="section-head">
-      <div class="eyebrow">FAQ</div>
-      <h2 class="section-title">Common questions</h2>
+      <div class="eyebrow" data-i18n="faq.eyebrow">FAQ</div>
+      <h2 class="section-title" data-i18n="faq.title">Common questions</h2>
     </div>
     <div class="faq">
-      <details open>
-        <summary>Is it free?</summary>
-        <div class="faq-a">Yes, completely free. No subscription, no premium tier, no hidden costs. Ever.</div>
-      </details>
-      <details>
-        <summary>Do I need an API key?</summary>
-        <div class="faq-a">No. The AI categorization runs on a shared backend at no cost to you. Just install the extension and click Organize.</div>
-      </details>
-      <details>
-        <summary>Will it delete my chats or projects?</summary>
-        <div class="faq-a">No chats are ever deleted. Projects that are left completely empty after organizing are removed to keep your sidebar clean, but every conversation stays intact in your chat history.</div>
-      </details>
-      <details>
-        <summary>Does it work in languages other than English?</summary>
-        <div class="faq-a">Yes. The keyword wordlist covers Dutch, French, German, Spanish, Italian, Polish, Russian, Arabic, Hindi and more. The AI fallback works in any language.</div>
-      </details>
-      <details>
-        <summary>Do I need to be logged in to Claude.ai?</summary>
-        <div class="faq-a">Yes. The extension uses your active Claude.ai browser session to read and move chats. Open claude.ai, log in, then click the extension icon.</div>
-      </details>
-      <details>
-        <summary>Can I undo an organize run?</summary>
-        <div class="faq-a">Not automatically, but you can move chats back manually in Claude.ai. That's why the preview step exists: review the plan carefully before clicking Apply.</div>
-      </details>
+      <details open><summary data-i18n="faq.q1">Is it free?</summary><div class="faq-a" data-i18n="faq.a1">Yes, completely free. No subscription, no premium tier, no hidden costs. Ever.</div></details>
+      <details><summary data-i18n="faq.q2">Do I need an API key?</summary><div class="faq-a" data-i18n="faq.a2">No. The AI categorization runs on a shared backend at no cost to you. Just install the extension and click Organize.</div></details>
+      <details><summary data-i18n="faq.q3">Will it delete my chats or projects?</summary><div class="faq-a" data-i18n="faq.a3">No chats are ever deleted. Projects that are left completely empty after organizing are removed to keep your sidebar clean, but every conversation stays intact in your chat history.</div></details>
+      <details><summary data-i18n="faq.q4">Does it work in languages other than English?</summary><div class="faq-a" data-i18n="faq.a4">Yes. The keyword wordlist covers Dutch, French, German, Spanish, Italian, Polish, Russian, Arabic, Hindi and more. The AI fallback works in any language.</div></details>
+      <details><summary data-i18n="faq.q5">Do I need to be logged in to Claude.ai?</summary><div class="faq-a" data-i18n="faq.a5">Yes. The extension uses your active Claude.ai browser session to read and move chats. Open claude.ai, log in, then click the extension icon.</div></details>
+      <details><summary data-i18n="faq.q6">Can I undo an organize run?</summary><div class="faq-a" data-i18n="faq.a6">Not automatically, but you can move chats back manually in Claude.ai. That's why the preview step exists: review the plan carefully before clicking Apply.</div></details>
     </div>
   </div>
 </section>
@@ -1526,16 +712,13 @@
 <!-- ── CTA ───────────────────────────────────────────────── -->
 <section class="cta-section">
   <div class="inner">
-    <h2 class="section-title">Clean up your chats today</h2>
-    <p class="cta-sub">Free, no setup, works in seconds.</p>
+    <h2 class="section-title" data-i18n="cta.title">Clean up your chats today</h2>
+    <p class="cta-sub" data-i18n="cta.sub">Free, no setup, works in seconds.</p>
     <a href="https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm" class="btn-white">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M8 2C4.686 2 2 4.686 2 8s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6z"/>
-        <circle cx="8" cy="8" r="2.5" fill="currentColor" stroke="none"/>
-      </svg>
-      Add to Chrome
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2C4.686 2 2 4.686 2 8s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6z"/><circle cx="8" cy="8" r="2.5" fill="currentColor" stroke="none"/></svg>
+      <span data-i18n="nav.cta">Add to Chrome</span>
     </a>
-    <p class="cta-note">No account &middot; No API key &middot; No data collection</p>
+    <p class="cta-note" data-i18n="cta.note">No account &middot; No API key &middot; No data collection</p>
   </div>
 </section>
 
@@ -1544,29 +727,22 @@
 <!-- ── FOOTER ────────────────────────────────────────────── -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="footer-logo"><img src="icon128.png" alt="Claude Organizer"></div>
-      Claude Organizer
-    </div>
+    <div class="footer-brand"><div class="footer-logo"><img src="icon128.png" alt="Claude Organizer"></div>Claude Organizer</div>
     <div class="footer-links">
-      <a href="https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm">Chrome Web Store</a>
-      <a href="mailto:contact@chat-organizer.com">Contact</a>
-      <a href="privacy.html">Privacy Policy</a>
+      <a href="https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm" data-i18n="footer.store">Chrome Web Store</a>
+      <a href="mailto:contact@chat-organizer.com" data-i18n="footer.contact">Contact</a>
+      <a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
     </div>
   </div>
-  <div class="footer-copy">
-    Not affiliated with Anthropic. Claude is a trademark of Anthropic, PBC.
-  </div>
+  <div class="footer-copy" data-i18n="footer.copy">Not affiliated with Anthropic. Claude is a trademark of Anthropic, PBC.</div>
 </footer>
 
-<!-- Google Analytics — loaded after page content for faster LCP -->
+<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-K9J7DHMT4V"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-K9J7DHMT4V');
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-K9J7DHMT4V');</script>
+
+<!-- Translations -->
+<script src="translations.js"></script>
 
 </body>
 </html>
