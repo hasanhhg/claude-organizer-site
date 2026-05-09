@@ -587,30 +587,6 @@
     }
     .feature:hover { border-color: var(--primary-border); box-shadow: var(--shadow-sm); }
 
-    /* Featured card (bento hero) */
-    .feature.featured {
-      grid-column: span 2;
-      border-left: 4px solid var(--primary);
-      background: var(--primary-bg);
-      border-color: var(--primary-border);
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: var(--s4);
-      align-items: center;
-    }
-    .feature.featured .feature-content { }
-    .feature.featured .feature-visual {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 88px; height: 88px;
-      background: rgba(217,119,86,0.12);
-      border-radius: var(--radius-lg);
-      flex-shrink: 0;
-      color: var(--primary);
-    }
-    .feature.featured .feature-visual svg { width: 40px; height: 40px; }
-
     .feature-icon {
       width: 40px; height: 40px;
       display: flex;
@@ -1039,8 +1015,6 @@
       .steps { grid-template-columns: 1fr; }
       .steps::before { display: none; }
       .features-grid { grid-template-columns: 1fr; }
-      .feature.featured { grid-column: span 1; grid-template-columns: 1fr; }
-      .feature.featured .feature-visual { display: none; }
       .privacy-grid { grid-template-columns: 1fr; }
       .permissions-grid { grid-template-columns: 1fr; }
       .stats-inner { flex-wrap: wrap; }
@@ -1236,27 +1210,6 @@
     </div>
     <div class="features-grid">
 
-      <!-- Featured bento card: Preview -->
-      <div class="feature featured">
-        <div class="feature-content">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
-              <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-            </svg>
-          </div>
-          <h3>Preview before applying</h3>
-          <p>See the full plan before a single chat moves. Cancel at any time with one click. You stay in control.</p>
-        </div>
-        <div class="feature-visual" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
-            <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-          </svg>
-        </div>
-      </div>
-
-      <!-- Standard cards -->
       <div class="feature">
         <div class="feature-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1276,6 +1229,17 @@
         </div>
         <h3>AI for the hard ones</h3>
         <p>Ambiguous titles get categorized by a shared AI backend. No API key needed. It just works.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
+            <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+        </div>
+        <h3>Preview before applying</h3>
+        <p>See the full plan before a single chat moves. Cancel at any time with one click.</p>
       </div>
 
       <div class="feature">
