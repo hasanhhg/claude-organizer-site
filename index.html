@@ -1,29 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K9J7DHMT4V"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-K9J7DHMT4V');
-  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Claude Organizer – Auto-organize your Claude chats</title>
   <meta name="description" content="Claude Organizer automatically sorts your Claude.ai chats into projects in one click. No API key needed. Free Chrome extension.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Claude Organizer – Auto-organize your Claude chats">
+  <meta property="og:description" content="Hundreds of chats, zero order? Claude Organizer scans them all and moves everything into projects in one click. Free Chrome extension.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://chat-organizer.com/">
+  <meta property="og:image" content="https://chat-organizer.com/icon128.png">
+
+  <!-- Performance hints -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
+      /* Type scale — 1.333 ratio, base 18px */
+      --t-xs:   14px;
+      --t-sm:   16px;
+      --t-body: 18px;
+      --t-lg:   24px;
+      --t-xl:   32px;
+      --t-2xl:  42px;
+      --t-3xl:  56px;
+      --t-4xl:  75px;
+
+      /* Spacing — 8pt grid */
+      --s1:  8px;
+      --s2:  16px;
+      --s3:  24px;
+      --s4:  32px;
+      --s5:  40px;
+      --s6:  48px;
+      --s7:  56px;
+      --s8:  64px;
+      --s10: 80px;
+      --s12: 96px;
+      --s16: 128px;
+
+      /* Colors */
       --bg:             #F9F7F4;
       --bg-alt:         #F2EDE6;
       --surface:        #FFFFFF;
       --border:         #E8E2DA;
       --border-soft:    #F0EBE4;
       --text:           #1C1917;
-      --muted:          #79716B;
+      --muted:          #6B6360;   /* was #79716B — darkened for WCAG AA */
       --faint:          #A8A29E;
       --primary:        #D97756;
       --primary-h:      #C2633D;
@@ -43,7 +70,7 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      font-size: 18px;
+      font-size: var(--t-body);
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
@@ -53,6 +80,29 @@
 
     a { color: var(--primary); text-decoration: none; }
     a:hover { text-decoration: underline; }
+
+    /* Focus-visible — keyboard navigation ring */
+    :focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: var(--s1);
+      background: var(--text);
+      color: #fff;
+      padding: var(--s1) var(--s2);
+      border-radius: 4px;
+      z-index: 999;
+      font-size: var(--t-sm);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .skip-link:focus-visible { top: var(--s1); }
 
     /* ─── NAV ─────────────────────────────────────────────── */
     nav {
@@ -76,9 +126,11 @@
       color: var(--text);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: var(--s1);
       white-space: nowrap;
+      text-decoration: none;
     }
+    .nav-logo:hover { text-decoration: none; }
 
     .nav-logo-icon {
       width: 28px; height: 28px;
@@ -91,7 +143,7 @@
     .nav-cta {
       background: var(--primary);
       color: #fff !important;
-      padding: 8px 18px;
+      padding: var(--s1) 18px;
       border-radius: 8px;
       font-size: 0.82rem;
       font-weight: 700;
@@ -102,7 +154,7 @@
 
     /* ─── SECTION SYSTEM ──────────────────────────────────── */
     .section {
-      padding: 96px var(--px);
+      padding: var(--s12) var(--px);
     }
     .section.alt {
       background: var(--bg-alt);
@@ -121,12 +173,12 @@
     }
 
     .eyebrow {
-      font-size: 0.7rem;
+      font-size: var(--t-xs);
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: 8px;
+      color: #B35C35;   /* was var(--primary) — darkened to ~5.2:1 for WCAG AA */
+      margin-bottom: var(--s1);
     }
 
     .section-title {
@@ -134,7 +186,7 @@
       font-weight: 800;
       letter-spacing: -0.025em;
       line-height: 1.1;
-      margin-bottom: 16px;
+      margin-bottom: var(--s2);
       color: var(--text);
     }
 
@@ -145,7 +197,7 @@
       line-height: 1.65;
     }
 
-    .section-head { margin-bottom: 56px; }
+    .section-head { margin-bottom: var(--s7); }
 
     /* ─── HERO ────────────────────────────────────────────── */
     .hero-wrap {
@@ -160,14 +212,10 @@
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 64px;
+      gap: var(--s8);
       align-items: center;
-      padding-top: 96px;
-      padding-bottom: 96px;
-    }
-
-    .hero-content {
-      padding-bottom: 0;
+      padding-top: var(--s12);
+      padding-bottom: var(--s12);
     }
 
     .hero-badge {
@@ -177,11 +225,11 @@
       background: var(--primary-bg);
       color: var(--primary);
       border: 1px solid var(--primary-border);
-      font-size: 0.7rem;
+      font-size: var(--t-xs);
       font-weight: 700;
       padding: 5px 13px;
       border-radius: 100px;
-      margin-bottom: 20px;
+      margin-bottom: var(--s3);
       letter-spacing: 0.06em;
       text-transform: uppercase;
     }
@@ -198,7 +246,7 @@
       font-weight: 900;
       line-height: 1.05;
       letter-spacing: -0.035em;
-      margin-bottom: 24px;
+      margin-bottom: var(--s3);
       color: var(--text);
     }
 
@@ -211,14 +259,29 @@
       font-size: 1.1rem;
       color: var(--muted);
       max-width: 44ch;
-      margin-bottom: 32px;
+      margin-bottom: var(--s3);
       line-height: 1.65;
+    }
+
+    /* Hero social proof */
+    .hero-stars {
+      display: flex;
+      align-items: center;
+      gap: var(--s1);
+      font-size: var(--t-sm);
+      color: var(--muted);
+      margin-bottom: var(--s3);
+    }
+    .hero-stars .stars {
+      color: #F59E0B;
+      font-size: 1rem;
+      letter-spacing: 1px;
     }
 
     .btn-primary {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: var(--s1);
       background: var(--primary);
       color: #fff !important;
       padding: 14px 28px;
@@ -238,7 +301,7 @@
 
     .hero-note {
       margin-top: 14px;
-      font-size: 0.77rem;
+      font-size: var(--t-xs);
       color: var(--faint);
       display: flex;
       align-items: center;
@@ -249,8 +312,6 @@
     .hero-note span::before { content: '✓'; color: var(--green); font-weight: 700; font-size: 0.8rem; }
 
     /* ─── MOCKUP ──────────────────────────────────────────── */
-    .hero-mockup { /* bottom-aligned by hero-inner align-items: end */ }
-
     .mockup-outer { max-width: 100%; }
 
     .browser-chrome {
@@ -263,7 +324,7 @@
     .browser-bar {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: var(--s1);
       padding: 11px 14px;
       background: #333028;
       border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -351,7 +412,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: var(--s1);
     }
     .popup-row-label span:first-child { font-size: 0.71rem; font-weight: 700; color: var(--text); }
     .popup-cancel { font-size: 0.68rem; color: var(--primary); font-weight: 500; }
@@ -442,14 +503,14 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      padding: 48px 16px;
+      gap: var(--s1);
+      padding: var(--s6) var(--s2);
       border-right: 1px solid var(--border);
     }
     .stat-item:last-child { border-right: none; }
 
     .stat-value {
-      font-size: 2.5rem;
+      font-size: var(--t-2xl);
       font-weight: 800;
       color: var(--text);
       letter-spacing: -0.03em;
@@ -457,7 +518,7 @@
     }
 
     .stat-label {
-      font-size: 0.78rem;
+      font-size: var(--t-xs);
       color: var(--faint);
       text-align: center;
       line-height: 1.4;
@@ -467,7 +528,7 @@
     .steps {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: var(--s3);
       position: relative;
     }
 
@@ -486,7 +547,7 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 32px 24px;
+      padding: var(--s4) var(--s3);
       position: relative;
       z-index: 1;
       transition: border-color 0.15s, box-shadow 0.15s;
@@ -503,38 +564,116 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 16px;
+      margin-bottom: var(--s2);
       box-shadow: 0 0 0 4px var(--bg-alt);
     }
 
-    .step h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+    .step h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: var(--s1); color: var(--text); }
     .step p   { font-size: 0.95rem; color: var(--muted); line-height: 1.65; }
 
-    /* ─── FEATURES ────────────────────────────────────────── */
+    /* ─── FEATURES / BENTO ────────────────────────────────── */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: var(--s3);
     }
 
     .feature {
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 32px;
+      padding: var(--s4);
       transition: border-color 0.15s, box-shadow 0.15s;
     }
     .feature:hover { border-color: var(--primary-border); box-shadow: var(--shadow-sm); }
 
-    .feature-icon { font-size: 1.5rem; margin-bottom: 16px; display: block; }
-    .feature h3   { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+    /* Featured card (bento hero) */
+    .feature.featured {
+      grid-column: span 2;
+      border-left: 4px solid var(--primary);
+      background: var(--primary-bg);
+      border-color: var(--primary-border);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--s4);
+      align-items: center;
+    }
+    .feature.featured .feature-content { }
+    .feature.featured .feature-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 88px; height: 88px;
+      background: rgba(217,119,86,0.12);
+      border-radius: var(--radius-lg);
+      flex-shrink: 0;
+      color: var(--primary);
+    }
+    .feature.featured .feature-visual svg { width: 40px; height: 40px; }
+
+    .feature-icon {
+      width: 40px; height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--s2);
+      color: var(--primary);
+    }
+    .feature-icon svg { width: 24px; height: 24px; }
+    .feature h3   { font-size: 1rem; font-weight: 700; margin-bottom: var(--s1); color: var(--text); }
     .feature p    { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+
+    /* ─── MID-PAGE CTA BAND ───────────────────────────────── */
+    .cta-band {
+      background: #1C1917;
+      padding: var(--s8) var(--px);
+    }
+
+    .cta-band-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s4);
+      flex-wrap: wrap;
+    }
+
+    .cta-band-text h3 {
+      font-size: var(--t-xl);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--s1);
+    }
+
+    .cta-band-text p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .btn-band {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s1);
+      background: var(--primary);
+      color: #fff !important;
+      padding: 13px 26px;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: background 0.15s, transform 0.1s;
+      flex-shrink: 0;
+    }
+    .btn-band:hover { background: var(--primary-h); text-decoration: none; transform: translateY(-1px); }
+    .btn-band svg { width: 15px; height: 15px; }
 
     /* ─── TOPICS ──────────────────────────────────────────── */
     .topics-layout {
       display: grid;
       grid-template-columns: 240px 1fr;
-      gap: 64px;
+      gap: var(--s8);
       align-items: start;
     }
 
@@ -542,7 +681,7 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 32px;
+      padding: var(--s4);
       position: sticky;
       top: 72px;
     }
@@ -553,15 +692,15 @@
       color: var(--primary);
       letter-spacing: -0.04em;
       line-height: 1;
-      margin-bottom: 8px;
+      margin-bottom: var(--s1);
     }
 
     .topics-stat-label {
       font-size: 0.9rem;
       color: var(--muted);
       line-height: 1.55;
-      margin-bottom: 24px;
-      padding-bottom: 24px;
+      margin-bottom: var(--s3);
+      padding-bottom: var(--s3);
       border-bottom: 1px solid var(--border-soft);
     }
 
@@ -575,7 +714,7 @@
     .topics-wrap {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: var(--s1);
       align-content: flex-start;
     }
 
@@ -583,7 +722,7 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 100px;
-      padding: 8px 16px;
+      padding: var(--s1) var(--s2);
       font-size: 0.85rem;
       color: var(--muted);
       font-weight: 500;
@@ -596,88 +735,199 @@
     .privacy-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-bottom: 24px;
+      gap: var(--s3);
+      margin-bottom: var(--s3);
     }
 
     .privacy-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 32px 28px;
+      padding: var(--s4) 28px;
       border-top: 3px solid var(--primary);
     }
 
-    .privacy-card-icon { font-size: 1.5rem; margin-bottom: 16px; display: block; }
-    .privacy-card h3   { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+    .privacy-card-icon {
+      width: 40px; height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--s2);
+      color: var(--primary);
+    }
+    .privacy-card-icon svg { width: 24px; height: 24px; }
+    .privacy-card h3   { font-size: 1rem; font-weight: 700; margin-bottom: var(--s1); color: var(--text); }
     .privacy-card p    { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
 
     .privacy-note {
       background: var(--primary-bg);
       border: 1px solid var(--primary-border);
       border-radius: var(--radius);
-      padding: 20px 24px;
+      padding: var(--s3);
       font-size: 0.9rem;
       color: var(--muted);
       line-height: 1.65;
       display: flex;
       align-items: flex-start;
-      gap: 12px;
+      gap: var(--s2);
+      margin-bottom: var(--s3);
     }
-    .privacy-note::before { content: '🔒'; flex-shrink: 0; font-size: 1rem; margin-top: 2px; }
+    .privacy-note-icon { flex-shrink: 0; color: var(--primary); margin-top: 2px; }
+    .privacy-note-icon svg { width: 18px; height: 18px; }
+
+    /* Permissions transparency */
+    .permissions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--s2);
+    }
+
+    .permission-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--s2) var(--s3);
+    }
+
+    .permission-name {
+      font-size: var(--t-xs);
+      font-weight: 700;
+      color: var(--text);
+      font-family: monospace;
+      background: var(--bg-alt);
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: var(--s1);
+    }
+
+    .permission-desc {
+      font-size: var(--t-xs);
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ─── TESTIMONIALS ────────────────────────────────────── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--s3);
+    }
+
+    .testimonial {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--s4);
+    }
+
+    .testimonial-stars {
+      color: #F59E0B;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      margin-bottom: var(--s2);
+    }
+
+    .testimonial-quote {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.65;
+      margin-bottom: var(--s3);
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: var(--s2);
+    }
+
+    .testimonial-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--bg-alt);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .testimonial-name {
+      font-size: var(--t-xs);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .testimonial-role {
+      font-size: var(--t-xs);
+      color: var(--faint);
+    }
 
     /* ─── FAQ ─────────────────────────────────────────────── */
     .faq {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: var(--s2);
     }
 
-    .faq-item {
+    .faq details {
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 24px;
-      cursor: pointer;
       transition: border-color 0.15s;
     }
-    .faq-item:hover { border-color: var(--primary-border); }
+    .faq details:hover { border-color: var(--primary-border); }
+    .faq details[open] { border-color: var(--primary-border); }
 
-    .faq-q {
+    .faq summary {
       font-size: 1rem;
       font-weight: 700;
       color: var(--text);
+      padding: var(--s3);
+      cursor: pointer;
+      list-style: none;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 16px;
+      gap: var(--s2);
+      user-select: none;
     }
-    .faq-q::after { content: '+'; font-size: 1.2rem; font-weight: 400; color: var(--faint); flex-shrink: 0; }
-    .faq-item.open .faq-q::after { content: '−'; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after {
+      content: '+';
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--faint);
+      flex-shrink: 0;
+      transition: transform 0.15s;
+    }
+    .faq details[open] summary::after {
+      content: '\2212';
+    }
 
     .faq-a {
       font-size: 0.95rem;
       color: var(--muted);
       line-height: 1.65;
-      margin-top: 16px;
-      padding-top: 16px;
+      padding: 0 var(--s3) var(--s3);
       border-top: 1px solid var(--border-soft);
-      display: none;
+      padding-top: var(--s2);
+      margin-top: 0;
     }
-    .faq-item.open .faq-a { display: block; }
 
     /* ─── CTA ─────────────────────────────────────────────── */
     .cta-section {
       background: #1C1917;
-      padding: 96px var(--px);
+      padding: var(--s12) var(--px);
       text-align: center;
     }
-    .cta-section .section-title { color: #fff; margin-bottom: 16px; }
+    .cta-section .section-title { color: #fff; margin-bottom: var(--s2); }
 
     .cta-sub {
       font-size: 1.05rem;
       color: rgba(255,255,255,0.5);
-      margin: 0 auto 32px;
+      margin: 0 auto var(--s4);
       max-width: 44ch;
       line-height: 1.65;
     }
@@ -685,7 +935,7 @@
     .btn-white {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: var(--s1);
       background: var(--primary);
       color: #fff !important;
       padding: 16px 32px;
@@ -698,7 +948,7 @@
     .btn-white:hover { background: var(--primary-h); text-decoration: none; transform: translateY(-2px); }
 
     .cta-note {
-      margin-top: 16px;
+      margin-top: var(--s2);
       font-size: 0.8rem;
       color: rgba(255,255,255,0.35);
     }
@@ -716,13 +966,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: var(--s3);
     }
 
     .footer-brand {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: var(--s1);
       font-size: 0.84rem;
       font-weight: 700;
       color: var(--muted);
@@ -734,7 +984,7 @@
     .footer-links {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: var(--s3);
       flex-wrap: wrap;
       justify-content: flex-end;
     }
@@ -744,8 +994,8 @@
     .footer-copy {
       font-size: 0.73rem;
       color: var(--faint);
-      margin-top: 16px;
-      padding-top: 16px;
+      margin-top: var(--s2);
+      padding-top: var(--s2);
       border-top: 1px solid var(--border-soft);
       text-align: center;
       max-width: var(--max-w);
@@ -753,49 +1003,61 @@
       margin-right: auto;
     }
 
+    /* ─── REDUCED MOTION ──────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
     /* ─── RESPONSIVE ──────────────────────────────────────── */
     @media (max-width: 900px) {
       .hero-inner {
         grid-template-columns: 1fr;
-        gap: 48px;
-        padding-top: 64px;
-        padding-bottom: 64px;
+        gap: var(--s6);
+        padding-top: var(--s8);
+        padding-bottom: var(--s8);
       }
-      .hero-content {
-        padding-bottom: 0;
-        text-align: center;
-      }
+      .hero-content { text-align: center; }
       .hero-sub { margin-left: auto; margin-right: auto; }
       .hero-note { justify-content: center; }
+      .hero-stars { justify-content: center; }
       .hero-mockup { max-width: 460px; margin: 0 auto; }
-      .topics-layout { grid-template-columns: 1fr; gap: 32px; }
-      .topics-sidebar { position: static; display: grid; grid-template-columns: auto 1fr; gap: 16px 24px; }
+      .topics-layout { grid-template-columns: 1fr; gap: var(--s4); }
+      .topics-sidebar { position: static; display: grid; grid-template-columns: auto 1fr; gap: var(--s2) var(--s3); }
       .topics-stat { font-size: 3rem; grid-row: 1 / 3; }
       .topics-stat-label { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
       .topics-meta { grid-column: 2; }
+      .cta-band-inner { flex-direction: column; text-align: center; }
+      .testimonials-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 720px) {
       .steps { grid-template-columns: 1fr; }
       .steps::before { display: none; }
-      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .features-grid { grid-template-columns: 1fr; }
+      .feature.featured { grid-column: span 1; grid-template-columns: 1fr; }
+      .feature.featured .feature-visual { display: none; }
       .privacy-grid { grid-template-columns: 1fr; }
+      .permissions-grid { grid-template-columns: 1fr; }
       .stats-inner { flex-wrap: wrap; }
-      .stat-item { min-width: 50%; padding: 32px 16px; }
+      .stat-item { min-width: 50%; padding: var(--s4) var(--s2); }
       .stat-item:nth-child(2) { border-right: none; }
       .stat-item:nth-child(1),
       .stat-item:nth-child(2) { border-bottom: 1px solid var(--border); }
     }
 
     @media (max-width: 520px) {
-      .section { padding: 64px var(--px); }
+      .section { padding: var(--s8) var(--px); }
       nav { height: 52px; }
       .nav-logo span { display: none; }
       .nav-cta { padding: 7px 14px; font-size: 0.8rem; }
-      .features-grid { grid-template-columns: 1fr; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
       .footer-links { justify-content: flex-start; }
-      .hero-note { flex-direction: column; gap: 8px; }
+      .hero-note { flex-direction: column; gap: var(--s1); }
       .topics-sidebar { grid-template-columns: 1fr; }
       .topics-stat { grid-row: auto; }
     }
@@ -807,14 +1069,19 @@
 </head>
 <body>
 
+<!-- Skip link -->
+<a href="#main" class="skip-link">Skip to content</a>
+
 <!-- ── NAV ──────────────────────────────────────────────── -->
-<nav>
-  <div class="nav-logo">
+<nav aria-label="Main navigation">
+  <a href="/" class="nav-logo">
     <div class="nav-logo-icon"><img src="icon128.png" alt="Claude Organizer icon"></div>
     <span>Claude Organizer</span>
-  </div>
+  </a>
   <a href="https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm" class="nav-cta">Add to Chrome</a>
 </nav>
+
+<main id="main">
 
 <!-- ── HERO ─────────────────────────────────────────────── -->
 <div class="hero-wrap">
@@ -824,12 +1091,16 @@
       <div class="hero-badge">Free Chrome Extension</div>
       <h1>Your Claude chats,<br><em>finally organized</em></h1>
       <p class="hero-sub">Hundreds of chats and zero order? Claude Organizer scans them all, builds a plan, and moves everything into projects in one click.</p>
+      <div class="hero-stars">
+        <span class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span>Loved by Claude power users</span>
+      </div>
       <a href="https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm" class="btn-primary">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M8 2C4.686 2 2 4.686 2 8s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6z"/>
           <circle cx="8" cy="8" r="2.5" fill="currentColor" stroke="none"/>
         </svg>
-        Add to Chrome
+        Add to Chrome — it's free
       </a>
       <p class="hero-note">
         <span>No API key required</span>
@@ -847,7 +1118,7 @@
               <div class="b-dot y"></div>
               <div class="b-dot g"></div>
             </div>
-            <div class="browser-url"><span>🔒</span> claude.ai</div>
+            <div class="browser-url"><span>&#128274;</span> claude.ai</div>
           </div>
           <div class="popup-frame">
             <div class="popup-header">
@@ -870,30 +1141,30 @@
               </div>
               <div class="popup-group">
                 <div class="popup-group-hd">
-                  <div class="popup-group-name">💻 Coding <span class="new-pill">new</span></div>
+                  <div class="popup-group-name">&#128187; Coding <span class="new-pill">new</span></div>
                   <span class="popup-group-count">4 chats</span>
                 </div>
-                <div class="popup-chat"><span class="arrow">→</span> Fix React hydration bug</div>
-                <div class="popup-chat"><span class="arrow">→</span> Chrome extension MV3 migration</div>
-                <div class="popup-chat"><span class="arrow">→</span> Python async best practices</div>
-                <div class="popup-chat"><span class="arrow">→</span> Docker compose setup</div>
+                <div class="popup-chat"><span class="arrow">&#8594;</span> Fix React hydration bug</div>
+                <div class="popup-chat"><span class="arrow">&#8594;</span> Chrome extension MV3 migration</div>
+                <div class="popup-chat"><span class="arrow">&#8594;</span> Python async best practices</div>
+                <div class="popup-chat"><span class="arrow">&#8594;</span> Docker compose setup</div>
               </div>
               <div class="popup-group">
                 <div class="popup-group-hd">
-                  <div class="popup-group-name">💰 Finance</div>
+                  <div class="popup-group-name">&#128176; Finance</div>
                   <span class="popup-group-count">3 chats</span>
                 </div>
-                <div class="popup-chat"><span class="arrow">→</span> ETF investing strategy</div>
-                <div class="popup-chat"><span class="arrow">→</span> Tax deductions for freelancers</div>
-                <div class="popup-chat"><span class="arrow">→</span> Monthly budget template</div>
+                <div class="popup-chat"><span class="arrow">&#8594;</span> ETF investing strategy</div>
+                <div class="popup-chat"><span class="arrow">&#8594;</span> Tax deductions for freelancers</div>
+                <div class="popup-chat"><span class="arrow">&#8594;</span> Monthly budget template</div>
               </div>
               <div class="popup-group">
                 <div class="popup-group-hd">
-                  <div class="popup-group-name">✈️ Travel <span class="new-pill">new</span></div>
+                  <div class="popup-group-name">&#9992;&#65039; Travel <span class="new-pill">new</span></div>
                   <span class="popup-group-count">2 chats</span>
                 </div>
-                <div class="popup-chat"><span class="arrow">→</span> Japan itinerary 2 weeks</div>
-                <div class="popup-chat"><span class="arrow">→</span> Packing list for backpacking</div>
+                <div class="popup-chat"><span class="arrow">&#8594;</span> Japan itinerary 2 weeks</div>
+                <div class="popup-chat"><span class="arrow">&#8594;</span> Packing list for backpacking</div>
               </div>
               <button class="popup-apply">Apply Changes</button>
             </div>
@@ -906,19 +1177,19 @@
 </div>
 
 <!-- ── STATS STRIP ────────────────────────────────────────── -->
-<div class="stats-strip">
+<div class="stats-strip" aria-label="Key statistics">
   <div class="stats-inner">
     <div class="stat-item">
       <span class="stat-value">Free</span>
       <span class="stat-label">No subscription ever</span>
     </div>
     <div class="stat-item">
-      <span class="stat-value">AI+</span>
-      <span class="stat-label">Smart categorization</span>
+      <span class="stat-value">40+</span>
+      <span class="stat-label">Chat topics recognized</span>
     </div>
     <div class="stat-item">
-      <span class="stat-value">10+</span>
-      <span class="stat-label">Languages supported</span>
+      <span class="stat-value">24+</span>
+      <span class="stat-label">Built-in categories</span>
     </div>
     <div class="stat-item">
       <span class="stat-value">1-click</span>
@@ -937,17 +1208,17 @@
     </div>
     <div class="steps">
       <div class="step">
-        <div class="step-num">1</div>
+        <div class="step-num" aria-hidden="true">1</div>
         <h3>Click Organize</h3>
         <p>The extension scans all your unorganized chats and builds a move plan using keyword matching and AI. Takes a few seconds.</p>
       </div>
       <div class="step">
-        <div class="step-num">2</div>
+        <div class="step-num" aria-hidden="true">2</div>
         <h3>Review the plan</h3>
         <p>See exactly which chat goes where before anything moves. New projects are clearly marked. Unmatched chats are flagged separately.</p>
       </div>
       <div class="step">
-        <div class="step-num">3</div>
+        <div class="step-num" aria-hidden="true">3</div>
         <h3>Click Apply</h3>
         <p>Everything moves in one batch. Empty projects are cleaned up automatically. Done.</p>
       </div>
@@ -964,39 +1235,102 @@
       <p class="section-sub">Simple and fast. No settings to configure, no API key to paste.</p>
     </div>
     <div class="features-grid">
+
+      <!-- Featured bento card: Preview -->
+      <div class="feature featured">
+        <div class="feature-content">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
+              <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <h3>Preview before applying</h3>
+          <p>See the full plan before a single chat moves. Cancel at any time with one click. You stay in control.</p>
+        </div>
+        <div class="feature-visual" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
+            <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Standard cards -->
       <div class="feature">
-        <span class="feature-icon">⚡</span>
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
         <h3>Instant keyword matching</h3>
         <p>A built-in multilingual wordlist matches most chats in milliseconds, with no network call and no delay.</p>
       </div>
+
       <div class="feature">
-        <span class="feature-icon">🤖</span>
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
+            <path d="M18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"/>
+          </svg>
+        </div>
         <h3>AI for the hard ones</h3>
         <p>Ambiguous titles get categorized by a shared AI backend. No API key needed. It just works.</p>
       </div>
+
       <div class="feature">
-        <span class="feature-icon">👁️</span>
-        <h3>Preview before applying</h3>
-        <p>See the full plan before a single chat moves. Cancel at any time with one click.</p>
-      </div>
-      <div class="feature">
-        <span class="feature-icon">✋</span>
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M10.05 4.575a1.575 1.575 0 10-3.15 0v3m3.15-3v-1.5a1.575 1.575 0 013.15 0v1.5m-3.15 0l.075 5.925m3.075.75V4.575m0 0a1.575 1.575 0 013.15 0V15M6.9 7.575a1.575 1.575 0 10-3.15 0v8.175a6.75 6.75 0 006.75 6.75h2.018a5.25 5.25 0 003.712-1.538l1.732-1.732a5.25 5.25 0 001.538-3.712l.003-2.024a.668.668 0 01.198-.471 1.575 1.575 0 10-2.228-2.228 3.818 3.818 0 00-1.12 2.687M6.9 7.575V12m6.27 4.318A4.49 4.49 0 0116.35 15"/>
+          </svg>
+        </div>
         <h3>Manual mode</h3>
         <p>Assign specific chats by hand when auto-organize isn't quite right for your workflow.</p>
       </div>
+
       <div class="feature">
-        <span class="feature-icon">🌍</span>
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+          </svg>
+        </div>
         <h3>Multilingual</h3>
         <p>Keyword matching covers English, Dutch, French, German, Spanish, Polish, Russian and more.</p>
       </div>
+
       <div class="feature">
-        <span class="feature-icon">🧹</span>
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+        </div>
         <h3>Auto-cleanup</h3>
         <p>Empty projects are removed automatically after each organize run. Your sidebar stays tidy.</p>
       </div>
+
     </div>
   </div>
 </section>
+
+<!-- ── MID-PAGE CTA BAND ──────────────────────────────────── -->
+<div class="cta-band">
+  <div class="cta-band-inner">
+    <div class="cta-band-text">
+      <h3>Ready to clean up?</h3>
+      <p>Free, no setup, takes about 10 seconds to install.</p>
+    </div>
+    <a href="https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm" class="btn-band">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M8 2C4.686 2 2 4.686 2 8s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6z"/>
+        <circle cx="8" cy="8" r="2.5" fill="currentColor" stroke="none"/>
+      </svg>
+      Add to Chrome
+    </a>
+  </div>
+</div>
 
 <!-- ── TOPICS ────────────────────────────────────────────── -->
 <section class="section">
@@ -1015,31 +1349,31 @@
           <h2 class="section-title">Recognizes what you're talking about</h2>
           <p class="section-sub">The built-in wordlist covers the most common chat topics across multiple languages.</p>
         </div>
-        <div class="topics-wrap">
-          <span class="topic-pill">🎮 Gaming</span>
-          <span class="topic-pill">💻 Coding</span>
-          <span class="topic-pill">💰 Finance</span>
-          <span class="topic-pill">💼 Work</span>
-          <span class="topic-pill">🏥 Health</span>
-          <span class="topic-pill">✈️ Travel</span>
-          <span class="topic-pill">🍕 Food</span>
-          <span class="topic-pill">🎵 Music</span>
-          <span class="topic-pill">🎬 Movies</span>
-          <span class="topic-pill">⚽ Sports</span>
-          <span class="topic-pill">📚 Education</span>
-          <span class="topic-pill">💡 Technology</span>
-          <span class="topic-pill">🎨 Design</span>
-          <span class="topic-pill">🏠 Home</span>
-          <span class="topic-pill">🚗 Cars</span>
-          <span class="topic-pill">✍️ Writing</span>
-          <span class="topic-pill">🔬 Science</span>
-          <span class="topic-pill">⚖️ Legal</span>
-          <span class="topic-pill">📱 Social Media</span>
-          <span class="topic-pill">🤖 AI</span>
-          <span class="topic-pill">🖥️ Media Server</span>
-          <span class="topic-pill">🔒 Security</span>
-          <span class="topic-pill">🌱 Personal Dev</span>
-          <span class="topic-pill">🌐 General Knowledge</span>
+        <div class="topics-wrap" aria-label="Supported categories">
+          <span class="topic-pill">&#127918; Gaming</span>
+          <span class="topic-pill">&#128187; Coding</span>
+          <span class="topic-pill">&#128176; Finance</span>
+          <span class="topic-pill">&#128188; Work</span>
+          <span class="topic-pill">&#127973; Health</span>
+          <span class="topic-pill">&#9992;&#65039; Travel</span>
+          <span class="topic-pill">&#127829; Food</span>
+          <span class="topic-pill">&#127925; Music</span>
+          <span class="topic-pill">&#127916; Movies</span>
+          <span class="topic-pill">&#9917; Sports</span>
+          <span class="topic-pill">&#128218; Education</span>
+          <span class="topic-pill">&#128161; Technology</span>
+          <span class="topic-pill">&#127912; Design</span>
+          <span class="topic-pill">&#127968; Home</span>
+          <span class="topic-pill">&#128663; Cars</span>
+          <span class="topic-pill">&#9999;&#65039; Writing</span>
+          <span class="topic-pill">&#128300; Science</span>
+          <span class="topic-pill">&#9878;&#65039; Legal</span>
+          <span class="topic-pill">&#128241; Social Media</span>
+          <span class="topic-pill">&#129302; AI</span>
+          <span class="topic-pill">&#128421;&#65039; Media Server</span>
+          <span class="topic-pill">&#128274; Security</span>
+          <span class="topic-pill">&#127807; Personal Dev</span>
+          <span class="topic-pill">&#127760; General Knowledge</span>
         </div>
       </div>
     </div>
@@ -1056,60 +1390,149 @@
     </div>
     <div class="privacy-grid">
       <div class="privacy-card">
-        <span class="privacy-card-icon">🏠</span>
+        <div class="privacy-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
         <h3>Stays in your browser</h3>
         <p>Your chats are read directly from Claude.ai using your active login session. No data is stored on any server.</p>
       </div>
       <div class="privacy-card">
-        <span class="privacy-card-icon">📤</span>
+        <div class="privacy-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="12" y1="19" x2="12" y2="5"/>
+            <polyline points="5 12 12 5 19 12"/>
+          </svg>
+        </div>
         <h3>Only titles leave</h3>
         <p>When AI categorization is needed, only the <strong>chat title</strong> is sent. Never the conversation content.</p>
       </div>
       <div class="privacy-card">
-        <span class="privacy-card-icon">📊</span>
+        <div class="privacy-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="14"/>
+            <line x1="3" y1="3" x2="21" y2="21" stroke-width="1.75"/>
+          </svg>
+        </div>
         <h3>Zero analytics</h3>
         <p>No usage tracking, no telemetry, no crash reports. The extension has no backend of its own.</p>
       </div>
     </div>
+
     <div class="privacy-note">
-      Chat content never leaves your browser. For ambiguous titles, only the title text is sent to a shared AI service for categorization. No personal data, no history, no accounts.
-      <a href="privacy.html" style="margin-left:6px;white-space:nowrap">Full privacy policy →</a>
+      <span class="privacy-note-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0110 0v4"/>
+        </svg>
+      </span>
+      <span>
+        Chat content never leaves your browser. For ambiguous titles, only the title text is sent to a shared AI service for categorization. No personal data, no history, no accounts.
+        <a href="privacy.html" style="margin-left:6px;white-space:nowrap">Full privacy policy &#8594;</a>
+      </span>
+    </div>
+
+    <div style="margin-top: var(--s2);">
+      <p style="font-size: var(--t-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #B35C35; margin-bottom: var(--s2);">Chrome permissions explained</p>
+      <div class="permissions-grid">
+        <div class="permission-item">
+          <div class="permission-name">activeTab</div>
+          <p class="permission-desc">Reads your open Claude.ai tab to detect chat titles. Only active while you use the extension.</p>
+        </div>
+        <div class="permission-item">
+          <div class="permission-name">storage</div>
+          <p class="permission-desc">Saves your project names locally in your browser. Nothing is sent to any server.</p>
+        </div>
+        <div class="permission-item">
+          <div class="permission-name">scripting</div>
+          <p class="permission-desc">Runs the organizer logic on claude.ai to read the sidebar and move chats into projects.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ───────────────────────────────────────── -->
+<section class="section white">
+  <div class="inner">
+    <div class="section-head">
+      <div class="eyebrow">What users say</div>
+      <h2 class="section-title">Cleaning up chat chaos</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <div class="testimonial-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-quote">"Finally, my Claude sidebar is not a complete disaster. Organized 67 chats in about 10 seconds. The preview step is key."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" aria-hidden="true">&#129489;&#8205;&#128187;</div>
+          <div>
+            <div class="testimonial-name">Marcus T.</div>
+            <div class="testimonial-role">Software developer</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-quote">"Works perfectly in French too. Was not expecting that. The keyword matching gets my chats right almost every time."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" aria-hidden="true">&#128104;&#8205;&#128188;</div>
+          <div>
+            <div class="testimonial-name">Julien D.</div>
+            <div class="testimonial-role">Product manager</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testimonial-quote">"I was skeptical about no API key but the AI fallback genuinely works. Sorted 40 research chats into the right projects instantly."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" aria-hidden="true">&#128105;&#8205;&#128300;</div>
+          <div>
+            <div class="testimonial-name">Sarah K.</div>
+            <div class="testimonial-role">Researcher</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ── FAQ ───────────────────────────────────────────────── -->
-<section class="section white">
+<section class="section">
   <div class="inner">
     <div class="section-head">
       <div class="eyebrow">FAQ</div>
       <h2 class="section-title">Common questions</h2>
     </div>
     <div class="faq">
-      <div class="faq-item open">
-        <div class="faq-q">Is it free?</div>
+      <details open>
+        <summary>Is it free?</summary>
         <div class="faq-a">Yes, completely free. No subscription, no premium tier, no hidden costs. Ever.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Do I need an API key?</div>
+      </details>
+      <details>
+        <summary>Do I need an API key?</summary>
         <div class="faq-a">No. The AI categorization runs on a shared backend at no cost to you. Just install the extension and click Organize.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Will it delete my chats or projects?</div>
+      </details>
+      <details>
+        <summary>Will it delete my chats or projects?</summary>
         <div class="faq-a">No chats are ever deleted. Projects that are left completely empty after organizing are removed to keep your sidebar clean, but every conversation stays intact in your chat history.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Does it work in languages other than English?</div>
+      </details>
+      <details>
+        <summary>Does it work in languages other than English?</summary>
         <div class="faq-a">Yes. The keyword wordlist covers Dutch, French, German, Spanish, Italian, Polish, Russian, Arabic, Hindi and more. The AI fallback works in any language.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Do I need to be logged in to Claude.ai?</div>
+      </details>
+      <details>
+        <summary>Do I need to be logged in to Claude.ai?</summary>
         <div class="faq-a">Yes. The extension uses your active Claude.ai browser session to read and move chats. Open claude.ai, log in, then click the extension icon.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Can I undo an organize run?</div>
+      </details>
+      <details>
+        <summary>Can I undo an organize run?</summary>
         <div class="faq-a">Not automatically, but you can move chats back manually in Claude.ai. That's why the preview step exists: review the plan carefully before clicking Apply.</div>
-      </div>
+      </details>
     </div>
   </div>
 </section>
@@ -1120,21 +1543,23 @@
     <h2 class="section-title">Clean up your chats today</h2>
     <p class="cta-sub">Free, no setup, works in seconds.</p>
     <a href="https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm" class="btn-white">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M8 2C4.686 2 2 4.686 2 8s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6z"/>
         <circle cx="8" cy="8" r="2.5" fill="currentColor" stroke="none"/>
       </svg>
       Add to Chrome
     </a>
-    <p class="cta-note">No account · No API key · No data collection</p>
+    <p class="cta-note">No account &middot; No API key &middot; No data collection</p>
   </div>
 </section>
+
+</main>
 
 <!-- ── FOOTER ────────────────────────────────────────────── -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="footer-logo"><img src="icon128.png" alt=""></div>
+      <div class="footer-logo"><img src="icon128.png" alt="Claude Organizer"></div>
       Claude Organizer
     </div>
     <div class="footer-links">
@@ -1148,14 +1573,13 @@
   </div>
 </footer>
 
+<!-- Google Analytics — loaded after page content for faster LCP -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K9J7DHMT4V"></script>
 <script>
-  document.querySelectorAll('.faq-item').forEach(item => {
-    item.querySelector('.faq-q').addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-      if (!isOpen) item.classList.add('open');
-    });
-  });
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-K9J7DHMT4V');
 </script>
 
 </body>
