@@ -195,6 +195,18 @@
 
   <div class="release">
     <div class="release-head">
+      <span class="ver">v1.7.4</span>
+      <span class="ver-date">June 2026</span>
+      <span class="tag">Fix</span>
+    </div>
+    <h3>Bug fix</h3>
+    <ul>
+      <li><strong>Fixed organizing showing an error even when it succeeded.</strong> The Claude.ai API moves chats and then returns a 400 status anyway (a quirk on their side). The extension was treating this as a failure and retrying, then getting told "nothing to update" because the chats were already moved. It now correctly recognises this and completes without showing an error.</li>
+    </ul>
+  </div>
+
+  <div class="release">
+    <div class="release-head">
       <span class="ver">v1.7</span>
       <span class="ver-date">June 2026</span>
       <span class="tag">Fix</span>
