@@ -1,0 +1,225 @@
+/*
+ * Cookie consent + analytics loader for chat-organizer.com
+ *
+ * Implements Google Consent Mode v2: analytics/ad storage default to "denied"
+ * and are only granted after the visitor accepts in the banner. Google
+ * Analytics (gtag.js) is loaded here so nothing tracks before consent state
+ * is set.
+ *
+ * To enable Microsoft Clarity (session replay / heatmaps):
+ *   1. Set CLARITY_ID below to your Clarity project id.
+ *   2. Add these origins to the Content-Security-Policy meta tag on every page:
+ *        script-src  : https://www.clarity.ms
+ *        img-src     : https://*.clarity.ms
+ *        connect-src : https://*.clarity.ms https://c.bing.com
+ * Clarity then loads only after consent, just like GA.
+ */
+(function () {
+  var GA_ID      = 'G-K9J7DHMT4V';
+  var CLARITY_ID = '';                 // <-- set to enable Microsoft Clarity
+  var STORE_KEY  = 'co-consent';       // 'granted' | 'denied'
+
+  // ── Consent Mode v2 bootstrap (must run before gtag.js executes) ──────────
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  window.gtag = gtag;
+
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    functionality_storage: 'denied',
+    personalization_storage: 'denied',
+    security_storage: 'granted',
+    wait_for_update: 500
+  });
+
+  function getStored() {
+    try { return localStorage.getItem(STORE_KEY); } catch (e) { return null; }
+  }
+  function setStored(v) {
+    try { localStorage.setItem(STORE_KEY, v); } catch (e) {}
+  }
+
+  function grantConsent() {
+    gtag('consent', 'update', {
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted',
+      analytics_storage: 'granted',
+      functionality_storage: 'granted',
+      personalization_storage: 'granted'
+    });
+  }
+  function denyConsent() {
+    gtag('consent', 'update', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'denied',
+      personalization_storage: 'denied'
+    });
+  }
+
+  var clarityLoaded = false;
+  function loadClarity() {
+    if (clarityLoaded || !CLARITY_ID) return;
+    clarityLoaded = true;
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+      t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, 'clarity', 'script', CLARITY_ID);
+  }
+
+  // ── Fire analytics config + load the gtag.js library ──────────────────────
+  var choice = getStored();
+  if (choice === 'granted') grantConsent();
+
+  gtag('js', new Date());
+  gtag('config', GA_ID);
+
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+  document.head.appendChild(s);
+
+  if (choice === 'granted') loadClarity();
+
+  // ── Banner ────────────────────────────────────────────────────────────────
+  var B = {
+    en: { msg: 'We use analytics cookies to understand how visitors use this site.', accept: 'Accept', decline: 'Decline', privacy: 'Privacy policy', settings: 'Cookie settings' },
+    nl: { msg: 'We gebruiken analytische cookies om te begrijpen hoe bezoekers deze site gebruiken.', accept: 'Accepteren', decline: 'Weigeren', privacy: 'Privacybeleid', settings: 'Cookie-instellingen' },
+    fr: { msg: 'Nous utilisons des cookies d’analyse pour comprendre comment les visiteurs utilisent ce site.', accept: 'Accepter', decline: 'Refuser', privacy: 'Politique de confidentialité', settings: 'Paramètres des cookies' },
+    de: { msg: 'Wir verwenden Analyse-Cookies, um zu verstehen, wie Besucher diese Website nutzen.', accept: 'Zustimmen', decline: 'Ablehnen', privacy: 'Datenschutz', settings: 'Cookie-Einstellungen' },
+    es: { msg: 'Usamos cookies de análisis para entender cómo los visitantes usan este sitio.', accept: 'Aceptar', decline: 'Rechazar', privacy: 'Política de privacidad', settings: 'Configuración de cookies' }
+  };
+
+  function getLang() {
+    try {
+      var p = new URLSearchParams(location.search).get('lang');
+      if (p && B[p]) return p;
+      var st = localStorage.getItem('co-lang');
+      if (st && B[st]) return st;
+    } catch (e) {}
+    var n = (navigator.language || 'en').slice(0, 2).toLowerCase();
+    return B[n] ? n : 'en';
+  }
+
+  var stylesInjected = false;
+  function injectStyles() {
+    if (stylesInjected) return;
+    stylesInjected = true;
+    var css =
+      '#co-consent{position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;max-width:720px;margin:0 auto;' +
+      'background:#fff;border:1px solid #E8E2DA;border-radius:12px;box-shadow:0 12px 40px rgba(28,25,23,.18);' +
+      'padding:14px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;' +
+      "font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif}" +
+      '.co-consent-msg{margin:0;flex:1;min-width:0;font-size:.85rem;line-height:1.5;color:#57534E}' +
+      '.co-consent-link{color:#D97756;text-decoration:underline;white-space:nowrap}' +
+      '.co-consent-btns{display:flex;gap:8px;flex-shrink:0}' +
+      '.co-consent-btn{font-family:inherit;font-size:.82rem;font-weight:700;padding:9px 18px;border-radius:8px;' +
+      'cursor:pointer;border:1px solid transparent;transition:background .15s,border-color .15s;white-space:nowrap}' +
+      '.co-consent-decline{background:transparent;border-color:#E8E2DA;color:#57534E}' +
+      '.co-consent-decline:hover{border-color:#A8A29E}' +
+      '.co-consent-accept{background:#D97756;color:#fff}' +
+      '.co-consent-accept:hover{background:#C2633D}' +
+      '@media(max-width:600px){' +
+      '#co-consent{flex-direction:column;align-items:stretch;gap:10px;padding:14px 14px 12px;bottom:0;left:0;right:0;border-radius:14px 14px 0 0}' +
+      '.co-consent-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}' +
+      '.co-consent-btn{padding:11px 10px;text-align:center}' +
+      '}';
+    var el = document.createElement('style');
+    el.textContent = css;
+    document.head.appendChild(el);
+  }
+
+  // Update text in an already-visible banner and all footer cookie-settings links
+  function applyLangToBanner(lang) {
+    var t = B[lang] || B.en;
+    var bar = document.getElementById('co-consent');
+    if (bar) {
+      var msgEl  = bar.querySelector('.co-consent-msg');
+      var linkEl = bar.querySelector('.co-consent-link');
+      var acc    = bar.querySelector('.co-consent-accept');
+      var dec    = bar.querySelector('.co-consent-decline');
+      if (msgEl)  { msgEl.childNodes[0].nodeValue = t.msg + ' '; }
+      if (linkEl) { linkEl.textContent = t.privacy; }
+      if (acc)    { acc.textContent = t.accept; }
+      if (dec)    { dec.textContent = t.decline; }
+      bar.setAttribute('aria-label', t.settings);
+    }
+    document.querySelectorAll('[data-cookie-settings]').forEach(function (a) {
+      a.textContent = t.settings;
+    });
+  }
+
+  function showBanner() {
+    if (document.getElementById('co-consent')) return;
+    var t = B[getLang()] || B.en;
+    injectStyles();
+
+    var bar = document.createElement('div');
+    bar.id = 'co-consent';
+    bar.setAttribute('role', 'dialog');
+    bar.setAttribute('aria-label', t.settings);
+
+    var msg = document.createElement('p');
+    msg.className = 'co-consent-msg';
+    msg.appendChild(document.createTextNode(t.msg + ' '));
+    var link = document.createElement('a');
+    link.className = 'co-consent-link';
+    link.href = 'privacy.html';
+    link.textContent = t.privacy;
+    msg.appendChild(link);
+
+    var btns = document.createElement('div');
+    btns.className = 'co-consent-btns';
+    var decline = document.createElement('button');
+    decline.type = 'button';
+    decline.className = 'co-consent-btn co-consent-decline';
+    decline.textContent = t.decline;
+    var accept = document.createElement('button');
+    accept.type = 'button';
+    accept.className = 'co-consent-btn co-consent-accept';
+    accept.textContent = t.accept;
+
+    function close() { if (bar.parentNode) bar.parentNode.removeChild(bar); }
+    decline.addEventListener('click', function () { setStored('denied'); denyConsent(); close(); });
+    accept.addEventListener('click', function () { setStored('granted'); grantConsent(); loadClarity(); close(); });
+
+    btns.appendChild(decline);
+    btns.appendChild(accept);
+    bar.appendChild(msg);
+    bar.appendChild(btns);
+    document.body.appendChild(bar);
+  }
+
+  function ready(fn) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn);
+    } else {
+      fn();
+    }
+  }
+
+  ready(function () {
+    if (!getStored()) showBanner();
+
+    var t = B[getLang()] || B.en;
+    document.querySelectorAll('[data-cookie-settings]').forEach(function (a) {
+      a.textContent = t.settings;
+      a.addEventListener('click', function (e) { e.preventDefault(); showBanner(); });
+    });
+
+    // Keep banner and footer links in sync when user switches language
+    document.querySelectorAll('.lang-option').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var lang = btn.dataset.lang;
+        if (lang && B[lang]) applyLangToBanner(lang);
+      });
+    });
+  });
+})();

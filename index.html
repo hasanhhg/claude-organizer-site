@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Claude Chat Organizer – Auto-sort your Claude.ai chats into projects</title>
   <meta name="description" content="Claude Organizer automatically sorts your Claude.ai chats into projects in one click. No API key needed. Free Chrome extension.">
   <link rel="canonical" href="https://chat-organizer.com/">
@@ -733,14 +735,14 @@
       <a href="mailto:contact@chat-organizer.com" data-i18n="footer.contact">Contact</a>
       <a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
       <a href="changelog.html" data-i18n="footer.changelog">Changelog</a>
+      <a href="#" data-cookie-settings>Cookie settings</a>
     </div>
   </div>
   <div class="footer-copy" data-i18n="footer.copy">Not affiliated with Anthropic. Claude is a trademark of Anthropic, PBC.</div>
 </footer>
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-K9J7DHMT4V"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-K9J7DHMT4V');</script>
+<!-- Analytics + cookie consent (Google Consent Mode v2) -->
+<script src="consent.js"></script>
 
 <!-- Translations -->
 <script src="translations.js"></script>

@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Privacy Policy – Claude Organizer</title>
   <link rel="canonical" href="https://chat-organizer.com/privacy.html">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -222,6 +224,9 @@
   <h2>Analytics and tracking</h2>
   <p>The extension contains no analytics, no tracking pixels, no error reporting, and no telemetry of any kind. No data about your usage is collected.</p>
 
+  <h2>Website analytics (this site)</h2>
+  <p>This section is about the website at chat-organizer.com, not the extension. The site uses Google Analytics to measure aggregate traffic, such as which pages are visited and how visitors arrive. Analytics cookies are set <strong>only after you accept them</strong> in the cookie banner shown on your first visit. If you decline, no analytics cookies are stored and no analytics data is collected. You can change your choice at any time using the <strong>Cookie settings</strong> link in the footer.</p>
+
   <h2>Third-party services</h2>
   <p>The extension communicates with the following services:</p>
   <ul>
@@ -241,17 +246,11 @@
 </main>
 
 <footer>
-  <p>Claude Organizer · <a href="index.html">Home</a> · <a href="mailto:contact@chat-organizer.com">Contact</a> · Not affiliated with Anthropic</p>
+  <p>Claude Organizer · <a href="index.html">Home</a> · <a href="mailto:contact@chat-organizer.com">Contact</a> · <a href="#" data-cookie-settings>Cookie settings</a> · Not affiliated with Anthropic</p>
 </footer>
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-K9J7DHMT4V"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-K9J7DHMT4V');
-</script>
+<!-- Analytics + cookie consent (Google Consent Mode v2) -->
+<script src="consent.js"></script>
 
 </body>
 </html>
