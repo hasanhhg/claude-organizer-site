@@ -16,7 +16,7 @@
  */
 (function () {
   var GA_ID      = 'G-K9J7DHMT4V';
-  var CLARITY_ID = '';                 // <-- set to enable Microsoft Clarity
+  var CLARITY_ID = 'x2f2g5ok4y';      // Microsoft Clarity project ID
   var STORE_KEY  = 'co-consent';       // 'granted' | 'denied'
 
   // ── Consent Mode v2 bootstrap (must run before gtag.js executes) ──────────
