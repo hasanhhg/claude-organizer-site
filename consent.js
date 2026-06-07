@@ -15,7 +15,7 @@
  * Clarity then loads only after consent, just like GA.
  */
 (function () {
-  var GA_ID      = 'G-K9J7DHMT4V';
+  var GA_ID      = 'G-EZG37BF12B';
   var CLARITY_ID = 'x2f2g5ok4y';      // Microsoft Clarity project ID
   var STORE_KEY  = 'co-consent';       // 'granted' | 'denied'
 
