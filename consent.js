@@ -92,11 +92,20 @@
 
   // ── Banner ────────────────────────────────────────────────────────────────
   var B = {
-    en: { msg: 'We use analytics cookies to understand how visitors use this site.', accept: 'Accept', decline: 'Decline', privacy: 'Privacy policy', settings: 'Cookie settings' },
-    nl: { msg: 'We gebruiken analytische cookies om te begrijpen hoe bezoekers deze site gebruiken.', accept: 'Accepteren', decline: 'Weigeren', privacy: 'Privacybeleid', settings: 'Cookie-instellingen' },
-    fr: { msg: 'Nous utilisons des cookies d’analyse pour comprendre comment les visiteurs utilisent ce site.', accept: 'Accepter', decline: 'Refuser', privacy: 'Politique de confidentialité', settings: 'Paramètres des cookies' },
-    de: { msg: 'Wir verwenden Analyse-Cookies, um zu verstehen, wie Besucher diese Website nutzen.', accept: 'Zustimmen', decline: 'Ablehnen', privacy: 'Datenschutz', settings: 'Cookie-Einstellungen' },
-    es: { msg: 'Usamos cookies de análisis para entender cómo los visitantes usan este sitio.', accept: 'Aceptar', decline: 'Rechazar', privacy: 'Política de privacidad', settings: 'Configuración de cookies' }
+    en: { msg: ‘We use analytics cookies to understand how visitors use this site.’, accept: ‘Accept’, decline: ‘Decline’, privacy: ‘Privacy policy’, settings: ‘Cookie settings’ },
+    nl: { msg: ‘We gebruiken analytische cookies om te begrijpen hoe bezoekers deze site gebruiken.’, accept: ‘Accepteren’, decline: ‘Weigeren’, privacy: ‘Privacybeleid’, settings: ‘Cookie-instellingen’ },
+    fr: { msg: ‘Nous utilisons des cookies d\’analyse pour comprendre comment les visiteurs utilisent ce site.’, accept: ‘Accepter’, decline: ‘Refuser’, privacy: ‘Politique de confidentialité’, settings: ‘Paramètres des cookies’ },
+    de: { msg: ‘Wir verwenden Analyse-Cookies, um zu verstehen, wie Besucher diese Website nutzen.’, accept: ‘Zustimmen’, decline: ‘Ablehnen’, privacy: ‘Datenschutz’, settings: ‘Cookie-Einstellungen’ },
+    es: { msg: ‘Usamos cookies de análisis para entender cómo los visitantes usan este sitio.’, accept: ‘Aceptar’, decline: ‘Rechazar’, privacy: ‘Política de privacidad’, settings: ‘Configuración de cookies’ },
+    zh: { msg: ‘我们使用分析 Cookie 来了解访问者如何使用本网站。’, accept: ‘接受’, decline: ‘拒绝’, privacy: ‘隐私政策’, settings: ‘Cookie 设置’ },
+    pt: { msg: ‘Usamos cookies analíticos para entender como os visitantes usam este site.’, accept: ‘Aceitar’, decline: ‘Recusar’, privacy: ‘Política de privacidade’, settings: ‘Configurações de cookies’ },
+    ja: { msg: ‘当サイトの利用状況を把握するため、分析 Cookie を使用しています。’, accept: ‘同意する’, decline: ‘拒否する’, privacy: ‘プライバシーポリシー’, settings: ‘Cookie 設定’ },
+    ru: { msg: ‘Мы используем аналитические файлы cookie, чтобы понять, как посетители используют этот сайт.’, accept: ‘Принять’, decline: ‘Отклонить’, privacy: ‘Политика конфиденциальности’, settings: ‘Настройки файлов cookie’ },
+    ar: { msg: ‘نستخدم ملفات تعريف الارتباط التحليلية لفهم كيفية استخدام الزوار لهذا الموقع.’, accept: ‘قبول’, decline: ‘رفض’, privacy: ‘سياسة الخصوصية’, settings: ‘إعدادات ملفات تعريف الارتباط’ },
+    hi: { msg: ‘हम इस साइट को विज़िटर कैसे उपयोग करते हैं, यह समझने के लिए विश्लेषण कुकीज़ का उपयोग करते हैं।’, accept: ‘स्वीकार करें’, decline: ‘अस्वीकार करें’, privacy: ‘गोपनीयता नीति’, settings: ‘Cookie सेटिंग्स’ },
+    id: { msg: ‘Kami menggunakan cookie analitik untuk memahami bagaimana pengunjung menggunakan situs ini.’, accept: ‘Terima’, decline: ‘Tolak’, privacy: ‘Kebijakan privasi’, settings: ‘Pengaturan cookie’ },
+    it: { msg: ‘Utilizziamo cookie analitici per capire come i visitatori usano questo sito.’, accept: ‘Accetta’, decline: ‘Rifiuta’, privacy: ‘Informativa sulla privacy’, settings: ‘Impostazioni cookie’ },
+    tr: { msg: ‘Ziyaretçilerin bu siteyi nasıl kullandığını anlamak için analitik çerezler kullanıyoruz.’, accept: ‘Kabul et’, decline: ‘Reddet’, privacy: ‘Gizlilik politikası’, settings: ‘Çerez ayarları’ }
   };
 
   function getLang() {
