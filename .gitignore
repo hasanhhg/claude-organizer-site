@@ -1,0 +1,10 @@
+# Dependencies (only if export tooling is run locally)
+node_modules/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log
+
+# Local env
+.env
