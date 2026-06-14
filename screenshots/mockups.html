@@ -303,6 +303,37 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
   border-radius: 50%;
   opacity: 0.08;
 }
+
+/* ── Promo tiles (Web Store) ── */
+#t-small, #t-marquee {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #FDF3EE 0%, #F9EDE4 50%, #F4E4D6 100%);
+  margin-bottom: 24px;
+}
+#t-small {
+  width: 440px;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 36px;
+}
+#t-marquee {
+  width: 1400px;
+  height: 560px;
+}
+.tile-brand { display: flex; align-items: center; gap: 11px; }
+.tile-pill {
+  padding: 6px 14px;
+  border-radius: 18px;
+  font-size: 13px;
+  font-weight: 600;
+  background: #fff;
+  border: 1px solid #E8E2DA;
+  color: #1C1917;
+  white-space: nowrap;
+}
 </style>
 </head>
 <body>
@@ -331,7 +362,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
           <div class="p-header">
             <div class="p-brand">
               <div class="p-icon">
-                <img src="../claude-chat-organizer/icons/icon128.png" alt="" style="width:22px;height:22px;display:block;border-radius:6px;">
+                <img src="../../claude-chat-organizer/icons/icon128.png" alt="" style="width:22px;height:22px;display:block;border-radius:6px;">
               </div>
               <span class="p-name">Claude Organizer</span>
               <span class="p-ver">v1.8.0</span>
@@ -380,7 +411,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
           <div class="p-header">
             <div class="p-brand">
               <div class="p-icon">
-                <img src="../claude-chat-organizer/icons/icon128.png" alt="" style="width:22px;height:22px;display:block;border-radius:6px;">
+                <img src="../../claude-chat-organizer/icons/icon128.png" alt="" style="width:22px;height:22px;display:block;border-radius:6px;">
               </div>
               <span class="p-name">Claude Organizer</span>
               <span class="p-ver">v1.8.0</span>
@@ -447,7 +478,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
           <div class="p-header">
             <div class="p-brand">
               <div class="p-icon">
-                <img src="../claude-chat-organizer/icons/icon128.png" alt="" style="width:22px;height:22px;display:block;border-radius:6px;">
+                <img src="../../claude-chat-organizer/icons/icon128.png" alt="" style="width:22px;height:22px;display:block;border-radius:6px;">
               </div>
               <span class="p-name">Claude Organizer</span>
               <span class="p-ver">v1.8.0</span>
@@ -501,7 +532,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
           <div class="p-header">
             <div class="p-brand">
               <div class="p-icon">
-                <img src="../claude-chat-organizer/icons/icon128.png" alt="" style="width:22px;height:22px;display:block;border-radius:6px;">
+                <img src="../../claude-chat-organizer/icons/icon128.png" alt="" style="width:22px;height:22px;display:block;border-radius:6px;">
               </div>
               <span class="p-name">Claude Organizer</span>
               <span class="p-ver">v1.8.0</span>
@@ -554,7 +585,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
   <div class="deco" style="width:500px;height:500px;background:#EA580C;bottom:-150px;left:-100px;"></div>
   <div class="slide-inner">
     <div class="slide-text">
-      <div class="eyebrow">Privacy First · Works in 10 Languages</div>
+      <div class="eyebrow">Privacy First · Works in 11 Languages</div>
       <h1>Your chats never leave your browser</h1>
       <p>Chat content stays completely private. Only titles are sent for AI matching, and only when needed. Works in English, Dutch, French, German, Spanish, and more.</p>
       <div class="pills">
@@ -572,7 +603,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
           <div class="p-header">
             <div class="p-brand">
               <div class="p-icon">
-                <img src="../claude-chat-organizer/icons/icon128.png" alt="" style="width:22px;height:22px;display:block;border-radius:6px;">
+                <img src="../../claude-chat-organizer/icons/icon128.png" alt="" style="width:22px;height:22px;display:block;border-radius:6px;">
               </div>
               <span class="p-name">Claude Organizer</span>
               <span class="p-ver">v1.8.0</span>
@@ -593,6 +624,97 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
               <div style="font-size:11.5px;color:#79716B;line-height:1.5;">✓ Chatinhoud blijft in uw browser<br>✓ Alleen titels worden gedeeld voor AI<br>✓ Geen tracking of analyse</div>
             </div>
             <div class="state-ok">✓ 31 chats ingedeeld in 5 projecten</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PROMO TILE, Small 440x280
+════════════════════════════════════════════ -->
+<div id="t-small">
+  <div class="deco" style="width:230px;height:230px;background:#D97756;top:-80px;right:-70px;"></div>
+  <div class="deco" style="width:130px;height:130px;background:#D97756;bottom:-50px;left:-30px;"></div>
+  <div class="tile-brand" style="margin-bottom:16px;">
+    <div class="p-icon" style="width:34px;height:34px;border-radius:9px;">
+      <img src="../../claude-chat-organizer/icons/icon128.png" alt="" style="width:24px;height:24px;display:block;border-radius:6px;">
+    </div>
+    <span style="font-size:19px;font-weight:700;color:#1C1917;">Claude Organizer</span>
+  </div>
+  <div style="font-size:31px;font-weight:800;letter-spacing:-0.02em;line-height:1.12;color:#1C1917;margin-bottom:16px;">Organize your Claude chats in <span style="color:#D97756;">one click</span></div>
+  <div style="display:flex;gap:8px;">
+    <span class="tile-pill">Free</span>
+    <span class="tile-pill">AI powered</span>
+    <span class="tile-pill">No setup</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PROMO TILE, Marquee 1400x560
+════════════════════════════════════════════ -->
+<div id="t-marquee">
+  <div class="deco" style="width:500px;height:500px;background:#D97756;top:-170px;right:-130px;"></div>
+  <div class="deco" style="width:260px;height:260px;background:#D97756;bottom:-90px;left:50px;"></div>
+  <div style="display:flex;align-items:center;gap:70px;padding:0 90px;height:100%;">
+    <div style="flex:1;max-width:660px;">
+      <div class="tile-brand" style="margin-bottom:24px;">
+        <div class="p-icon" style="width:42px;height:42px;border-radius:11px;">
+          <img src="../../claude-chat-organizer/icons/icon128.png" alt="" style="width:30px;height:30px;display:block;border-radius:7px;">
+        </div>
+        <span style="font-size:25px;font-weight:700;color:#1C1917;">Claude Organizer</span>
+      </div>
+      <div style="font-size:56px;font-weight:800;letter-spacing:-0.03em;line-height:1.05;color:#1C1917;margin-bottom:20px;">Your Claude chats,<br>finally organized</div>
+      <div style="font-size:21px;line-height:1.55;color:#79716B;margin-bottom:28px;">Sorts hundreds of chats into the right projects automatically. Free, no setup, and nothing moves without your approval.</div>
+      <div style="display:flex;gap:10px;">
+        <span class="tile-pill" style="font-size:15px;padding:8px 17px;">✦ One click</span>
+        <span class="tile-pill" style="font-size:15px;padding:8px 17px;">✦ AI powered</span>
+        <span class="tile-pill" style="font-size:15px;padding:8px 17px;">✦ 11 languages</span>
+        <span class="tile-pill" style="font-size:15px;padding:8px 17px;">✦ Free</span>
+      </div>
+    </div>
+    <div style="flex-shrink:0;transform:scale(0.88);transform-origin:center;">
+      <div class="popup-shadow">
+        <div class="popup">
+          <div class="p-header">
+            <div class="p-brand">
+              <div class="p-icon">
+                <img src="../../claude-chat-organizer/icons/icon128.png" alt="" style="width:22px;height:22px;display:block;border-radius:6px;">
+              </div>
+              <span class="p-name">Claude Organizer</span>
+              <span class="p-ver">v1.8.0</span>
+            </div>
+            <div class="p-badge"><span class="dot"></span><span class="p-conn">Connected</span></div>
+          </div>
+          <div class="p-tabs">
+            <div class="p-tab active">Auto</div>
+            <div class="p-tab">Manual</div>
+            <div class="p-tab">Rules</div>
+            <div class="p-tab">Debug</div>
+          </div>
+          <div class="p-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <span class="preview-label">18 chats ready to move</span>
+              <span style="font-size:12px;color:#A8A29E;">Cancel</span>
+            </div>
+            <div class="preview-container">
+              <div class="preview-row">
+                <span class="pr-name">Coding & Dev</span>
+                <div class="pr-meta"><span class="pr-count">7 chats</span></div>
+              </div>
+              <div class="chat-item">Fix async race condition in JS</div>
+              <div class="preview-row new">
+                <span class="pr-name">Gaming</span>
+                <div class="pr-meta"><span class="badge-new">New</span><span class="pr-count">4 chats</span></div>
+              </div>
+              <div class="chat-item">Best Elden Ring build strategies</div>
+              <div class="preview-row ai">
+                <span class="pr-name">Finance</span>
+                <div class="pr-meta"><span class="badge-ai">AI</span><span class="pr-count">3 chats</span></div>
+              </div>
+            </div>
+            <button class="btn-apply">Apply Changes</button>
           </div>
         </div>
       </div>
