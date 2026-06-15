@@ -1,8 +1,9 @@
 (function () {
   var T = {
     en: {
+      meta: { title: "AI Chat Organizer for Claude: Auto-Sort Chats | Free Chrome Extension", description: "The AI chat organizer and chat manager for Claude.ai. Auto-sort hundreds of Claude chats into projects in one click. Free Chrome extension, no API key needed." },
       nav:  { cta: "Add to Chrome" },
-      hero: { badge: "Free Chrome Extension", h1: "Your Claude chats,<br><em>finally organized</em>", sub: "Hundreds of chats and zero order? Claude Organizer scans them all, builds a plan, and moves everything into projects in one click.", stars: "Loved by Claude power users", cta: "Add to Chrome, it’s free", note1: "No API key required", note2: "No account needed", note3: "Works in seconds" },
+      hero: { badge: "Free Chrome Extension", h1: "Your Claude chats,<br><em>finally organized</em>", sub: "Hundreds of chats and zero order? Claude Organizer is the AI chat organizer that scans them all, builds a plan, and moves every Claude chat into projects in one click.", stars: "Loved by Claude power users", cta: "Add to Chrome, it’s free", note1: "No API key required", note2: "No account needed", note3: "Works in seconds" },
       stats: { v1: "Free", l1: "No subscription ever", l2: "Chat topics recognized", l3: "Built-in categories", l4: "Full organize run" },
       hiw:  { eyebrow: "How it works", title: "Three steps, one click", sub: "You see the full plan before anything moves. Nothing happens without your approval." },
       step1: { title: "Click Organize", desc: "The extension scans all your unorganized chats and builds a move plan using keyword matching and AI. Takes a few seconds." },
@@ -63,6 +64,7 @@
     },
 
     fr: {
+      meta: { title: "Organisateur de Chats IA pour Claude : Triez vos Chats | Extension Chrome Gratuite", description: "L'organisateur et gestionnaire de chats IA pour Claude.ai. Triez des centaines de chats Claude dans des projets en un clic. Extension Chrome gratuite, sans clé API." },
       nav:  { cta: "Ajouter à Chrome" },
       hero: { badge: "Extension Chrome gratuite", h1: "Vos chats Claude,<br><em>enfin organisés</em>", sub: "Des centaines de chats sans ordre? Claude Organizer les analyse, crée un plan et déplace tout dans des projets en un clic.", stars: "Adoré par les utilisateurs Claude", cta: "Ajouter à Chrome, gratuit", note1: "Aucune clé API requise", note2: "Aucun compte nécessaire", note3: "Prêt en quelques secondes" },
       stats: { v1: "Gratuit", l1: "Jamais d’abonnement", l2: "Sujets de chat reconnus", l3: "Catégories intégrées", l4: "Organisation complète" },
@@ -94,6 +96,7 @@
     },
 
     de: {
+      meta: { title: "KI Chat-Organizer für Claude: Chats automatisch sortieren | Kostenlose Chrome-Erweiterung", description: "Der KI-Chat-Organizer und Chat-Manager für Claude.ai. Hunderte Claude-Chats mit einem Klick in Projekte sortieren. Kostenlose Chrome-Erweiterung, kein API-Schlüssel nötig." },
       nav:  { cta: "Zu Chrome hinzufügen" },
       hero: { badge: "Kostenlose Chrome-Erweiterung", h1: "Deine Claude-Chats,<br><em>endlich organisiert</em>", sub: "Hunderte Chats ohne Ordnung? Claude Organizer scannt alles, erstellt einen Plan und verschiebt alles in Projekte mit einem Klick.", stars: "Geliebt von Claude-Nutzern", cta: "Zu Chrome hinzufügen, kostenlos", note1: "Kein API-Schlüssel nötig", note2: "Kein Konto nötig", note3: "Fertig in Sekunden" },
       stats: { v1: "Kostenlos", l1: "Kein Abonnement jemals", l2: "Chat-Themen erkannt", l3: "Eingebaute Kategorien", l4: "Vollständige Organisation" },
@@ -125,6 +128,7 @@
     },
 
     es: {
+      meta: { title: "Organizador de Chats con IA para Claude: Ordena tus Chats | Extensión de Chrome Gratis", description: "El organizador y gestor de chats con IA para Claude.ai. Ordena cientos de chats de Claude en proyectos con un solo clic. Extensión de Chrome gratis, sin clave API." },
       nav:  { cta: "Añadir a Chrome" },
       hero: { badge: "Extensión de Chrome gratuita", h1: "Tus chats de Claude,<br><em>por fin organizados</em>", sub: "¿Cientos de chats sin orden? Claude Organizer los analiza, crea un plan y mueve todo a proyectos con un clic.", stars: "Amado por los usuarios de Claude", cta: "Añadir a Chrome, es gratis", note1: "Sin clave API", note2: "Sin cuenta requerida", note3: "Listo en segundos" },
       stats: { v1: "Gratis", l1: "Nunca una suscripción", l2: "Temas de chat reconocidos", l3: "Categorías integradas", l4: "Organización completa" },
@@ -443,6 +447,15 @@
     var t = T[lang] || T.en;
     document.documentElement.lang = lang;
     document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+    // Localized <title> + meta description (falls back to English when a
+    // language has no meta block yet). Keeps each ?lang= URL self-describing.
+    var meta = t.meta || T.en.meta;
+    if (meta) {
+      if (meta.title) document.title = meta.title;
+      var md = document.querySelector('meta[name="description"]');
+      if (md && meta.description) md.setAttribute('content', meta.description);
+    }
 
     document.querySelectorAll('[data-i18n]').forEach(function(el) {
       var val = resolve(t, el.dataset.i18n);
