@@ -1,9 +1,9 @@
 (function () {
   var T = {
     en: {
-      meta: { title: "Chat Organizer for Claude & ChatGPT: Auto-Sort Chats | Free Chrome Extension", description: "Chat Organizer auto-sorts hundreds of Claude.ai chats into projects in one click. Free Chrome extension, no API key needed. ChatGPT support coming soon." },
+      meta: { title: "Chat Organizer for Claude & ChatGPT: Auto-Sort Chats | Free Chrome Extension", description: "Chat Organizer auto-sorts your Claude and ChatGPT chats into projects in one click. Free Chrome extension, no API key needed." },
       nav:  { cta: "Add to Chrome" },
-      hero: { badge: "Free Chrome Extension", h1: "Your Claude chats,<br><em>finally organized</em>", sub: "Hundreds of chats and zero order? Chat Organizer is the AI chat organizer that scans them all, builds a plan, and moves every Claude chat into projects in one click. ChatGPT support coming soon.", stars: "Loved by Claude power users", cta: "Add to Chrome, it’s free", note1: "No API key required", note2: "No account needed", note3: "Works in seconds" },
+      hero: { badge: "Free Chrome Extension", h1: "Your Claude &amp; ChatGPT chats,<br><em>finally organized</em>", sub: "Hundreds of chats and zero order? Chat Organizer is the AI chat organizer that scans them all, builds a plan, and moves every Claude and ChatGPT chat into projects in one click.", stars: "Loved by Claude power users", cta: "Add to Chrome, it’s free", note1: "No API key required", note2: "No account needed", note3: "Works in seconds" },
       stats: { v1: "Free", l1: "No subscription ever", l2: "Chat topics recognized", l3: "Built-in categories", l4: "Full organize run" },
       hiw:  { eyebrow: "How it works", title: "Three steps, one click", sub: "You see the full plan before anything moves. Nothing happens without your approval." },
       step1: { title: "Click Organize", desc: "The extension scans all your unorganized chats and builds a move plan using keyword matching and AI. Takes a few seconds." },
@@ -34,7 +34,7 @@
 
     nl: {
       nav:  { cta: "Toevoegen aan Chrome" },
-      hero: { badge: "Gratis Chrome-extensie", h1: "Jouw Claude-chats,<br><em>eindelijk georganiseerd</em>", sub: "Honderden chats en geen overzicht? Chat Organizer scant ze allemaal, maakt een plan en verplaatst alles naar projecten met een klik.", stars: "Geliefd bij Claude-gebruikers", cta: "Toevoegen aan Chrome, gratis", note1: "Geen API-sleutel nodig", note2: "Geen account nodig", note3: "Klaar in seconden" },
+      hero: { badge: "Gratis Chrome-extensie", h1: "Jouw Claude- en ChatGPT-chats,<br><em>eindelijk georganiseerd</em>", sub: "Honderden chats en geen overzicht? Chat Organizer scant ze allemaal, maakt een plan en verplaatst alles naar projecten met een klik.", stars: "Geliefd bij Claude-gebruikers", cta: "Toevoegen aan Chrome, gratis", note1: "Geen API-sleutel nodig", note2: "Geen account nodig", note3: "Klaar in seconden" },
       stats: { v1: "Gratis", l1: "Nooit een abonnement", l2: "Chatonderwerpen herkend", l3: "Ingebouwde categorieën", l4: "Volledig organiseren" },
       hiw:  { eyebrow: "Hoe het werkt", title: "Drie stappen, één klik", sub: "Je ziet het volledige plan voordat er iets verplaatst wordt. Niets gebeurt zonder jouw goedkeuring." },
       step1: { title: "Klik op Organiseren", desc: "De extensie scant al je ongeorganiseerde chats en maakt een verplaatsplan met trefwoordherkenning en AI. Duurt een paar seconden." },
@@ -66,7 +66,7 @@
     fr: {
       meta: { title: "Organisateur de Chats IA pour Claude : Triez vos Chats | Extension Chrome Gratuite", description: "L'organisateur et gestionnaire de chats IA pour Claude.ai. Triez des centaines de chats Claude dans des projets en un clic. Extension Chrome gratuite, sans clé API." },
       nav:  { cta: "Ajouter à Chrome" },
-      hero: { badge: "Extension Chrome gratuite", h1: "Vos chats Claude,<br><em>enfin organisés</em>", sub: "Des centaines de chats sans ordre? Chat Organizer les analyse, crée un plan et déplace tout dans des projets en un clic.", stars: "Adoré par les utilisateurs Claude", cta: "Ajouter à Chrome, gratuit", note1: "Aucune clé API requise", note2: "Aucun compte nécessaire", note3: "Prêt en quelques secondes" },
+      hero: { badge: "Extension Chrome gratuite", h1: "Vos chats Claude et ChatGPT,<br><em>enfin organisés</em>", sub: "Des centaines de chats sans ordre? Chat Organizer les analyse, crée un plan et déplace tout dans des projets en un clic.", stars: "Adoré par les utilisateurs Claude", cta: "Ajouter à Chrome, gratuit", note1: "Aucune clé API requise", note2: "Aucun compte nécessaire", note3: "Prêt en quelques secondes" },
       stats: { v1: "Gratuit", l1: "Jamais d’abonnement", l2: "Sujets de chat reconnus", l3: "Catégories intégrées", l4: "Organisation complète" },
       hiw:  { eyebrow: "Comment ça marche", title: "Trois étapes, un clic", sub: "Vous voyez le plan complet avant que quoi que ce soit ne bouge. Rien ne se passe sans votre accord." },
       step1: { title: "Cliquez sur Organiser", desc: "L’extension analyse tous vos chats non organisés et crée un plan avec correspondance par mots-clés et IA. Quelques secondes suffisent." },
@@ -98,7 +98,7 @@
     de: {
       meta: { title: "KI Chat-Organizer für Claude: Chats automatisch sortieren | Kostenlose Chrome-Erweiterung", description: "Der KI-Chat-Organizer und Chat-Manager für Claude.ai. Hunderte Claude-Chats mit einem Klick in Projekte sortieren. Kostenlose Chrome-Erweiterung, kein API-Schlüssel nötig." },
       nav:  { cta: "Zu Chrome hinzufügen" },
-      hero: { badge: "Kostenlose Chrome-Erweiterung", h1: "Deine Claude-Chats,<br><em>endlich organisiert</em>", sub: "Hunderte Chats ohne Ordnung? Chat Organizer scannt alles, erstellt einen Plan und verschiebt alles in Projekte mit einem Klick.", stars: "Geliebt von Claude-Nutzern", cta: "Zu Chrome hinzufügen, kostenlos", note1: "Kein API-Schlüssel nötig", note2: "Kein Konto nötig", note3: "Fertig in Sekunden" },
+      hero: { badge: "Kostenlose Chrome-Erweiterung", h1: "Deine Claude- und ChatGPT-Chats,<br><em>endlich organisiert</em>", sub: "Hunderte Chats ohne Ordnung? Chat Organizer scannt alles, erstellt einen Plan und verschiebt alles in Projekte mit einem Klick.", stars: "Geliebt von Claude-Nutzern", cta: "Zu Chrome hinzufügen, kostenlos", note1: "Kein API-Schlüssel nötig", note2: "Kein Konto nötig", note3: "Fertig in Sekunden" },
       stats: { v1: "Kostenlos", l1: "Kein Abonnement jemals", l2: "Chat-Themen erkannt", l3: "Eingebaute Kategorien", l4: "Vollständige Organisation" },
       hiw:  { eyebrow: "So funktioniert es", title: "Drei Schritte, ein Klick", sub: "Du siehst den vollständigen Plan, bevor irgendetwas verschoben wird. Nichts passiert ohne deine Zustimmung." },
       step1: { title: "Klick auf Organisieren", desc: "Die Erweiterung scannt alle unorganisierten Chats und erstellt einen Verschiebeplan per Schlüsselwort-Erkennung und KI. Dauert einige Sekunden." },
@@ -130,7 +130,7 @@
     es: {
       meta: { title: "Organizador de Chats con IA para Claude: Gratis en Chrome", description: "Organiza cientos de chats de Claude.ai en proyectos con un solo clic. Extensión de Chrome gratis, sin clave API ni cuenta. Pon orden en tus chats en segundos." },
       nav:  { cta: "Añadir a Chrome" },
-      hero: { badge: "Extensión de Chrome gratuita", h1: "Tus chats de Claude,<br><em>por fin organizados</em>", sub: "¿Cientos de chats sin orden? Chat Organizer los analiza, crea un plan y mueve todo a proyectos con un clic.", stars: "Amado por los usuarios de Claude", cta: "Añadir a Chrome, es gratis", note1: "Sin clave API", note2: "Sin cuenta requerida", note3: "Listo en segundos" },
+      hero: { badge: "Extensión de Chrome gratuita", h1: "Tus chats de Claude y ChatGPT,<br><em>por fin organizados</em>", sub: "¿Cientos de chats sin orden? Chat Organizer los analiza, crea un plan y mueve todo a proyectos con un clic.", stars: "Amado por los usuarios de Claude", cta: "Añadir a Chrome, es gratis", note1: "Sin clave API", note2: "Sin cuenta requerida", note3: "Listo en segundos" },
       stats: { v1: "Gratis", l1: "Nunca una suscripción", l2: "Temas de chat reconocidos", l3: "Categorías integradas", l4: "Organización completa" },
       hiw:  { eyebrow: "Cómo funciona", title: "Tres pasos, un clic", sub: "Ves el plan completo antes de que se mueva nada. Nada ocurre sin tu aprobación." },
       step1: { title: "Haz clic en Organizar", desc: "La extensión escanea todos tus chats sin organizar y crea un plan usando coincidencia de palabras clave e IA. Tarda unos segundos." },
@@ -161,7 +161,7 @@
 
     zh: {
       nav:  { cta: "添加到 Chrome" },
-      hero: { badge: "免费 Chrome 扩展", h1: "你的 Claude 对话，<br><em>终于井然有序</em>", sub: "数百个对话毫无条理？Chat Organizer 扫描全部对话，制定计划，一键将所有内容移入项目。", stars: "深受 Claude 用户喜爱", cta: "添加到 Chrome，免费", note1: "无需 API 密钥", note2: "无需注册账号", note3: "几秒即可完成" },
+      hero: { badge: "免费 Chrome 扩展", h1: "你的 Claude 和 ChatGPT 对话，<br><em>终于井然有序</em>", sub: "数百个对话毫无条理？Chat Organizer 扫描全部对话，制定计划，一键将所有内容移入项目。", stars: "深受 Claude 用户喜爱", cta: "添加到 Chrome，免费", note1: "无需 API 密钥", note2: "无需注册账号", note3: "几秒即可完成" },
       stats: { v1: "免费", l1: "永久无需订阅", l2: "可识别的对话主题", l3: "内置分类", l4: "完整整理一次" },
       hiw:  { eyebrow: "使用方法", title: "三步，一键搞定", sub: "任何内容移动之前，你都能看到完整计划。没有你的确认，什么都不会发生。" },
       step1: { title: "点击整理", desc: "扩展程序扫描所有未整理的对话，通过关键词匹配和 AI 生成移动计划，只需几秒钟。" },
@@ -192,7 +192,7 @@
 
     pt: {
       nav:  { cta: "Adicionar ao Chrome" },
-      hero: { badge: "Extensão gratuita para Chrome", h1: "Seus chats do Claude,<br><em>finalmente organizados</em>", sub: "Centenas de chats sem ordem? Chat Organizer escaneia todos, cria um plano e move tudo para projetos em um clique.", stars: "Adorado pelos usuários do Claude", cta: "Adicionar ao Chrome, de graça", note1: "Sem chave de API", note2: "Sem conta necessária", note3: "Pronto em segundos" },
+      hero: { badge: "Extensão gratuita para Chrome", h1: "Seus chats do Claude e ChatGPT,<br><em>finalmente organizados</em>", sub: "Centenas de chats sem ordem? Chat Organizer escaneia todos, cria um plano e move tudo para projetos em um clique.", stars: "Adorado pelos usuários do Claude", cta: "Adicionar ao Chrome, de graça", note1: "Sem chave de API", note2: "Sem conta necessária", note3: "Pronto em segundos" },
       stats: { v1: "Grátis", l1: "Nunca uma assinatura", l2: "Tópicos de chat reconhecidos", l3: "Categorias integradas", l4: "Organização completa" },
       hiw:  { eyebrow: "Como funciona", title: "Três passos, um clique", sub: "Você vê o plano completo antes de qualquer coisa ser movida. Nada acontece sem a sua aprovação." },
       step1: { title: "Clique em Organizar", desc: "A extensão escaneia todos os seus chats não organizados e cria um plano usando correspondência de palavras-chave e IA. Leva alguns segundos." },
@@ -223,7 +223,7 @@
 
     ja: {
       nav:  { cta: "Chrome に追加" },
-      hero: { badge: "無料 Chrome 拡張機能", h1: "Claude のチャット、<br><em>ついに整理された</em>", sub: "何百ものチャットが無秩序に？Chat Organizer がすべてをスキャンし、計画を立て、ワンクリックでプロジェクトに移動します。", stars: "Claude ユーザーに愛されています", cta: "Chrome に追加（無料）", note1: "API キー不要", note2: "アカウント不要", note3: "数秒で完了" },
+      hero: { badge: "無料 Chrome 拡張機能", h1: "Claude と ChatGPT のチャット、<br><em>ついに整理された</em>", sub: "何百ものチャットが無秩序に？Chat Organizer がすべてをスキャンし、計画を立て、ワンクリックでプロジェクトに移動します。", stars: "Claude ユーザーに愛されています", cta: "Chrome に追加（無料）", note1: "API キー不要", note2: "アカウント不要", note3: "数秒で完了" },
       stats: { v1: "無料", l1: "サブスクリプションなし", l2: "認識できるチャットトピック", l3: "組み込みカテゴリ", l4: "完全整理実行" },
       hiw:  { eyebrow: "使い方", title: "3ステップ、ワンクリック", sub: "何かが移動される前に、完全な計画を確認できます。あなたの承認なしに何も起こりません。" },
       step1: { title: "「整理」をクリック", desc: "拡張機能がすべての未整理チャットをスキャンし、キーワードマッチングと AI を使って移動計画を作成します。数秒かかります。" },
@@ -254,7 +254,7 @@
 
     ru: {
       nav:  { cta: "Добавить в Chrome" },
-      hero: { badge: "Бесплатное расширение для Chrome", h1: "Ваши чаты в Claude,<br><em>наконец организованы</em>", sub: "Сотни чатов в беспорядке? Chat Organizer сканирует их все, составляет план и перемещает всё в проекты одним кликом.", stars: "Любимое расширение пользователей Claude", cta: "Добавить в Chrome — бесплатно", note1: "API-ключ не нужен", note2: "Аккаунт не нужен", note3: "Готово за секунды" },
+      hero: { badge: "Бесплатное расширение для Chrome", h1: "Ваши чаты в Claude и ChatGPT,<br><em>наконец организованы</em>", sub: "Сотни чатов в беспорядке? Chat Organizer сканирует их все, составляет план и перемещает всё в проекты одним кликом.", stars: "Любимое расширение пользователей Claude", cta: "Добавить в Chrome — бесплатно", note1: "API-ключ не нужен", note2: "Аккаунт не нужен", note3: "Готово за секунды" },
       stats: { v1: "Бесплатно", l1: "Никаких подписок", l2: "Распознаваемых тем чатов", l3: "Встроенных категорий", l4: "Полная организация" },
       hiw:  { eyebrow: "Как это работает", title: "Три шага, один клик", sub: "Вы видите полный план до того, как что-либо будет перемещено. Ничего не происходит без вашего одобрения." },
       step1: { title: "Нажмите «Организовать»", desc: "Расширение сканирует все неорганизованные чаты и составляет план перемещения с помощью ключевых слов и ИИ. Занимает несколько секунд." },
@@ -285,7 +285,7 @@
 
     ar: {
       nav:  { cta: "أضف إلى Chrome" },
-      hero: { badge: "امتداد Chrome مجاني", h1: "محادثاتك على Claude،<br><em>منظّمة أخيراً</em>", sub: "مئات المحادثات بلا نظام؟ يقوم Chat Organizer بمسحها جميعاً وإنشاء خطة ونقل كل شيء إلى المشاريع بنقرة واحدة.", stars: "يحبّه مستخدمو Claude", cta: "أضف إلى Chrome، مجاناً", note1: "لا حاجة لمفتاح API", note2: "لا حاجة لحساب", note3: "جاهز في ثوانٍ" },
+      hero: { badge: "امتداد Chrome مجاني", h1: "محادثاتك على Claude وChatGPT،<br><em>منظّمة أخيراً</em>", sub: "مئات المحادثات بلا نظام؟ يقوم Chat Organizer بمسحها جميعاً وإنشاء خطة ونقل كل شيء إلى المشاريع بنقرة واحدة.", stars: "يحبّه مستخدمو Claude", cta: "أضف إلى Chrome، مجاناً", note1: "لا حاجة لمفتاح API", note2: "لا حاجة لحساب", note3: "جاهز في ثوانٍ" },
       stats: { v1: "مجاني", l1: "لا اشتراك أبداً", l2: "موضوعات محادثة معترف بها", l3: "فئات مدمجة", l4: "تنظيم شامل" },
       hiw:  { eyebrow: "كيف يعمل", title: "ثلاث خطوات، نقرة واحدة", sub: "ترى الخطة الكاملة قبل نقل أي شيء. لا شيء يحدث دون موافقتك." },
       step1: { title: "انقر على تنظيم", desc: "يمسح الامتداد جميع محادثاتك غير المنظّمة ويُنشئ خطة نقل باستخدام مطابقة الكلمات المفتاحية والذكاء الاصطناعي. يستغرق بضع ثوانٍ." },
@@ -316,7 +316,7 @@
 
     hi: {
       nav:  { cta: "Chrome में जोड़ें" },
-      hero: { badge: "मुफ़्त Chrome एक्सटेंशन", h1: "आपकी Claude चैट्स,<br><em>आख़िरकार व्यवस्थित</em>", sub: "सैकड़ों चैट्स और कोई व्यवस्था नहीं? Chat Organizer सभी को स्कैन करता है, एक योजना बनाता है, और एक क्लिक में सब कुछ प्रोजेक्ट्स में ले जाता है।", stars: "Claude यूज़र्स का पसंदीदा", cta: "Chrome में जोड़ें, मुफ़्त है", note1: "कोई API की ज़रूरत नहीं", note2: "कोई अकाउंट ज़रूरी नहीं", note3: "कुछ सेकंड में तैयार" },
+      hero: { badge: "मुफ़्त Chrome एक्सटेंशन", h1: "आपकी Claude और ChatGPT चैट्स,<br><em>आख़िरकार व्यवस्थित</em>", sub: "सैकड़ों चैट्स और कोई व्यवस्था नहीं? Chat Organizer सभी को स्कैन करता है, एक योजना बनाता है, और एक क्लिक में सब कुछ प्रोजेक्ट्स में ले जाता है।", stars: "Claude यूज़र्स का पसंदीदा", cta: "Chrome में जोड़ें, मुफ़्त है", note1: "कोई API की ज़रूरत नहीं", note2: "कोई अकाउंट ज़रूरी नहीं", note3: "कुछ सेकंड में तैयार" },
       stats: { v1: "मुफ़्त", l1: "कभी सब्सक्रिप्शन नहीं", l2: "चैट विषय पहचाने गए", l3: "बिल्ट-इन श्रेणियां", l4: "पूर्ण व्यवस्था" },
       hiw:  { eyebrow: "यह कैसे काम करता है", title: "तीन क़दम, एक क्लिक", sub: "कुछ भी हिलने से पहले आप पूरी योजना देखते हैं। आपकी मंज़ूरी के बिना कुछ नहीं होता।" },
       step1: { title: "Organize पर क्लिक करें", desc: "एक्सटेंशन आपकी सभी अव्यवस्थित चैट्स को स्कैन करता है और कीवर्ड मिलान और AI का उपयोग करके एक मूव प्लान बनाता है। कुछ सेकंड लगते हैं।" },
@@ -347,7 +347,7 @@
 
     id: {
       nav:  { cta: "Tambahkan ke Chrome" },
-      hero: { badge: "Ekstensi Chrome gratis", h1: "Obrolan Claude-mu,<br><em>akhirnya terorganisir</em>", sub: "Ratusan obrolan tanpa keteraturan? Chat Organizer memindai semuanya, membuat rencana, dan memindahkan segalanya ke proyek dengan satu klik.", stars: "Disukai pengguna Claude", cta: "Tambahkan ke Chrome, gratis", note1: "Tanpa kunci API", note2: "Tanpa akun", note3: "Selesai dalam hitungan detik" },
+      hero: { badge: "Ekstensi Chrome gratis", h1: "Obrolan Claude dan ChatGPT-mu,<br><em>akhirnya terorganisir</em>", sub: "Ratusan obrolan tanpa keteraturan? Chat Organizer memindai semuanya, membuat rencana, dan memindahkan segalanya ke proyek dengan satu klik.", stars: "Disukai pengguna Claude", cta: "Tambahkan ke Chrome, gratis", note1: "Tanpa kunci API", note2: "Tanpa akun", note3: "Selesai dalam hitungan detik" },
       stats: { v1: "Gratis", l1: "Tidak pernah berlangganan", l2: "Topik obrolan dikenali", l3: "Kategori bawaan", l4: "Pengorganisasian lengkap" },
       hiw:  { eyebrow: "Cara kerjanya", title: "Tiga langkah, satu klik", sub: "Kamu melihat rencana lengkap sebelum ada yang dipindahkan. Tidak ada yang terjadi tanpa persetujuanmu." },
       step1: { title: "Klik Organize", desc: "Ekstensi memindai semua obrolan yang belum terorganisir dan membuat rencana pemindahan menggunakan pencocokan kata kunci dan AI. Hanya butuh beberapa detik." },
@@ -378,7 +378,7 @@
 
     it: {
       nav:  { cta: "Aggiungi a Chrome" },
-      hero: { badge: "Estensione Chrome gratuita", h1: "Le tue chat di Claude,<br><em>finalmente organizzate</em>", sub: "Centinaia di chat senza ordine? Chat Organizer le analizza tutte, crea un piano e sposta tutto nei progetti con un clic.", stars: "Amato dagli utenti di Claude", cta: "Aggiungi a Chrome, è gratis", note1: "Nessuna chiave API", note2: "Nessun account necessario", note3: "Pronto in secondi" },
+      hero: { badge: "Estensione Chrome gratuita", h1: "Le tue chat di Claude e ChatGPT,<br><em>finalmente organizzate</em>", sub: "Centinaia di chat senza ordine? Chat Organizer le analizza tutte, crea un piano e sposta tutto nei progetti con un clic.", stars: "Amato dagli utenti di Claude", cta: "Aggiungi a Chrome, è gratis", note1: "Nessuna chiave API", note2: "Nessun account necessario", note3: "Pronto in secondi" },
       stats: { v1: "Gratis", l1: "Nessun abbonamento mai", l2: "Argomenti chat riconosciuti", l3: "Categorie integrate", l4: "Organizzazione completa" },
       hiw:  { eyebrow: "Come funziona", title: "Tre passi, un clic", sub: "Vedi il piano completo prima che si muova qualsiasi cosa. Niente succede senza la tua approvazione." },
       step1: { title: "Fai clic su Organizza", desc: "L'estensione analizza tutte le tue chat non organizzate e crea un piano usando corrispondenza di parole chiave e IA. Richiede pochi secondi." },
@@ -409,7 +409,7 @@
 
     tr: {
       nav:  { cta: "Chrome'a Ekle" },
-      hero: { badge: "Ücretsiz Chrome Uzantısı", h1: "Claude sohbetlerin,<br><em>sonunda düzene girdi</em>", sub: "Yüzlerce sohbet ve hiç düzen yok mu? Chat Organizer hepsini tarar, bir plan oluşturur ve her şeyi tek tıkla projelere taşır.", stars: "Claude kullanıcılarının favorisi", cta: "Chrome'a Ekle, ücretsiz", note1: "API anahtarı gerekmez", note2: "Hesap gerekmez", note3: "Saniyeler içinde hazır" },
+      hero: { badge: "Ücretsiz Chrome Uzantısı", h1: "Claude ve ChatGPT sohbetlerin,<br><em>sonunda düzene girdi</em>", sub: "Yüzlerce sohbet ve hiç düzen yok mu? Chat Organizer hepsini tarar, bir plan oluşturur ve her şeyi tek tıkla projelere taşır.", stars: "Claude kullanıcılarının favorisi", cta: "Chrome'a Ekle, ücretsiz", note1: "API anahtarı gerekmez", note2: "Hesap gerekmez", note3: "Saniyeler içinde hazır" },
       stats: { v1: "Ücretsiz", l1: "Hiçbir zaman abonelik yok", l2: "Tanınan sohbet konusu", l3: "Yerleşik kategori", l4: "Tam düzenleme" },
       hiw:  { eyebrow: "Nasıl çalışır", title: "Üç adım, bir tık", sub: "Her şey taşınmadan önce tam planı görürsün. Onayın olmadan hiçbir şey olmaz." },
       step1: { title: "Organize'e tıkla", desc: "Uzantı düzensiz tüm sohbetleri tarar ve anahtar kelime eşleştirme ile yapay zeka kullanarak bir taşıma planı oluşturur. Birkaç saniye sürer." },
