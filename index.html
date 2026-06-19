@@ -341,6 +341,13 @@
     .popup-ver { font-size: 0.65rem; color: var(--faint); font-weight: 400; }
     .popup-connected { display: flex; align-items: center; gap: 5px; font-size: 0.68rem; color: var(--green); font-weight: 600; }
     .popup-connected::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+    .popup-switch { display: flex; gap: 6px; padding: 8px 12px; background: var(--surface); border-bottom: 1px solid var(--border); }
+    .popup-seg { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 6px 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--muted); font-size: 0.7rem; font-weight: 700; }
+    .popup-seg.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .seg-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .seg-dot.claude { background: #D97756; }
+    .seg-dot.chatgpt { background: #10A37F; }
+    .popup-seg.active .seg-dot { background: #fff; }
     .popup-tabs { display: flex; border-bottom: 1px solid var(--border); background: var(--surface); }
     .popup-tab { flex: 1; padding: 9px 0; font-size: 0.7rem; font-weight: 600; color: var(--faint); text-align: center; border-bottom: 2px solid transparent; }
     .popup-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
@@ -573,7 +580,7 @@
       <p class="hero-sub" data-i18n="hero.sub">Hundreds of chats and zero order? Chat Organizer is the AI chat organizer that scans them all, builds a plan, and moves every Claude and ChatGPT chat into projects in one click.</p>
       <div class="hero-stars">
         <span class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-        <span data-i18n="hero.stars">Loved by Claude power users</span>
+        <span data-i18n="hero.stars">Loved by Claude and ChatGPT power users</span>
       </div>
       <a href="https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm" class="btn-primary">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2C4.686 2 2 4.686 2 8s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6z"/><circle cx="8" cy="8" r="2.5" fill="currentColor" stroke="none"/></svg>
@@ -596,13 +603,18 @@
             <div class="popup-header">
               <div class="popup-brand">
                 <div class="popup-icon"><img src="icon128.png" alt=""></div>
-                Chat Organizer <span class="popup-ver">v1.8.0</span>
+                Chat Organizer <span class="popup-ver">v2.0.0</span>
               </div>
               <div class="popup-connected">Connected</div>
+            </div>
+            <div class="popup-switch">
+              <div class="popup-seg active"><span class="seg-dot claude"></span>Claude</div>
+              <div class="popup-seg"><span class="seg-dot chatgpt"></span>ChatGPT</div>
             </div>
             <div class="popup-tabs">
               <div class="popup-tab active">Auto-Organize</div>
               <div class="popup-tab">Manual</div>
+              <div class="popup-tab">Rules</div>
               <div class="popup-tab">Debug</div>
             </div>
             <div class="popup-body">

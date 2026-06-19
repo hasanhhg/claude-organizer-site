@@ -3,7 +3,7 @@
     en: {
       meta: { title: "Chat Organizer for Claude & ChatGPT: Auto-Sort Chats | Free Chrome Extension", description: "Chat Organizer auto-sorts your Claude and ChatGPT chats into projects in one click. Free Chrome extension, no API key needed." },
       nav:  { cta: "Add to Chrome" },
-      hero: { badge: "Free Chrome Extension", h1: "Your Claude &amp; ChatGPT chats,<br><em>finally organized</em>", sub: "Hundreds of chats and zero order? Chat Organizer is the AI chat organizer that scans them all, builds a plan, and moves every Claude and ChatGPT chat into projects in one click.", stars: "Loved by Claude power users", cta: "Add to Chrome, it’s free", note1: "No API key required", note2: "No account needed", note3: "Works in seconds" },
+      hero: { badge: "Free Chrome Extension", h1: "Your Claude &amp; ChatGPT chats,<br><em>finally organized</em>", sub: "Hundreds of chats and zero order? Chat Organizer is the AI chat organizer that scans them all, builds a plan, and moves every Claude and ChatGPT chat into projects in one click.", stars: "Loved by Claude and ChatGPT power users", cta: "Add to Chrome, it’s free", note1: "No API key required", note2: "No account needed", note3: "Works in seconds" },
       stats: { v1: "Free", l1: "No subscription ever", l2: "Chat topics recognized", l3: "Built-in categories", l4: "Full organize run" },
       hiw:  { eyebrow: "How it works", title: "Three steps, one click", sub: "You see the full plan before anything moves. Nothing happens without your approval." },
       step1: { title: "Click Organize", desc: "The extension scans all your unorganized chats and builds a move plan using keyword matching and AI. Takes a few seconds." },
