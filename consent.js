@@ -125,18 +125,18 @@
     stylesInjected = true;
     var css =
       '#co-consent{position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;max-width:720px;margin:0 auto;' +
-      'background:#fff;border:1px solid #E8E2DA;border-radius:12px;box-shadow:0 12px 40px rgba(28,25,23,.18);' +
+      'background:#fff;border:1px solid #E4E7EC;border-radius:12px;box-shadow:0 12px 40px rgba(20,23,28,.18);' +
       'padding:14px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;' +
       "font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif}" +
-      '.co-consent-msg{margin:0;flex:1;min-width:0;font-size:.85rem;line-height:1.5;color:#57534E}' +
-      '.co-consent-link{color:#D97756;text-decoration:underline;white-space:nowrap}' +
+      '.co-consent-msg{margin:0;flex:1;min-width:0;font-size:.85rem;line-height:1.5;color:#475569}' +
+      '.co-consent-link{color:#334155;text-decoration:underline;white-space:nowrap}' +
       '.co-consent-btns{display:flex;gap:8px;flex-shrink:0}' +
       '.co-consent-btn{font-family:inherit;font-size:.82rem;font-weight:700;padding:9px 18px;border-radius:8px;' +
       'cursor:pointer;border:1px solid transparent;transition:background .15s,border-color .15s;white-space:nowrap}' +
-      '.co-consent-decline{background:transparent;border-color:#E8E2DA;color:#57534E}' +
-      '.co-consent-decline:hover{border-color:#A8A29E}' +
-      '.co-consent-accept{background:#D97756;color:#fff}' +
-      '.co-consent-accept:hover{background:#C2633D}' +
+      '.co-consent-decline{background:transparent;border-color:#E4E7EC;color:#475569}' +
+      '.co-consent-decline:hover{border-color:#94A3B8}' +
+      '.co-consent-accept{background:#334155;color:#fff}' +
+      '.co-consent-accept:hover{background:#1E293B}' +
       '@media(max-width:600px){' +
       '#co-consent{flex-direction:column;align-items:stretch;gap:10px;padding:14px 14px 12px;bottom:0;left:0;right:0;border-radius:14px 14px 0 0}' +
       '.co-consent-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}' +
