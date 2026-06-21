@@ -205,12 +205,12 @@
   </div>
 
   <h2>What this extension does</h2>
-  <p>Chat Organizer is a Chrome extension that reads your Claude.ai chats and organizes them into projects. It runs entirely inside your browser and uses your active Claude.ai session to access your data.</p>
+  <p>Chat Organizer is a Chrome extension that reads your <strong>Claude.ai</strong> and <strong>ChatGPT (chatgpt.com)</strong> chats and organizes them into projects. It runs entirely inside your browser and uses your active Claude.ai or ChatGPT session to access your data, depending on which platform you pick in the popup.</p>
 
   <h2>What data is accessed</h2>
-  <p>The extension reads the following data from the Claude.ai API using your browser session:</p>
+  <p>For whichever platform you are organizing, the extension reads the following from that platform's internal API using your active browser session:</p>
   <ul>
-    <li>Your organization ID (used to identify your workspace)</li>
+    <li>Your workspace or organization ID (used to identify your account's workspace)</li>
     <li>Your project names and IDs</li>
     <li>Your chat titles and IDs</li>
     <li>Chat summaries (used together with titles for AI matching)</li>
@@ -246,7 +246,7 @@
   <h2>Third-party services</h2>
   <p>The extension communicates with the following services:</p>
   <ul>
-    <li><strong>Claude.ai</strong> - to read and organize your chats using your active browser session</li>
+    <li><strong>Claude.ai and ChatGPT (chatgpt.com)</strong> - to read and organize your chats using your active browser session on whichever platform you choose</li>
     <li><strong>Cloudflare Workers</strong> - AI categorization backend, receives chat titles only</li>
     <li><strong>Groq</strong> - runs the AI model that suggests project categories, receives chat titles only</li>
   </ul>
