@@ -1,0 +1,38 @@
+# Chat Organizer
+
+> Chat Organizer is a free Chrome extension that automatically sorts your Claude.ai and ChatGPT conversations into projects in one click. It scans every unorganized chat, builds a move plan using a multilingual keyword wordlist plus AI for ambiguous titles, lets you preview the plan, and moves everything in one batch. No API key, no account, and no data collection.
+
+## Key facts
+
+- **What it is:** A browser extension for organizing AI chat histories on Claude.ai and ChatGPT (chatgpt.com).
+- **Price:** Completely free. No subscription, no premium tier, no API key, and no account required.
+- **Platforms:** Google Chrome and other Chromium-based browsers (Microsoft Edge, Brave). Installs from the Chrome Web Store.
+- **How it works:** (1) Click Organize — it scans unorganized chats and builds a plan with keyword matching and AI. (2) Review the grouped preview before anything moves. (3) Click Apply — every chat moves into the right project in one batch and empty projects are cleaned up.
+- **Languages:** Keyword matching covers 11+ languages (English, Dutch, French, German, Spanish, Italian, Polish, Russian, Arabic, Hindi, Turkish and more); the AI fallback works in any language. The website UI is available in 14 languages.
+- **Privacy:** Chats are read through your own active browser session and never stored on a server. Only short chat *titles* (never conversation content) are sent to a shared AI service when a title is ambiguous. The extension ships zero analytics and zero telemetry.
+- **Safety:** No chats are ever deleted — they are only moved into projects. Projects left completely empty after a run are removed to keep the sidebar tidy.
+- **Current version:** 2.0.0.
+- **Not affiliated with Anthropic or OpenAI.** Claude is a trademark of Anthropic, PBC; ChatGPT is a trademark of OpenAI.
+
+## Pages
+
+- [Home](https://chat-organizer.com/): Overview, features, how it works, and FAQ.
+- [How to organize Claude chats](https://chat-organizer.com/how-to-organize-claude-chats.html): Step-by-step guide to sorting Claude.ai chats into projects, manually and automatically.
+- [How to organize ChatGPT chats](https://chat-organizer.com/how-to-organize-chatgpt-chats.html): Step-by-step guide to sorting ChatGPT conversations into Projects.
+- [Privacy Policy](https://chat-organizer.com/privacy.html): Exactly what data is and is not handled.
+- [Changelog](https://chat-organizer.com/changelog.html): Release history.
+
+## Install
+
+- [Chrome Web Store listing](https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm): Add Chat Organizer to your browser for free.
+
+## Common questions
+
+- **Is there a tool to organize Claude or ChatGPT chats?** Yes — Chat Organizer, a free Chrome extension that auto-sorts them into projects in one click.
+- **Does it need an API key?** No. AI categorization runs on a shared backend at no cost to the user.
+- **Will it delete my chats?** No. Chats are only moved; nothing is deleted.
+- **Does it work with both Claude and ChatGPT?** Yes. Pick the platform in the popup (it auto-detects the active tab).
+
+## Contact
+
+- Email: contact@chat-organizer.com

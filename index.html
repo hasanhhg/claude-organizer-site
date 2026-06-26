@@ -7,6 +7,7 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <!-- Bing Webmaster Tools verification -->
   <meta name="msvalidate.01" content="970978A9081259104B7D5FE9FE7C6581" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <title>Chat Organizer for Claude &amp; ChatGPT: Auto-Sort Chats | Free Chrome Extension</title>
   <meta name="description" content="Chat Organizer auto-sorts your Claude and ChatGPT chats into projects in one click. Free Chrome extension, no API key needed.">
   <link rel="canonical" href="https://chat-organizer.com/">
@@ -49,17 +50,61 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Chat Organizer",
-    "alternateName": ["Chat Organizer for Claude", "Claude Chat Organizer", "AI Chat Organizer for Claude", "ChatGPT Chat Organizer"],
-    "description": "Automatically sort your Claude and ChatGPT chats into projects in one click. No API key needed.",
-    "operatingSystem": "Chrome",
-    "applicationCategory": "BrowserApplication",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "url": "https://chat-organizer.com",
-    "image": "https://chat-organizer.com/social-preview.png",
-    "screenshot": "https://chat-organizer.com/social-preview.png",
-    "inLanguage": ["en", "nl", "fr", "de", "es", "zh", "pt", "ja", "ru", "ar", "hi", "id", "it", "tr"]
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://chat-organizer.com/#org",
+        "name": "Chat Organizer",
+        "url": "https://chat-organizer.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://chat-organizer.com/icon128.png",
+          "width": 128,
+          "height": 128
+        },
+        "sameAs": ["https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://chat-organizer.com/#website",
+        "url": "https://chat-organizer.com",
+        "name": "Chat Organizer",
+        "description": "Free Chrome extension that auto-sorts Claude and ChatGPT chats into projects in one click.",
+        "publisher": { "@id": "https://chat-organizer.com/#org" },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://chat-organizer.com/#app",
+        "name": "Chat Organizer",
+        "alternateName": ["Chat Organizer for Claude", "Claude Chat Organizer", "AI Chat Organizer for Claude", "ChatGPT Chat Organizer"],
+        "description": "Automatically sort your Claude and ChatGPT chats into projects in one click. Uses a multilingual keyword wordlist plus AI for ambiguous titles. No API key and no account needed.",
+        "applicationCategory": "BrowserApplication",
+        "operatingSystem": "Chrome",
+        "browserRequirements": "Requires Google Chrome or another Chromium-based browser (Edge, Brave).",
+        "softwareVersion": "2.0.0",
+        "datePublished": "2026-05",
+        "dateModified": "2026-06-25",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
+        "url": "https://chat-organizer.com",
+        "installUrl": "https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm",
+        "downloadUrl": "https://chromewebstore.google.com/detail/bipbaacophbcpboieghjoigjlbemchcm",
+        "image": "https://chat-organizer.com/social-preview.png",
+        "screenshot": "https://chat-organizer.com/social-preview.png",
+        "featureList": [
+          "One-click auto-organize for Claude.ai and ChatGPT chats",
+          "Instant multilingual keyword matching across 11+ languages",
+          "AI categorization for ambiguous chat titles, with no API key required",
+          "Full preview of every move before any chat is touched",
+          "Manual mode for assigning specific chats by hand",
+          "Automatic cleanup of empty projects",
+          "No tracking, no telemetry, and no account required"
+        ],
+        "inLanguage": ["en", "nl", "fr", "de", "es", "zh", "pt", "ja", "ru", "ar", "hi", "id", "it", "tr"],
+        "author": { "@id": "https://chat-organizer.com/#org" },
+        "publisher": { "@id": "https://chat-organizer.com/#org" }
+      }
+    ]
   }
   </script>
 
