@@ -6,11 +6,12 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.clarity.ms; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com https://*.googletagmanager.com https://*.clarity.ms; font-src 'self'; connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.clarity.ms https://c.bing.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Changelog – Chat Organizer</title>
+  <meta name="description" content="See what's new in Chat Organizer for Claude and ChatGPT. Latest release: v2.0.1.">
   <link rel="canonical" href="https://chat-organizer.com/changelog.html">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Changelog – Chat Organizer">
-  <meta property="og:description" content="See what's new in Chat Organizer. Latest release: v2.0.0.">
+  <meta property="og:description" content="See what's new in Chat Organizer. Latest release: v2.0.1.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://chat-organizer.com/changelog.html">
   <meta property="og:image" content="https://chat-organizer.com/social-preview.png">
@@ -20,7 +21,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Changelog – Chat Organizer">
-  <meta name="twitter:description" content="See what's new in Chat Organizer. Latest release: v2.0.0.">
+  <meta name="twitter:description" content="See what's new in Chat Organizer. Latest release: v2.0.1.">
   <meta name="twitter:image" content="https://chat-organizer.com/social-preview.png">
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -210,6 +211,21 @@
 <main>
   <h1>Changelog</h1>
   <p class="meta">What is new in Chat Organizer.</p>
+
+  <div class="release">
+    <div class="release-head">
+      <span class="ver">v2.0.1</span>
+      <span class="ver-date">June 2026</span>
+      <span class="tag">New</span>
+    </div>
+    <h3>Faster, steadier, and easier to switch</h3>
+    <ul>
+      <li><strong>Much faster on large accounts.</strong> AI categorization now classifies many chats per request instead of one at a time, so big runs no longer stall. Each run focuses on your most recent 200 chats to stay fast and predictable.</li>
+      <li><strong>The platform button opens the site.</strong> Clicking Claude or ChatGPT in the popup opens that site in a background tab, and the popup stays open so you do not lose your place.</li>
+      <li><strong>Honest progress bar.</strong> Loading now shows a moving sweep with a live count instead of a misleading percentage, and it no longer jumps backwards or flashes complete when something fails.</li>
+      <li><strong>Steadier on hiccups.</strong> A momentary server error or rate limit from Claude or ChatGPT is now retried with backoff instead of failing the whole run. The Debug tab also auto-copies its output and shows a readable log of recent API calls.</li>
+    </ul>
+  </div>
 
   <div class="release">
     <div class="release-head">
